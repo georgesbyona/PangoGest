@@ -1,0 +1,67 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+
+import '../shared.dart';
+
+void myCustomSnackBar({context, text}) {
+  final overlay = Overlay.of(context);
+
+  final overlayEntry = OverlayEntry(
+    canSizeOverlay: true,
+    builder: (context) => Align(
+      alignment: Alignment.bottomCenter,
+      child: mySnackBar(context, text),
+    ),
+  );
+  overlay.insert(overlayEntry);
+
+  Timer(const Duration(milliseconds: 2500), () {
+    overlayEntry.remove();
+  });
+}
+
+Widget mySnackBar(BuildContext context, String text) {
+  final width = MediaQuery.sizeOf(context).width;
+  final height = MediaQuery.sizeOf(context).height;
+  return Container(
+    padding: EdgeInsets.symmetric(
+      vertical: width * 0.015,
+      horizontal: width * 0.025,
+    ),
+    margin: EdgeInsets.only(bottom: height * 0.085),
+    decoration: BoxDecoration(
+      color: Theme.of(context).primaryColorDark,
+      borderRadius: BorderRadius.circular(25),
+    ),
+    child: SizedBox(
+      height: width * 0.065,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+            left: 0.0,
+            child: SizedBox(
+              height: width * 0.06,
+              width: width * 0.06,
+              child: Image.asset(AppImages.logo),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: width * 0.07),
+            child: Text(
+              text,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(fontSize: width * 0.025),
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              maxLines: 1,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
