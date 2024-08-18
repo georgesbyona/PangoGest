@@ -1,3 +1,3 @@
-# pangogest
+# PangoGest 🏡
 
-A new Flutter project.
+Une application Flutter de gestion des immobiliers (Maisons à louer).
