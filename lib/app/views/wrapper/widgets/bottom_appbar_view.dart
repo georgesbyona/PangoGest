@@ -30,12 +30,10 @@ class _BottomAppBarViewState extends State<BottomAppBarView> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.sizeOf(context).height;
-    final width = MediaQuery.sizeOf(context).width;
     final List<String> contents = ["Home", "Calendrier", "Chat"];
     return Container(
-      padding: EdgeInsets.only(left: width * 0.04, bottom: height * 0.02),
-      width: width,
+      padding: const EdgeInsets.only(left: 16, bottom: 10),
+      width: double.maxFinite,
       child: widget.controller.index == 0
           ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +42,7 @@ class _BottomAppBarViewState extends State<BottomAppBarView> {
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium!
-                      .copyWith(fontSize: height * 0.02),
+                      .copyWith(fontSize: 25),
                   textAlign: TextAlign.start,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +64,7 @@ class _BottomAppBarViewState extends State<BottomAppBarView> {
                         style: GoogleFonts.raleway(
                           color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.normal,
-                          fontSize: height * 0.03,
+                          fontSize: 30,
                         ),
                         textAlign: TextAlign.start,
                       ),
@@ -80,7 +78,7 @@ class _BottomAppBarViewState extends State<BottomAppBarView> {
               style: Theme.of(context)
                   .textTheme
                   .titleMedium!
-                  .copyWith(fontSize: height * 0.02),
+                  .copyWith(fontSize: 25),
               textAlign: TextAlign.start,
             ),
     );

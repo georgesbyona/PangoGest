@@ -1,27 +1,23 @@
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../controllers/controllers.dart';
-import '../../../shared/shared.dart';
 import '../widgets/auth_bottom_view.dart';
-import '../widgets/wrapper_inscription_connexion.dart';
-import 'widgets/connexion_form.dart';
+import '../../../shared/shared.dart';
 
-class ConnexionPage extends StatefulWidget {
-  const ConnexionPage({super.key, this.fromInscription = false});
-
-  final bool fromInscription;
+class ForgotPasswordPage extends StatefulWidget {
+  const ForgotPasswordPage({super.key});
 
   @override
-  State<ConnexionPage> createState() => _ConnexionPageState();
+  State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
 }
 
-class _ConnexionPageState extends State<ConnexionPage> {
-  final TextEditingController keyController = TextEditingController();
-  final TextEditingController wordsController = TextEditingController();
+class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
+  final TextEditingController textEditingController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final userData = Provider.of<UserDataController>(context);
@@ -51,7 +47,7 @@ class _ConnexionPageState extends State<ConnexionPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          "Connexion",
+                          "Mot de passe oublié",
                           style: theme.textTheme.titleMedium!.copyWith(
                             color: AppColors.white,
                             fontSize: size * 0.06,
@@ -62,7 +58,7 @@ class _ConnexionPageState extends State<ConnexionPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Bienvenu.e encore",
+                              "Oups",
                               style: GoogleFonts.raleway(
                                 color: Colors.grey.shade300,
                                 fontWeight: FontWeight.w600,
@@ -79,7 +75,7 @@ class _ConnexionPageState extends State<ConnexionPage> {
                               ),
                             ),
                             Text(
-                              "Nous sommes ravi de vous compter parmi nous ! Veuillez compléter ce champs pour vous connecter à votre compte !",
+                              "Vous avez oublié votre mot de passe !\nPas d'inquiétude, veuillez nous fournir soit votre adresse mail soit votre numéro et nous vous enverrons un mot de passe pour la réinitialisation de votre ancien mot de passe.",
                               style: GoogleFonts.raleway(
                                 color: Colors.grey.shade300,
                                 fontWeight: FontWeight.normal,
@@ -91,45 +87,52 @@ class _ConnexionPageState extends State<ConnexionPage> {
                         ),
                         Gap(height * 0.015),
                         Expanded(
-                          child: Form(
-                            key: _formKey,
-                            child: ConnexionForm(
-                              keyController: keyController,
-                              wordsController: wordsController,
-                            ),
+                          child: ListView(
+                            children: [
+                              Form(
+                                key: _formKey,
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      AppIcons.keywords,
+                                      color: AppColors.white,
+                                    ),
+                                    Gap(size * 0.03),
+                                    Expanded(
+                                      child: CustomTextField(
+                                        controller: textEditingController,
+                                        labelText: "Email/N° Tél",
+                                        keyboardType: TextInputType.text,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Gap(height * 0.02),
+                              userData.isConnecting
+                                  ? Container(
+                                      alignment: Alignment.center,
+                                      color: Colors.transparent,
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: height * 0.02),
+                                      margin: EdgeInsets.symmetric(
+                                          vertical: height * 0.015),
+                                      child: const CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                      ),
+                                    )
+                                  : CustomMainButton(
+                                      onTap: () async {
+                                        if (_formKey.currentState!
+                                            .validate()) {}
+                                      },
+                                      text: "Envoyer",
+                                    ),
+                            ],
                           ),
                         ),
-                        Gap(height * 0.015),
-                        userData.isConnecting
-                            ? Container(
-                                alignment: Alignment.center,
-                                color: Colors.transparent,
-                                padding: EdgeInsets.symmetric(
-                                    vertical: height * 0.02),
-                                margin: EdgeInsets.symmetric(
-                                    vertical: height * 0.015),
-                                child: const CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                ),
-                              )
-                            : CustomMainButton(
-                                onTap: () async {
-                                  if (_formKey.currentState!.validate()) {
-                                    await userData.connectUser(
-                                      context,
-                                      keyController.text,
-                                      wordsController.text,
-                                    );
-                                  }
-                                },
-                                text: "Se connecter",
-                              ),
                       ],
                     ),
-                  ),
-                  WrapperInscriptionConnexion(
-                    fromConnexion: true,
-                    canPop: widget.fromInscription,
                   ),
                   Gap(height * 0.02),
                   const AuthBottomView(),

@@ -8,15 +8,20 @@ import '../../../views.dart';
 import 'about_dialog.dart';
 
 class MenusView extends StatelessWidget {
-  const MenusView({super.key, required this.controller});
+  const MenusView(
+      {super.key,
+      required this.controller,
+      required this.height,
+      required this.width});
 
   final MainController controller;
+  final double height;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final width = MediaQuery.sizeOf(context).width;
-    final height = MediaQuery.sizeOf(context).height;
+    final size = width > height ? height : width;
     final inverseColor = theme.colorScheme.inversePrimary;
     List<String> titles = [
       'Termes & Conditions',
@@ -33,15 +38,11 @@ class MenusView extends StatelessWidget {
       Iconsax.message_question_outline,
       Clarity.devices_line,
     ];
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.only(
-            top: width * 0.05,
-            left: width * 0.06,
-            right: width * 0.06,
-          ),
-          child: Column(
+    return Expanded(
+      child: ListView(
+        padding: const EdgeInsets.only(left: 15, right: 15),
+        children: [
+          Column(
             children: List.generate(
               icons.length,
               (index) {
@@ -76,29 +77,27 @@ class MenusView extends StatelessWidget {
                   child: Container(
                     alignment: Alignment.center,
                     color: Colors.transparent,
-                    margin: EdgeInsets.only(bottom: height * 0.02),
+                    margin: EdgeInsets.only(
+                      bottom: index + 1 == icons.length
+                          ? height * 0.015
+                          : height * 0.025,
+                    ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
                           children: [
-                            Icon(
-                              icons[index],
-                              size: width * 0.05,
-                            ),
-                            Gap(width * 0.03),
+                            Icon(icons[index]),
+                            Gap(size * 0.03),
                             Text(
                               titles[index],
-                              style: theme.textTheme.bodyMedium!.copyWith(
-                                fontSize: width * 0.028,
+                              style: theme.textTheme.bodySmall!.copyWith(
+                                fontSize: size * 0.03,
                               ),
                             ),
                           ],
                         ),
-                        Icon(
-                          iconsSuff[index],
-                          size: width * 0.03,
-                        ),
+                        Icon(iconsSuff[index]),
                       ],
                     ),
                   ),
@@ -106,26 +105,17 @@ class MenusView extends StatelessWidget {
               },
             ),
           ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(
-            left: width * 0.06,
-            right: width * 0.04,
-          ),
-          child: Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
-                  Icon(
-                    AppIcons.darkMode,
-                    size: width * 0.05,
-                  ),
-                  Gap(width * 0.025),
+                  const Icon(AppIcons.darkMode),
+                  Gap(size * 0.03),
                   Text(
                     'Thème sombre',
-                    style: theme.textTheme.bodyMedium!.copyWith(
-                      fontSize: width * 0.028,
+                    style: theme.textTheme.bodySmall!.copyWith(
+                      fontSize: size * 0.03,
                     ),
                   ),
                 ],
@@ -139,8 +129,8 @@ class MenusView extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

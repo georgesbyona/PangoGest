@@ -5,19 +5,25 @@ import '../../../../../controllers/controllers.dart';
 import '../../../views.dart';
 
 class HeadView extends StatelessWidget {
-  const HeadView({super.key, required this.userData});
+  const HeadView({
+    super.key,
+    required this.userData,
+    required this.height,
+    required this.width,
+  });
 
   final UserDataController userData;
+  final double height;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.sizeOf(context).height;
-    final width = MediaQuery.sizeOf(context).width;
     final theme = Theme.of(context);
+    final size = width > height ? height : width;
     return Column(
       children: [
         SizedBox(
-          height: height * 0.26,
+          height: height * 0.25,
           child: Stack(
             alignment: Alignment.topCenter,
             children: [
@@ -28,8 +34,8 @@ class HeadView extends StatelessWidget {
               Positioned(
                 bottom: 0,
                 child: Container(
-                  width: width * 0.3,
-                  height: width * 0.3,
+                  width: size * 0.25,
+                  height: size * 0.25,
                   decoration: BoxDecoration(
                     color: theme.unselectedWidgetColor,
                     border: Border.all(
@@ -47,7 +53,7 @@ class HeadView extends StatelessWidget {
             ],
           ),
         ),
-        Gap(height * 0.02),
+        Gap(height * 0.025),
         Text(userData.names!),
         Text(
           userData.email!,
@@ -56,7 +62,7 @@ class HeadView extends StatelessWidget {
             height: 2,
           ),
         ),
-        Gap(height * 0.01),
+        Gap(height * 0.025),
         GestureDetector(
           onTap: () => Navigator.push(
             context,
@@ -70,10 +76,7 @@ class HeadView extends StatelessWidget {
               border: Border.all(color: theme.primaryColor, width: 1),
               borderRadius: BorderRadius.circular(100),
             ),
-            padding: EdgeInsets.symmetric(
-              horizontal: width * 0.025,
-              vertical: height * 0.005,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             child: Text(
               "Voir le profil",
               style: theme.textTheme.bodySmall!.copyWith(
@@ -83,7 +86,7 @@ class HeadView extends StatelessWidget {
             ),
           ),
         ),
-        Gap(height * 0.02),
+        Gap(height * 0.025),
       ],
     );
   }

@@ -8,21 +8,22 @@ Widget customDialogView(
   onTap,
   onChanged,
 }) {
-  final theme = Theme.of(context);
-  final width = MediaQuery.sizeOf(context).width;
   final height = MediaQuery.sizeOf(context).height;
+  final width = MediaQuery.sizeOf(context).width;
+  final sizeWidth = width > height ? height : width;
+  final theme = Theme.of(context);
   return SimpleDialog(
     alignment: Alignment.center,
     backgroundColor: theme.highlightColor,
     children: [
       Container(
-        padding: EdgeInsets.all(width * 0.04),
+        padding: EdgeInsets.all(sizeWidth * 0.04),
         child: Column(
           children: [
             Text("$title"),
             TextFormField(
-              style:
-                  theme.textTheme.bodySmall!.copyWith(fontSize: width * 0.03),
+              style: theme.textTheme.bodySmall!
+                  .copyWith(fontSize: sizeWidth * 0.03),
               cursorColor: theme.colorScheme.inverseSurface,
               cursorWidth: 1,
               maxLines: null,
@@ -30,7 +31,7 @@ Widget customDialogView(
               decoration: InputDecoration(
                 hintText: "$hintText",
                 hintStyle: theme.textTheme.bodySmall!.copyWith(
-                  fontSize: width * 0.025,
+                  fontSize: sizeWidth * 0.025,
                   color: theme.unselectedWidgetColor,
                 ),
                 enabledBorder: UnderlineInputBorder(
@@ -47,7 +48,7 @@ Widget customDialogView(
                 ),
               ),
             ),
-            Gap(height * 0.02),
+            Gap(width * 0.02),
             bottomDialogButtonView(
               context: context,
               onTap: onTap,
@@ -61,7 +62,9 @@ Widget customDialogView(
 }
 
 Row bottomDialogButtonView({context, onTap, confirmText}) {
+  final height = MediaQuery.sizeOf(context).height;
   final width = MediaQuery.sizeOf(context).width;
+  final sizeWidth = width > height ? height : width;
   final theme = Theme.of(context);
   return Row(
     mainAxisAlignment: MainAxisAlignment.end,
@@ -71,15 +74,15 @@ Row bottomDialogButtonView({context, onTap, confirmText}) {
         child: Container(
           alignment: Alignment.center,
           padding: EdgeInsets.symmetric(
-            horizontal: width * 0.025,
-            vertical: MediaQuery.sizeOf(context).height * 0.01,
+            horizontal: sizeWidth * 0.025,
+            vertical: sizeWidth * 0.02,
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
           ),
           child: Text(
             'Annuler',
-            style: TextStyle(fontSize: width * 0.025),
+            style: TextStyle(fontSize: sizeWidth * 0.025),
           ),
         ),
       ),
@@ -89,8 +92,8 @@ Row bottomDialogButtonView({context, onTap, confirmText}) {
         child: Container(
           alignment: Alignment.center,
           padding: EdgeInsets.symmetric(
-            horizontal: width * 0.03,
-            vertical: MediaQuery.sizeOf(context).height * 0.01,
+            horizontal: sizeWidth * 0.025,
+            vertical: sizeWidth * 0.02,
           ),
           decoration: BoxDecoration(
             border: Border.all(
@@ -102,7 +105,7 @@ Row bottomDialogButtonView({context, onTap, confirmText}) {
           ),
           child: Text(
             '$confirmText',
-            style: TextStyle(fontSize: width * 0.025),
+            style: TextStyle(fontSize: sizeWidth * 0.025),
           ),
         ),
       ),

@@ -1,6 +1,5 @@
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../shared/shared.dart';
 
@@ -9,40 +8,53 @@ class AboutDialogBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final width = MediaQuery.sizeOf(context).width;
     final height = MediaQuery.sizeOf(context).height;
+    final width = MediaQuery.sizeOf(context).width;
+    final size = width > height ? height : width;
+    final theme = Theme.of(context);
     Map infos = {
-      "Version de l'App : ": "0.1.0",
+      "Version de l'App : ": "1.0.0",
       "Version d'Android : ": "11+",
       'Dernière Mise en jour : ': "31 Juillet 2024",
     };
     return Container(
-      padding: EdgeInsets.all(width * 0.07),
-      height: height * 0.5,
+      padding: EdgeInsets.all(size * 0.07),
+      height: height * 0.53,
       child: Column(
         children: [
           SizedBox(
-            width: width * 0.2,
-            height: width * 0.2,
+            width: size * 0.2,
+            height: size * 0.2,
             child: Image.asset(AppImages.logo),
           ),
           Gap(height * 0.02),
           Text(
             "PangoGest",
             style:
-                theme.textTheme.displaySmall!.copyWith(fontSize: width * 0.04),
+                theme.textTheme.displaySmall!.copyWith(fontSize: size * 0.04),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Gap(width * 0.03),
               Text(
-                "Une app conçue dans l'idée d'aider les collègues étudiants à optimiser leurs études, révisions, exercices, ...\nEn regroupant un ensemble des anciens questionnaires d'examens, d'interrogations, de TP, ...",
+                "Une application mobile de mise en contact des deux parties entrant dans la scène des maison à louer ...",
                 style: theme.textTheme.bodySmall,
                 textAlign: TextAlign.center,
               ),
-              Gap(width * 0.05),
+              Gap(size * 0.01),
+              Text(
+                "- En donnant une flexibilité aux propriétaire de pouvoir avoir la main proche sur la gérance de leurs différentes maisons, de rappel sur l'évolution de leurs différentes maisons, ...",
+                style: theme.textTheme.bodySmall,
+                textAlign: TextAlign.start,
+              ),
+              Gap(size * 0.01),
+              Text(
+                "- Aux locataires de pouvoir vérifier d'une manière continue leur contrat, les dates clés pour différentes actions, ...",
+                style: theme.textTheme.bodySmall,
+                textAlign: TextAlign.start,
+              ),
+              Gap(size * 0.025),
               for (String info in infos.keys) ...{
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -65,35 +77,11 @@ class AboutDialogBody extends StatelessWidget {
                     ),
                   ],
                 ),
-                Gap(height * 0.005),
+                Gap(size * 0.01),
               },
             ],
           ),
-          Gap(height * 0.02),
-          Text(
-            "Pour plus de détails, visitez :",
-            style: theme.textTheme.bodySmall,
-            textAlign: TextAlign.center,
-          ),
-          Gap(width * 0.01),
-          GestureDetector(
-            onTap: () async {
-              const url = 'https://g-losingson.github.io/JifunzApp/';
-              if (await canLaunchUrl(Uri.parse(url))) {
-                await launchUrl(Uri.parse(url));
-              }
-            },
-            child: Text(
-              "jifunzapp.com",
-              style: theme.textTheme.bodySmall!.copyWith(
-                color: Colors.blue,
-                decoration: TextDecoration.underline,
-                decorationColor: Colors.blue,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Gap(width * 0.05),
+          Gap(size * 0.05),
           socialmediaView(width, theme, context),
         ],
       ),

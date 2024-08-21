@@ -30,7 +30,7 @@ class AuthBottomView extends StatelessWidget {
                     style: GoogleFonts.raleway(
                       fontWeight: FontWeight.normal,
                       color: AppColors.white,
-                      fontSize: 13,
+                      fontSize: 12,
                     ),
                   ),
                   TextSpan(
@@ -52,7 +52,7 @@ class AuthBottomView extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: theme.primaryColor,
             fontSize: 12,
-            height: 3,
+            height: 2.5,
           ),
         ),
       ],

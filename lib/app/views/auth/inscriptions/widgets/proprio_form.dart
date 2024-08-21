@@ -28,7 +28,9 @@ class _ProprioFormState extends State<ProprioForm> {
   bool isShowed = false;
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
+    final size = width > height ? height : width;
     final List icons = [
       AppIcons.profile,
       AppIcons.adresse,
@@ -42,8 +44,8 @@ class _ProprioFormState extends State<ProprioForm> {
       "Adresse *",
       "Email",
       "N° Tél *",
-      "Mots de passe *",
-      "Mots clés *",
+      "Mot de passe *",
+      "Mot clé *",
     ];
     final List hintTexts = [
       "Georges Byona",
@@ -70,7 +72,7 @@ class _ProprioFormState extends State<ProprioForm> {
           child: Row(
             children: [
               Icon(icons[index], color: AppColors.white),
-              Gap(width * 0.05),
+              Gap(size * 0.03),
               Expanded(
                 child: CustomTextField(
                   controller: controllers[index],
@@ -95,7 +97,7 @@ class _ProprioFormState extends State<ProprioForm> {
                 GestureDetector(
                   onTap: onShowPasswords,
                   child: Container(
-                    padding: EdgeInsets.only(left: width * 0.05),
+                    padding: EdgeInsets.only(left: size * 0.05),
                     child: Icon(
                       isShowed ? AppIcons.eyeShow : AppIcons.eyeHide,
                       color: Colors.white,

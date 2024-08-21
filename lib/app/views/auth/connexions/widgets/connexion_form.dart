@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../shared/shared.dart';
+import '../../forgot_password/forgot_password.dart';
 
 class ConnexionForm extends StatefulWidget {
   final TextEditingController wordsController;
@@ -21,8 +22,9 @@ class _ConnexionFormState extends State<ConnexionForm> {
   bool isShowed = false;
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
-
+    final size = width > height ? height : width;
     return ListView(
       scrollDirection: Axis.vertical,
       children: [
@@ -31,7 +33,7 @@ class _ConnexionFormState extends State<ConnexionForm> {
           child: Row(
             children: [
               const Icon(AppIcons.keywords, color: AppColors.white),
-              Gap(width * 0.05),
+              Gap(size * 0.03),
               Expanded(
                 child: CustomTextField(
                   controller: widget.keyController,
@@ -47,11 +49,11 @@ class _ConnexionFormState extends State<ConnexionForm> {
           child: Row(
             children: [
               const Icon(AppIcons.passwords, color: AppColors.white),
-              Gap(width * 0.05),
+              Gap(size * 0.03),
               Expanded(
                 child: CustomTextField(
                   controller: widget.wordsController,
-                  labelText: "Mots de passe",
+                  labelText: "Mot de passe",
                   keyboardType: TextInputType.text,
                   obscureText: !isShowed,
                 ),
@@ -70,11 +72,18 @@ class _ConnexionFormState extends State<ConnexionForm> {
           ),
         ),
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ForgotPasswordPage(),
+              ),
+            );
+          },
           child: Container(
             color: Colors.transparent,
             child: Text(
-              'Mots de passe oubliés !',
+              'Mot de passe oublié !',
               style: GoogleFonts.poiretOne(
                 fontWeight: FontWeight.bold,
                 color: AppColors.primary,
