@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:chatview/chatview.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../../../controllers/controllers.dart';
 import '../../../shared/shared.dart';
@@ -16,16 +15,32 @@ ChatViewAppBar chatAppBar({
     chatTitle: chatController!.otherUsers.first.name,
     imageType: ImageType.network,
     profilePicture: chatController.otherUsers.first.profilePhoto,
+    networkImageProgressIndicatorBuilder: (context, url, error) {
+      return Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: theme.unselectedWidgetColor,
+          shape: BoxShape.circle,
+        ),
+        child: Icon(
+          AppIcons.profileB,
+          color: theme.primaryColorDark,
+          size: 20,
+        ),
+      );
+    },
     networkImageErrorBuilder: (context, url, error) {
-      return CachedNetworkImage(
-        imageUrl: chatController.currentUser.profilePhoto!,
-        errorWidget: (context, url, error) => const Icon(AppIcons.profile),
-        progressIndicatorBuilder: (context, url, progress) {
-          return CircularProgressIndicator(
-            strokeWidth: 1,
-            value: progress.progress,
-          );
-        },
+      return Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: theme.unselectedWidgetColor,
+          shape: BoxShape.circle,
+        ),
+        child: Icon(
+          AppIcons.profileB,
+          color: theme.primaryColorDark,
+          size: 20,
+        ),
       );
     },
     backGroundColor: theme!.scaffoldBackgroundColor,
@@ -45,7 +60,6 @@ ChatViewAppBar chatAppBar({
     actions: [
       GestureDetector(
         onTap: () {
-          // debugPrint(_chatController!.initialMessageList.last.message);
           controller!.changeThemeMode();
         },
         child: Container(

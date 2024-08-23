@@ -12,12 +12,17 @@ ProfileCircleConfiguration profileConfig(
     imageType: ImageType.network,
     profileImageUrl: chatController.currentUser.profilePhoto,
     networkImageErrorBuilder: (context, url, error) {
-      return const Icon(AppIcons.profile);
-    },
-    networkImageProgressIndicatorBuilder: (context, url, progress) {
-      return CircularProgressIndicator(
-        color: theme.primaryColor,
-        value: progress.progress,
+      return Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: theme.unselectedWidgetColor,
+          shape: BoxShape.circle,
+        ),
+        child: Icon(
+          AppIcons.profileB,
+          color: theme.primaryColorDark,
+          size: 20,
+        ),
       );
     },
     onAvatarTap: (p0) {

@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:pangogest/app/shared/shared.dart';
 
 import '../../../../../controllers/controllers.dart';
 import '../../../views.dart';
@@ -33,21 +35,59 @@ class HeadView extends StatelessWidget {
               ),
               Positioned(
                 bottom: 0,
-                child: Container(
+                child: CachedNetworkImage(
                   width: size * 0.25,
-                  height: size * 0.25,
-                  decoration: BoxDecoration(
-                    color: theme.unselectedWidgetColor,
-                    border: Border.all(
-                      color: theme.highlightColor,
-                      width: 3,
-                    ),
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: NetworkImage(userData.imgUrl!),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                  imageUrl: userData.imgUrl!,
+                  alignment: Alignment.center,
+                  color: theme.unselectedWidgetColor,
+                  progressIndicatorBuilder: (context, url, progress) {
+                    return Container(
+                      width: size * 0.25,
+                      height: size * 0.25,
+                      decoration: BoxDecoration(
+                        color: theme.highlightColor,
+                        shape: BoxShape.circle,
+                      ),
+                    );
+                  },
+                  errorWidget: (context, url, error) {
+                    return Container(
+                      alignment: Alignment.center,
+                      width: size * 0.25,
+                      height: size * 0.25,
+                      decoration: BoxDecoration(
+                        color: theme.unselectedWidgetColor,
+                        border: Border.all(
+                          color: theme.highlightColor,
+                          width: 3,
+                        ),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        AppIcons.profileB,
+                        size: size * 0.1,
+                        color: theme.primaryColorDark,
+                      ),
+                    );
+                  },
+                  imageBuilder: (context, imageProvider) {
+                    return Container(
+                      width: size * 0.25,
+                      height: size * 0.25,
+                      decoration: BoxDecoration(
+                        color: theme.unselectedWidgetColor,
+                        border: Border.all(
+                          color: theme.highlightColor,
+                          width: 3,
+                        ),
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ],

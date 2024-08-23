@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../../controllers/controllers.dart';
-import '../../shared/shared.dart';
-import '../views.dart';
-import 'drawer/mi_drawer.dart';
 import 'widgets/bottom_appbar_view.dart';
+import '../../shared/shared.dart';
+import '../../../data/data.dart';
+import 'drawer/mi_drawer.dart';
+import '../views.dart';
 
 class Wrapper extends StatelessWidget {
   final UserDataController userData;
@@ -40,7 +41,10 @@ class Wrapper extends StatelessWidget {
         controller: controller,
       ),
     ];
-
+    int chatNotifLength = 0;
+    for (var chatData in chatListData.where((chatData) => !chatData.isRead)) {
+      chatNotifLength += chatData.lastMsgTotal!;
+    }
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
@@ -56,6 +60,7 @@ class Wrapper extends StatelessWidget {
               alignment: Alignment.center,
               color: Colors.transparent,
               padding: const EdgeInsets.only(left: 15, right: 15),
+              margin: const EdgeInsets.only(right: 10),
               child: CustomBadge(
                 content: badgeContents[controller.index],
                 icon: AppIcons.notification,
@@ -72,6 +77,7 @@ class Wrapper extends StatelessWidget {
       body: SafeArea(child: screens[controller.index]),
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
+          height: 70,
           elevation: 0,
           indicatorColor: Colors.transparent,
           backgroundColor: Colors.transparent,
@@ -89,14 +95,16 @@ class Wrapper extends StatelessWidget {
           labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         ),
         child: NavigationBar(
-          backgroundColor: Colors.transparent,
           animationDuration: const Duration(microseconds: 500),
           onDestinationSelected: (i) => controller.navigationController(i),
           selectedIndex: controller.index,
           destinations: indexes.map((index) {
             return NavigationDestination(
               icon: index == 2
-                  ? CustomBadge(icon: unselectedIcons[index], content: '7')
+                  ? CustomBadge(
+                      icon: unselectedIcons[index],
+                      content: '$chatNotifLength',
+                    )
                   : Icon(unselectedIcons[index]),
               selectedIcon: Icon(
                 selectedIcons[index],

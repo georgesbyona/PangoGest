@@ -40,6 +40,7 @@ class MenusView extends StatelessWidget {
     ];
     return Expanded(
       child: ListView(
+        shrinkWrap: true,
         padding: const EdgeInsets.only(left: 15, right: 15),
         children: [
           Column(
@@ -92,7 +93,7 @@ class MenusView extends StatelessWidget {
                             Text(
                               titles[index],
                               style: theme.textTheme.bodySmall!.copyWith(
-                                fontSize: size * 0.03,
+                                fontSize: size * 0.027,
                               ),
                             ),
                           ],
@@ -115,7 +116,7 @@ class MenusView extends StatelessWidget {
                   Text(
                     'Thème sombre',
                     style: theme.textTheme.bodySmall!.copyWith(
-                      fontSize: size * 0.03,
+                      fontSize: size * 0.027,
                     ),
                   ),
                 ],

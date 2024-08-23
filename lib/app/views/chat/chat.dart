@@ -3,14 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../controllers/controllers.dart';
+import '../../../data/data.dart';
 import 'widgets/chat_widgets.dart';
 import '../../shared/shared.dart';
 
 class ChatPage extends StatefulWidget {
-  const ChatPage({super.key, required this.user, required this.controller});
+  const ChatPage({
+    super.key,
+    required this.user,
+    required this.controller,
+    required this.otherU,
+  });
 
   final UserDataController user;
   final MainController controller;
+  final ChatModel otherU;
 
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -22,89 +29,89 @@ class _ChatPageState extends State<ChatPage> {
   double imageWidth = 200;
 
   List<Message> messages = [
-    Message(
-      id: '1',
-      message: "Hi",
-      createdAt: DateTime.now(),
-      sentBy: "georgesbyona@gmail.com",
-    ),
-    Message(
-      id: '2',
-      message: "Hello",
-      createdAt: DateTime.now(),
-      sentBy: "glosingson@gmail.com",
-    ),
-    Message(
-      id: '3',
-      message:
-          "J'ai déjà les médicaments que je mettais avant non 😂 donc tout va aller mieux, envoie moi le lien du package",
-      createdAt: DateTime.now(),
-      sentBy: "glosingson@gmail.com",
-    ),
-    Message(
-      id: "4",
-      message: "T'inquiètes G !",
-      createdAt: DateTime.now(),
-      sentBy: "glosingson@gmail.com",
-      replyMessage: const ReplyMessage(
-        messageId: "3",
-        message:
-            "J'ai déjà les médicaments que je mettais avant non 😂 donc tout va aller mieux, envoie moi le lien du package",
-        replyBy: "glosingson@gmail.com",
-        replyTo: "glosingson@gmail.com",
-      ),
-    ),
-    Message(
-      id: "5",
-      message: "https://pub.dev/packages/chatview",
-      createdAt: DateTime.now(),
-      sentBy: "georgesbyona@gmail.com",
-    ),
-    Message(
-      id: "6",
-      message: "👆🏾👆🏾👆🏾",
-      createdAt: DateTime.now(),
-      sentBy: "georgesbyona@gmail.com",
-      replyMessage: const ReplyMessage(
-        messageId: "3",
-        message:
-            "J'ai déjà les médicaments que je mettais avant non 😂 donc tout va aller mieux, envoie moi le lien du package",
-        replyBy: "georgesbyona@gmail.com",
-        replyTo: "glosingson@gmail.com",
-      ),
-    ),
-    Message(
-      id: "7",
-      message: "Bien reçu G !",
-      createdAt: DateTime.now(),
-      sentBy: "glosingson@gmail.com",
-      replyMessage: const ReplyMessage(
-        messageId: "4",
-        message: "https://pub.dev/packages/chatview",
-        replyBy: "glosingson@gmail.com",
-        replyTo: "georgesbyona@gmail.com",
-      ),
-    ),
+    // Message(
+    //   id: '1',
+    //   message: "Hi",
+    //   createdAt: DateTime.now(),
+    //   sentBy: "georgesbyona@gmail.com",
+    // ),
+    // Message(
+    //   id: '2',
+    //   message: "Hello",
+    //   createdAt: DateTime.now(),
+    //   sentBy: "glosingson@gmail.com",
+    // ),
+    // Message(
+    //   id: '3',
+    //   message:
+    //       "J'ai déjà les médicaments que je mettais avant non 😂 donc tout va aller mieux, envoie moi le lien du package",
+    //   createdAt: DateTime.now(),
+    //   sentBy: "glosingson@gmail.com",
+    // ),
+    // Message(
+    //   id: "4",
+    //   message: "T'inquiètes G !",
+    //   createdAt: DateTime.now(),
+    //   sentBy: "glosingson@gmail.com",
+    //   replyMessage: const ReplyMessage(
+    //     messageId: "3",
+    //     message:
+    //         "J'ai déjà les médicaments que je mettais avant non 😂 donc tout va aller mieux, envoie moi le lien du package",
+    //     replyBy: "glosingson@gmail.com",
+    //     replyTo: "glosingson@gmail.com",
+    //   ),
+    // ),
+    // Message(
+    //   id: "5",
+    //   message: "https://pub.dev/packages/chatview",
+    //   createdAt: DateTime.now(),
+    //   sentBy: "georgesbyona@gmail.com",
+    // ),
+    // Message(
+    //   id: "6",
+    //   message: "👆🏾👆🏾👆🏾",
+    //   createdAt: DateTime.now(),
+    //   sentBy: "georgesbyona@gmail.com",
+    //   replyMessage: const ReplyMessage(
+    //     messageId: "3",
+    //     message:
+    //         "J'ai déjà les médicaments que je mettais avant non 😂 donc tout va aller mieux, envoie moi le lien du package",
+    //     replyBy: "georgesbyona@gmail.com",
+    //     replyTo: "glosingson@gmail.com",
+    //   ),
+    // ),
+    // Message(
+    //   id: "7",
+    //   message: "Bien reçu G !",
+    //   createdAt: DateTime.now(),
+    //   sentBy: "glosingson@gmail.com",
+    //   replyMessage: const ReplyMessage(
+    //     messageId: "4",
+    //     message: "https://pub.dev/packages/chatview",
+    //     replyBy: "glosingson@gmail.com",
+    //     replyTo: "georgesbyona@gmail.com",
+    //   ),
+    // ),
   ];
 
   @override
   void initState() {
+    final userID = widget.user.email ?? widget.user.num;
     _chatController = ChatController(
       initialMessageList: messages,
       scrollController: ScrollController(),
       currentUser: ChatUser(
-        id: 'georgesbyona@gmail.com',
-        name: 'Georges Byona',
+        id: userID!,
+        name: widget.user.names!,
         imageType: ImageType.network,
-        profilePhoto:
-            "https://lh3.googleusercontent.com/a/ACg8ocLrFO4QlXqP0Elvw0cspu9YMHbut7Os8iSPpfxtzo6NTJZtw5s=s96-c",
+        profilePhoto: widget.user.imgUrl,
       ),
       otherUsers: [
         ChatUser(
-          id: 'glosingson@gmail.com',
-          name: 'G-Losingson',
+          id: widget.otherU.id,
+          name: widget.otherU.name,
           imageType: ImageType.network,
-          profilePhoto: 'https://avatars.githubusercontent.com/u/127692851?v=4',
+          profilePhoto: widget.otherU.imgUrl,
         ),
       ],
     );
