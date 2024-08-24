@@ -41,10 +41,10 @@ class AppTheme {
       elevation: 0,
       foregroundColor: AppColors.black,
       titleTextStyle: GoogleFonts.raleway(
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.w600,
         color: AppColors.black,
         letterSpacing: 1,
-        fontSize: 20,
+        fontSize: 18,
       ),
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -105,10 +105,10 @@ class AppTheme {
       elevation: 0,
       foregroundColor: AppColors.white,
       titleTextStyle: GoogleFonts.raleway(
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.w600,
         color: AppColors.white,
         letterSpacing: 1,
-        fontSize: 20,
+        fontSize: 18,
       ),
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,

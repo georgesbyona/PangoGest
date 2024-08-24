@@ -127,7 +127,7 @@ class ChatList extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const Gap(15),
+                    const Gap(10),
                     Column(
                       children: [
                         Text(

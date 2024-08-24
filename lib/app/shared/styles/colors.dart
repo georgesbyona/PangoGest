@@ -16,4 +16,7 @@ class AppColors {
   static const primary = Color(0xFF31A7FB);
 
   static const red = Color.fromARGB(255, 212, 107, 107);
+  static const orange = Color.fromARGB(255, 255, 119, 0);
+  static const yellow = Color(0xFFF7C143);
+  static const greenO = Color(0xFF26780C);
 }
