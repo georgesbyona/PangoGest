@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
             width: 400,
             height: 400,
             child: const Card(
-              child: Text('Chart'),
+              child: Center(child: Text('Chart')),
             ),
           ),
           const BottomBoxesView(),
