@@ -26,7 +26,7 @@ class MainController extends ChangeNotifier {
     String? content,
   }) async {
     String? phoneInfo;
-    checkConnection(context);
+    checkConnection(context!);
     if (isConnected) {
       final deviceInfo = DeviceInfoPlugin();
       if (defaultTargetPlatform == TargetPlatform.android) {
@@ -58,7 +58,7 @@ class MainController extends ChangeNotifier {
 
   bool isConnected = false;
 
-  Future<void> checkConnection(context) async {
+  Future<void> checkConnection(BuildContext context) async {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].address.isNotEmpty) {

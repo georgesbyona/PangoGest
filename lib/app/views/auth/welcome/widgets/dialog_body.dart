@@ -34,7 +34,7 @@ Container dialogBody(
         accountView(
           width,
           text: "Propriétaire",
-          icon: AppIcons.proprio,
+          icon: AppIcons.owner,
           onTap: () {
             Navigator.pop(context);
             if (userData.isRegister) {
@@ -58,7 +58,7 @@ Container dialogBody(
         accountView(
           width,
           text: "Locataire",
-          icon: AppIcons.locataire,
+          icon: AppIcons.tenant,
           onTap: () {
             Navigator.push(
               context,

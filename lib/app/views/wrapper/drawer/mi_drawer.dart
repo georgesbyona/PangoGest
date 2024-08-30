@@ -55,7 +55,7 @@ class MiDrawer extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     color: AppColors.red,
-                    borderRadius: BorderRadius.circular(25),
+                    borderRadius: BorderRadius.circular(100),
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   margin: EdgeInsets.symmetric(

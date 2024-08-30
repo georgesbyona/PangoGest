@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'widgets/bottom_boxes_view.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -7,7 +9,21 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      child: const Text("Home"),
+      child: ListView(
+        shrinkWrap: true,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            margin: const EdgeInsets.only(bottom: 30),
+            width: 400,
+            height: 400,
+            child: const Card(
+              child: Text('Chart'),
+            ),
+          ),
+          const BottomBoxesView(),
+        ],
+      ),
     );
   }
 }

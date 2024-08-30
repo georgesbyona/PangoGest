@@ -26,9 +26,8 @@ class PangoGest extends StatelessWidget {
           create: (context) => UserDataController()..loadUserData(),
         ),
         ChangeNotifierProvider(
-          create: (context) => MainController()
-            ..changeThemeMode(darkMode: isDark)
-            ..checkConnection(context),
+          create: (context) =>
+              MainController()..changeThemeMode(darkMode: isDark),
         ),
       ],
       child: Consumer<MainController>(
@@ -36,7 +35,7 @@ class PangoGest extends StatelessWidget {
           return Consumer<UserDataController>(
             builder: (context, userData, child) {
               return MaterialApp(
-                themeAnimationDuration: const Duration(milliseconds: 500),
+                themeAnimationDuration: const Duration(milliseconds: 1000),
                 themeAnimationCurve: Curves.easeInOut,
                 debugShowCheckedModeBanner: false,
                 title: "PangoGest",

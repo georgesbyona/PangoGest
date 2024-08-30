@@ -22,10 +22,17 @@ class AppTheme {
       inverseSurface: AppColors.blackO,
       onInverseSurface: AppColors.blackI,
     ),
+    canvasColor: AppColors.white,
     primaryColor: AppColors.primary,
     primaryColorDark: AppColors.whiteO,
     primaryColorLight: AppColors.whiteI,
     highlightColor: AppColors.white,
+    cardTheme: const CardTheme(
+      elevation: 2,
+      color: AppColors.white,
+      clipBehavior: Clip.hardEdge,
+      shadowColor: AppColors.whiteO,
+    ),
     progressIndicatorTheme: const ProgressIndicatorThemeData(
       color: AppColors.primary,
       linearMinHeight: 1,
@@ -41,10 +48,10 @@ class AppTheme {
       elevation: 0,
       foregroundColor: AppColors.black,
       titleTextStyle: GoogleFonts.raleway(
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.bold,
         color: AppColors.black,
         letterSpacing: 1,
-        fontSize: 18,
+        fontSize: 17,
       ),
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -86,10 +93,17 @@ class AppTheme {
       inverseSurface: AppColors.whiteO,
       onInverseSurface: AppColors.whiteI,
     ),
+    canvasColor: AppColors.black,
     primaryColor: AppColors.primary,
     primaryColorDark: AppColors.blackO,
     primaryColorLight: AppColors.blackI,
     highlightColor: AppColors.black,
+    cardTheme: const CardTheme(
+      elevation: 2,
+      color: AppColors.black,
+      clipBehavior: Clip.hardEdge,
+      shadowColor: AppColors.blackO,
+    ),
     progressIndicatorTheme: const ProgressIndicatorThemeData(
       linearMinHeight: 1,
       color: AppColors.primary,
@@ -105,10 +119,10 @@ class AppTheme {
       elevation: 0,
       foregroundColor: AppColors.white,
       titleTextStyle: GoogleFonts.raleway(
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.bold,
         color: AppColors.white,
         letterSpacing: 1,
-        fontSize: 18,
+        fontSize: 17,
       ),
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,

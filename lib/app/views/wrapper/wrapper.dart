@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../controllers/controllers.dart';
 import 'widgets/bottom_appbar_view.dart';
@@ -82,11 +83,11 @@ class Wrapper extends StatelessWidget {
           indicatorColor: Colors.transparent,
           backgroundColor: Colors.transparent,
           labelTextStyle: WidgetStatePropertyAll(
-            Theme.of(context).textTheme.bodySmall!.copyWith(
-                  fontWeight: FontWeight.normal,
-                  letterSpacing: 1,
-                  fontSize: 10,
-                ),
+            GoogleFonts.indieFlower(
+              fontWeight: FontWeight.w600,
+              letterSpacing: 1,
+              fontSize: 12,
+            ),
           ),
           iconTheme: WidgetStatePropertyAll(IconThemeData(
             color: Theme.of(context).unselectedWidgetColor,

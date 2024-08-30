@@ -1,13 +1,13 @@
 export 'choice.dart';
 export 'chat/chat.dart';
-export 'chat/chat_list.dart';
 export 'home/home.dart';
+export 'chat/chat_list.dart';
 export 'profile/profile.dart';
 export 'wrapper/wrapper.dart';
 export 'calendar/calendar.dart';
 export 'auth/welcome/welcome.dart';
+export 'auth/inscriptions/owner.dart';
+export 'auth/inscriptions/tenant.dart';
 export 'notification/notification.dart';
 export 'auth/connexions/connexion.dart';
-export 'auth/inscriptions/proprio.dart';
-export 'auth/inscriptions/locataire.dart';
 export 'auth/terms_and_conditions/terms_and_conditions.dart';

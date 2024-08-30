@@ -9,7 +9,7 @@ import '../widgets/auth_bottom_view.dart';
 import '../../../shared/shared.dart';
 import '../../../../data/data.dart';
 import '../widgets/wrapper_inscription_connexion.dart';
-import 'widgets/proprio_form.dart';
+import 'widgets/owner_form.dart';
 
 class ProprioInscription extends StatefulWidget {
   static const route = "/proprioInstruction";

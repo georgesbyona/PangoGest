@@ -19,8 +19,11 @@ class AppIcons {
   static const passwords = Iconsax.password_check_outline;
   static const keywords = MingCute.key_1_line;
 
-  static const proprio = MingCute.user_3_fill;
-  static const locataire = MingCute.user_3_line;
+  static const owner = MingCute.user_3_fill;
+  static const tenant = MingCute.user_3_line;
+
+  static const tenants = Iconsax.people_outline;
+  static const houses = Iconsax.buildings_outline;
 
   static const notification = Clarity.bell_line;
 
@@ -48,4 +51,7 @@ class AppIcons {
   static const gallery = Clarity.image_line;
 
   static const send = MingCute.send_line;
+
+  static const addEvent = Iconsax.calendar_add_outline;
+  static const addMessage = Iconsax.message_add_outline;
 }
