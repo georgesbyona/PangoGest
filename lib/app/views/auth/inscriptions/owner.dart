@@ -127,15 +127,31 @@ class _ProprioInscriptionState extends State<ProprioInscription> {
                                 onTap: () async {
                                   if (_formKey.currentState!.validate()) {
                                     await userData.registerUser(
-                                      ProprioModel(
+                                      UserModel(
                                         names: namesController.text,
                                         imgUrl:
                                             "https://lh3.googleusercontent.com/a/ACg8ocLrFO4QlXqP0Elvw0cspu9YMHbut7Os8iSPpfxtzo6NTJZtw5s=s96-c",
-                                        adresse: adressController.text,
+                                        adresse: AdresseModel(
+                                          id: adressController.text,
+                                          ville: adressController.text
+                                              .split(',')[3],
+                                          commune: adressController.text
+                                              .split(',')[2],
+                                          quartier: adressController.text
+                                              .split(',')[1],
+                                          cellule: "",
+                                          avenue: adressController.text
+                                              .split(',')[0]
+                                              .split(" ")[1],
+                                          num: adressController.text
+                                              .split(',')[0]
+                                              .split(" ")[0],
+                                        ),
                                         email: mailController.text,
                                         num: numController.text,
                                         passwords: passwordsController.text,
                                         keywords: keywordsController.text,
+                                        userType: "propriétaire",
                                       ),
                                     );
                                     namesController.clear();

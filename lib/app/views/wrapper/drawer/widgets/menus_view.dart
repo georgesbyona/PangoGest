@@ -41,94 +41,103 @@ class MenusView extends StatelessWidget {
     return Expanded(
       child: ListView(
         shrinkWrap: true,
-        padding: const EdgeInsets.only(left: 15, right: 15),
+        padding: const EdgeInsets.only(top: 0, left: 5),
         children: [
-          Column(
-            children: List.generate(
-              icons.length,
-              (index) {
-                return GestureDetector(
-                  onTap: () {
-                    if (index == 0) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const TermsAndConditions(),
-                        ),
-                      );
-                    } else if (index == 1) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => customDialogView(
+          Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: Column(
+              children: List.generate(
+                icons.length,
+                (index) {
+                  return GestureDetector(
+                    onTap: () {
+                      if (index == 0) {
+                        Navigator.push(
                           context,
-                          title: "Aide & FeedBack",
-                          hintText: "Envoyez nous vos préoccupations ...",
-                        ),
-                      );
-                    } else if (index == 2) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => Dialog(
-                          backgroundColor: theme.highlightColor,
-                          child: const AboutDialogBody(),
-                        ),
-                      );
-                    }
-                  },
-                  child: Container(
-                    alignment: Alignment.center,
-                    color: Colors.transparent,
-                    margin: EdgeInsets.only(
-                      bottom: index + 1 == icons.length
-                          ? height * 0.015
-                          : height * 0.025,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(icons[index]),
-                            Gap(size * 0.03),
-                            Text(
-                              titles[index],
-                              style: theme.textTheme.bodySmall!.copyWith(
-                                fontSize: size * 0.027,
+                          MaterialPageRoute(
+                            builder: (context) => const TermsAndConditions(),
+                          ),
+                        );
+                      } else if (index == 1) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => customDialogView(
+                            context,
+                            title: "Aide & FeedBack",
+                            hintText: "Envoyez nous vos préoccupations ...",
+                          ),
+                        );
+                      } else if (index == 2) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => Dialog(
+                            backgroundColor: theme.highlightColor,
+                            child: const AboutDialogBody(),
+                          ),
+                        );
+                      }
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      color: Colors.transparent,
+                      margin: EdgeInsets.only(
+                        bottom: index + 1 == icons.length
+                            ? height * 0.015
+                            : height * 0.025,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(icons[index], size: 20),
+                              const Gap(15),
+                              Text(
+                                titles[index],
+                                style: theme.textTheme.bodySmall!.copyWith(
+                                  fontSize: size * 0.027,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Icon(iconsSuff[index]),
-                      ],
+                            ],
+                          ),
+                          Icon(iconsSuff[index], size: 15),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  const Icon(AppIcons.darkMode),
-                  Gap(size * 0.03),
-                  Text(
-                    'Thème sombre',
-                    style: theme.textTheme.bodySmall!.copyWith(
-                      fontSize: size * 0.027,
+          Padding(
+            padding: const EdgeInsets.only(right: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    const Icon(AppIcons.darkMode),
+                    const Gap(15),
+                    Text(
+                      'Thème sombre',
+                      style: theme.textTheme.bodySmall!.copyWith(
+                        fontSize: size * 0.027,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Switch(
-                value: controller.isDark,
-                activeColor: inverseColor,
-                inactiveThumbColor: inverseColor,
-                inactiveTrackColor: inverseColor.withOpacity(0.5),
-                onChanged: (value) => controller.changeThemeMode(),
-              ),
-            ],
+                  ],
+                ),
+                Switch(
+                  trackOutlineWidth: const WidgetStatePropertyAll(20),
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  value: controller.isDark,
+                  activeColor: inverseColor,
+                  inactiveThumbColor: inverseColor,
+                  inactiveTrackColor: inverseColor.withOpacity(0.5),
+                  onChanged: (value) => controller.changeThemeMode(),
+                ),
+              ],
+            ),
           ),
         ],
       ),

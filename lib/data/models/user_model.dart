@@ -1,19 +1,25 @@
-class ProprioModel {
+import '../data.dart';
+
+class UserModel {
   final String names;
   final String? imgUrl;
-  final String adresse;
+  final AdresseModel? adresse;
   final String? email;
   final String num;
   final String passwords;
   final String keywords;
+  final String userType;
+  final List<UserModel> tenants;
 
-  ProprioModel({
+  UserModel({
     this.email,
     this.imgUrl,
+    this.adresse,
+    this.tenants = const [],
     required this.names,
-    required this.adresse,
     required this.num,
     required this.passwords,
     required this.keywords,
+    required this.userType,
   });
 }

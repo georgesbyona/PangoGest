@@ -99,7 +99,7 @@ class TxtTheme {
       letterSpacing: 1.5,
     ),
     titleLarge: GoogleFonts.raleway(
-      color: Colors.grey.shade700,
+      color: Colors.grey.shade400,
       fontWeight: FontWeight.bold,
       letterSpacing: 1.5,
     ),
@@ -109,7 +109,7 @@ class TxtTheme {
       letterSpacing: 1.5,
     ),
     titleSmall: GoogleFonts.raleway(
-      color: Colors.grey.shade700,
+      color: Colors.grey.shade400,
       fontWeight: FontWeight.normal,
       letterSpacing: 1.5,
       fontSize: 20,
@@ -130,7 +130,7 @@ class TxtTheme {
       letterSpacing: 1.5,
     ),
     labelMedium: GoogleFonts.raleway(
-      color: Colors.grey.shade700,
+      color: Colors.grey.shade400,
       fontWeight: FontWeight.w500,
       letterSpacing: 1.5,
     ),

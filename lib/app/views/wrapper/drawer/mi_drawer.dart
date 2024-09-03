@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../controllers/controllers.dart';
 import '../../../shared/shared.dart';
@@ -53,21 +54,30 @@ class MiDrawer extends StatelessWidget {
                   await userData.signOutUser();
                 },
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: AppColors.red,
-                    borderRadius: BorderRadius.circular(100),
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(100),
+                      bottomRight: Radius.circular(100),
+                    ),
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  margin: EdgeInsets.symmetric(
-                    horizontal: width * 0.03,
-                    vertical: height * 0.05,
+                  padding: const EdgeInsets.only(
+                    top: 15,
+                    left: 25,
+                    bottom: 15,
+                  ),
+                  margin: EdgeInsets.only(
+                    top: height * 0.05,
+                    right: width * 0.03,
+                    bottom: height * 0.05,
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const Icon(AppIcons.logout, color: AppColors.black),
+                      const Gap(15),
                       Text(
-                        "  Se déconnecter",
+                        "Se déconnecter",
                         style: theme.textTheme.bodyMedium!.copyWith(
                           color: AppColors.black,
                         ),

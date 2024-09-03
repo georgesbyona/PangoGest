@@ -54,19 +54,19 @@ class UserDataController extends ChangeNotifier {
 
   bool isRegisterUser = false;
 
-  Future<void> registerUser(ProprioModel proprio) async {
+  Future<void> registerUser(UserModel proprio) async {
     isRegisterUser = true;
     final prefs = await _prefs;
     prefs.setString('userNames', proprio.names);
     prefs.setString('userImgUrl', proprio.imgUrl!);
-    prefs.setString('userAdresse', proprio.adresse);
+    prefs.setString('userAdresse', proprio.adresse!.ville);
     prefs.setString('userEmail', proprio.email!);
     prefs.setString('userNum', proprio.num);
     prefs.setString('userPasswords', proprio.passwords);
     prefs.setString('userKeywords', proprio.keywords);
     prefs.setBool('isRegister', true);
     _names = proprio.names;
-    _adresse = proprio.adresse;
+    _adresse = proprio.adresse!.ville;
     _imgUrl = proprio.imgUrl;
     _email = proprio.email;
     _num = proprio.num;

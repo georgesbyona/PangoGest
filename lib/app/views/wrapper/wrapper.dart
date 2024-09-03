@@ -36,11 +36,8 @@ class Wrapper extends StatelessWidget {
     final List<double> bottomHeight = [95, 50, 50];
     final List<Widget> screens = [
       const HomePage(),
-      const CalendarPage(),
-      ChatList(
-        user: userData,
-        controller: controller,
-      ),
+      CalendarPage(user: userData),
+      ChatList(user: userData, controller: controller),
     ];
     int chatNotifLength = 0;
     for (var chatData in chatListData.where((chatData) => !chatData.isRead)) {

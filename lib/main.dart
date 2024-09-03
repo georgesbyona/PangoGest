@@ -29,6 +29,7 @@ class PangoGest extends StatelessWidget {
           create: (context) =>
               MainController()..changeThemeMode(darkMode: isDark),
         ),
+        ChangeNotifierProvider(create: (context) => CalendarController()),
       ],
       child: Consumer<MainController>(
         builder: (context, controller, state) {

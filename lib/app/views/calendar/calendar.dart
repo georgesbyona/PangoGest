@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../../shared/shared.dart';
+import '../../../controllers/controllers.dart';
 import 'widgets/body_calendar_view.dart';
 import 'widgets/head_calendar_view.dart';
+import '../../shared/shared.dart';
+import 'page/add_new_event.dart';
 
 class CalendarPage extends StatefulWidget {
-  const CalendarPage({super.key});
+  const CalendarPage({super.key, required this.user});
+
+  final UserDataController user;
 
   @override
   State<CalendarPage> createState() => _CalendarPageState();
@@ -34,36 +39,52 @@ class _CalendarPageState extends State<CalendarPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            const HeadCalendarView(),
-            BodyCalendarView(
-              isEmpty: isEmpty,
-              scrollController: scrollController,
+    return Consumer<CalendarController>(
+      builder: (context, calendar, child) {
+        return Scaffold(
+          body: Container(
+            alignment: Alignment.center,
+            child: Column(
+              children: [
+                const HeadCalendarView(),
+                BodyCalendarView(
+                  calendar: calendar,
+                  scrollController: scrollController,
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-      floatingActionButton: _isAtTop || isEmpty
-          ? CustomFAB(
-              onPressed: () {
-                setState(() {
-                  isEmpty = !isEmpty;
-                });
-              },
-              icon: AppIcons.addEvent,
-            )
-          : CustomFABMini(
-              onPressed: () {
-                setState(() {
-                  isEmpty = !isEmpty;
-                });
-              },
-              icon: AppIcons.addEvent,
-            ),
+          ),
+          floatingActionButton: _isAtTop || isEmpty
+              ? CustomFAB(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AddNewEventPage(
+                          user: widget.user,
+                          calendar: calendar,
+                        ),
+                      ),
+                    );
+                  },
+                  icon: AppIcons.addEvent,
+                )
+              : CustomFABMini(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AddNewEventPage(
+                          user: widget.user,
+                          calendar: calendar,
+                        ),
+                      ),
+                    );
+                  },
+                  icon: AppIcons.addEvent,
+                ),
+        );
+      },
     );
   }
 }

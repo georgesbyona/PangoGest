@@ -54,4 +54,6 @@ class AppIcons {
 
   static const addEvent = Iconsax.calendar_add_outline;
   static const addMessage = Iconsax.message_add_outline;
+
+  static const eventType = Iconsax.calendar_tick_outline;
 }
