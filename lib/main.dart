@@ -35,20 +35,25 @@ class PangoGest extends StatelessWidget {
         builder: (context, controller, state) {
           return Consumer<UserDataController>(
             builder: (context, userData, child) {
-              return MaterialApp(
-                themeAnimationDuration: const Duration(milliseconds: 1000),
-                themeAnimationCurve: Curves.easeInOut,
-                debugShowCheckedModeBanner: false,
-                title: "PangoGest",
-                theme: AppTheme.lightTheme,
-                darkTheme: AppTheme.darkTheme,
-                themeMode: controller.isDark ? ThemeMode.dark : ThemeMode.light,
-                home: userData.isRegister && userData.isLoggedIn
-                    ? Wrapper(controller: controller, userData: userData)
-                    : Welcome(
-                        controller: controller,
-                        userData: userData,
-                      ),
+              return Consumer<CalendarController>(
+                builder: (context, value, child) {
+                  return MaterialApp(
+                    themeAnimationDuration: const Duration(milliseconds: 250),
+                    themeAnimationCurve: Curves.easeInOut,
+                    debugShowCheckedModeBanner: false,
+                    title: "PangoGest",
+                    theme: AppTheme.lightTheme,
+                    darkTheme: AppTheme.darkTheme,
+                    themeMode:
+                        controller.isDark ? ThemeMode.dark : ThemeMode.light,
+                    home: userData.isRegister && userData.isLoggedIn
+                        ? Wrapper(controller: controller, userData: userData)
+                        : Welcome(
+                            controller: controller,
+                            userData: userData,
+                          ),
+                  );
+                },
               );
             },
           );

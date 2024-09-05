@@ -1,10 +1,14 @@
-import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../controllers/controllers.dart';
+import 'widgets/event_notification.dart';
+import 'widgets/event_description.dart';
+import 'widgets/event_schedule.dart';
 import '../../../shared/shared.dart';
 import '../widgets/event_card.dart';
+import 'widgets/event_details.dart';
+import 'widgets/title_field.dart';
+import 'widgets/event_type.dart';
 
 class AddNewEventPage extends StatefulWidget {
   const AddNewEventPage({
@@ -13,8 +17,8 @@ class AddNewEventPage extends StatefulWidget {
     required this.calendar,
   });
 
-  final UserDataController user;
   final CalendarController calendar;
+  final UserDataController user;
 
   @override
   State<AddNewEventPage> createState() => _AddNewEventPageState();
@@ -22,6 +26,8 @@ class AddNewEventPage extends StatefulWidget {
 
 class _AddNewEventPageState extends State<AddNewEventPage> {
   final TextEditingController titleTextController = TextEditingController();
+  final TextEditingController descTextController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -29,112 +35,48 @@ class _AddNewEventPageState extends State<AddNewEventPage> {
       appBar: AppBar(
         actions: [
           CustomSaveFormButton(
-            onTap: () {},
+            onTap: () {
+              if (widget.calendar.startDate == widget.calendar.endDate &&
+                  widget.calendar.startTime == widget.calendar.endTime) {
+                myCustomSnackBar(
+                  context: context,
+                  text: "Date & Heure ne doivent pas être idem",
+                  backgroundColor: AppColors.red,
+                );
+              }
+            },
           ),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            "Nouvel Evénement",
-            style: theme.textTheme.titleLarge,
-            textAlign: TextAlign.center,
-          ),
-          const Gap(5),
-          Expanded(
-            child: ListView(
-              shrinkWrap: false,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: TextFormField(
-                    autocorrect: false,
-                    controller: titleTextController,
-                    onTapOutside: (event) {
-                      FocusScope.of(context).requestFocus(FocusNode());
-                    },
-                    cursorColor: theme.colorScheme.inversePrimary,
-                    cursorErrorColor: AppColors.red,
-                    maxLines: 1,
-                    style: GoogleFonts.raleway(
-                      color: theme.colorScheme.inverseSurface,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 25,
-                    ),
-                    decoration: InputDecoration(
-                      hintText: "Taper un titre",
-                      hintStyle: GoogleFonts.raleway(
-                        color: theme.colorScheme.inverseSurface,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 25,
-                      ),
-                      disabledBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: theme.colorScheme.inverseSurface,
-                          style: BorderStyle.solid,
-                          width: 1,
-                        ),
-                      ),
-                      errorBorder: const UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: AppColors.red,
-                          style: BorderStyle.solid,
-                          width: 1,
-                        ),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Veuillez remplir ce champ !';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                const CustomDivider(marginTop: 5),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      const Icon(AppIcons.eventType),
-                      const Gap(15),
-                      Column(
-                        children: [
-                          Text(
-                            "Type de l'événement",
-                            style: theme.textTheme.labelMedium,
-                          ),
-                          const Gap(5),
-                          Row(
-                            children: [
-                              Container(
-                                width: 10,
-                                height: 10,
-                                margin: const EdgeInsets.only(right: 5),
-                                decoration: const BoxDecoration(
-                                  color: Colors.amber,
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
-                              Text(
-                                'Rappel-Paiement',
-                                style: theme.textTheme.bodySmall,
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                const CustomDivider(),
-              ],
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              "Nouvel Evénement",
+              style: theme.textTheme.titleLarge!.copyWith(height: 2.5),
+              textAlign: TextAlign.center,
             ),
-          ),
-        ],
+            Expanded(
+              child: ListView(
+                shrinkWrap: false,
+                children: [
+                  TitleField(titleTextController: titleTextController),
+                  const CustomDivider(marginTop: 5),
+                  EventType(calendar: widget.calendar),
+                  const CustomDivider(),
+                  EventSchedule(calendar: widget.calendar),
+                  const CustomDivider(marginBottom: 10),
+                  EventDetails(user: widget.user, calendar: widget.calendar),
+                  const CustomDivider(marginTop: 10, marginBottom: 10),
+                  EventNotification(calendar: widget.calendar),
+                  const CustomDivider(marginTop: 15),
+                  EventDescription(calendar: widget.calendar),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

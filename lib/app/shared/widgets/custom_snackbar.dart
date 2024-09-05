@@ -4,14 +4,17 @@ import 'package:flutter/material.dart';
 
 import '../shared.dart';
 
-void myCustomSnackBar({context, text}) {
+void myCustomSnackBar({
+  context,
+  text,
+  Color? backgroundColor,
+}) {
   final overlay = Overlay.of(context);
-
   final overlayEntry = OverlayEntry(
     canSizeOverlay: true,
     builder: (context) => Align(
       alignment: Alignment.bottomCenter,
-      child: mySnackBar(context, text),
+      child: mySnackBar(context, text, backgroundColor),
     ),
   );
   overlay.insert(overlayEntry);
@@ -21,9 +24,13 @@ void myCustomSnackBar({context, text}) {
   });
 }
 
-Widget mySnackBar(BuildContext context, String text) {
-  final width = MediaQuery.sizeOf(context).width;
+Widget mySnackBar(BuildContext context, String text, Color? backgroundColor) {
+  final bckColor = backgroundColor ?? Theme.of(context).primaryColorDark;
+  final textColor = backgroundColor == null
+      ? Theme.of(context).highlightColor
+      : AppColors.black;
   final height = MediaQuery.sizeOf(context).height;
+  final width = MediaQuery.sizeOf(context).width;
   return Container(
     padding: EdgeInsets.symmetric(
       vertical: width * 0.015,
@@ -31,7 +38,7 @@ Widget mySnackBar(BuildContext context, String text) {
     ),
     margin: EdgeInsets.only(bottom: height * 0.085),
     decoration: BoxDecoration(
-      color: Theme.of(context).primaryColorDark,
+      color: bckColor,
       borderRadius: BorderRadius.circular(25),
     ),
     child: SizedBox(
@@ -54,7 +61,7 @@ Widget mySnackBar(BuildContext context, String text) {
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium!
-                  .copyWith(fontSize: width * 0.025),
+                  .copyWith(fontSize: width * 0.025, color: textColor),
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
               maxLines: 1,

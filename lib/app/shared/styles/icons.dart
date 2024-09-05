@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 class AppIcons {
@@ -6,6 +7,8 @@ class AppIcons {
 
   static const calendar = Iconsax.calendar_1_outline;
   static const calendarB = Iconsax.calendar_bold;
+
+  static const calendarEdit = Iconsax.calendar_edit_outline;
 
   static const chat = Iconsax.messages_outline;
   static const chatB = Iconsax.messages_1_bold;
@@ -25,9 +28,9 @@ class AppIcons {
   static const tenants = Iconsax.people_outline;
   static const houses = Iconsax.buildings_outline;
 
-  static const notification = Clarity.bell_line;
+  static const notification = Iconsax.notification_outline;
 
-  static const add = Clarity.add_line;
+  static const add = Iconsax.add_outline;
 
   static const search = Clarity.search_line;
 
@@ -56,4 +59,10 @@ class AppIcons {
   static const addMessage = Iconsax.message_add_outline;
 
   static const eventType = Iconsax.calendar_tick_outline;
+
+  static const clock = Iconsax.clock_outline;
+  static const more = Iconsax.more_outline;
+  static const edit = Iconsax.edit_2_outline;
+
+  static const close = Icons.close_rounded;
 }

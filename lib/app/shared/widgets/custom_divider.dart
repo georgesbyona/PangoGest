@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class CustomDivider extends StatelessWidget {
   const CustomDivider({
     super.key,
-    this.marginTop = 15,
-    this.marginBottom = 15,
+    this.marginTop = 20,
+    this.marginBottom = 20,
   });
 
   final double marginBottom;

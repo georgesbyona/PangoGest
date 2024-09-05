@@ -39,52 +39,49 @@ class _CalendarPageState extends State<CalendarPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<CalendarController>(
-      builder: (context, calendar, child) {
-        return Scaffold(
-          body: Container(
-            alignment: Alignment.center,
-            child: Column(
-              children: [
-                const HeadCalendarView(),
-                BodyCalendarView(
-                  calendar: calendar,
-                  scrollController: scrollController,
-                ),
-              ],
+    final calendar = Provider.of<CalendarController>(context);
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        child: Column(
+          children: [
+            const HeadCalendarView(),
+            BodyCalendarView(
+              calendar: calendar,
+              scrollController: scrollController,
             ),
-          ),
-          floatingActionButton: _isAtTop || isEmpty
-              ? CustomFAB(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AddNewEventPage(
-                          user: widget.user,
-                          calendar: calendar,
-                        ),
-                      ),
-                    );
-                  },
-                  icon: AppIcons.addEvent,
-                )
-              : CustomFABMini(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AddNewEventPage(
-                          user: widget.user,
-                          calendar: calendar,
-                        ),
-                      ),
-                    );
-                  },
-                  icon: AppIcons.addEvent,
-                ),
-        );
-      },
+          ],
+        ),
+      ),
+      floatingActionButton: _isAtTop || calendar.events.isEmpty
+          ? CustomFAB(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddNewEventPage(
+                      user: widget.user,
+                      calendar: calendar,
+                    ),
+                  ),
+                );
+              },
+              icon: AppIcons.addEvent,
+            )
+          : CustomFABMini(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddNewEventPage(
+                      user: widget.user,
+                      calendar: calendar,
+                    ),
+                  ),
+                );
+              },
+              icon: AppIcons.addEvent,
+            ),
     );
   }
 }

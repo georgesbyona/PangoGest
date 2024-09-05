@@ -75,6 +75,12 @@ class AppTheme {
       hoverColor: AppColors.blackO,
       splashColor: AppColors.whiteO,
     ),
+    datePickerTheme: const DatePickerThemeData(
+      backgroundColor: AppColors.white,
+    ),
+    timePickerTheme: const TimePickerThemeData(
+      backgroundColor: AppColors.white,
+    ),
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -102,7 +108,7 @@ class AppTheme {
       elevation: 2,
       color: AppColors.black,
       clipBehavior: Clip.hardEdge,
-      shadowColor: AppColors.blackO,
+      shadowColor: AppColors.black,
     ),
     progressIndicatorTheme: const ProgressIndicatorThemeData(
       linearMinHeight: 1,
@@ -145,6 +151,12 @@ class AppTheme {
       foregroundColor: AppColors.white,
       hoverColor: AppColors.whiteO,
       splashColor: AppColors.blackO,
+    ),
+    datePickerTheme: const DatePickerThemeData(
+      backgroundColor: AppColors.black,
+    ),
+    timePickerTheme: const TimePickerThemeData(
+      backgroundColor: AppColors.black,
     ),
   );
 }
