@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
 
 import '../data/data.dart';
+import 'user_controller.dart';
 
 class CalendarController extends ChangeNotifier {
   String startDayString = convertWeekDayToString(DateTime.now().weekday);
@@ -41,8 +42,6 @@ class CalendarController extends ChangeNotifier {
       startDay = _startDate!.day.toString();
       startMonth = convertMonthToString(_startDate!.month);
       startYear = _startDate!.year.toString();
-      startHour = convertSmallHour(_startDate!.hour);
-      startMin = convertSmallMin(_startDate!.minute);
     }
     notifyListeners();
   }
@@ -65,6 +64,12 @@ class CalendarController extends ChangeNotifier {
       firstDate: DateTime(2024),
       lastDate: DateTime(2025),
     );
+    if (_endDate != null) {
+      endDayString = convertWeekDayToString(_endDate!.weekday);
+      endDay = _endDate!.day.toString();
+      endMonth = convertMonthToString(_endDate!.month);
+      endYear = _endDate!.year.toString();
+    }
     notifyListeners();
   }
 
@@ -126,39 +131,34 @@ class CalendarController extends ChangeNotifier {
   void addNewEvent(
     String title,
     String description,
-    UserModel user,
-    UserModel tenant,
+    UserDataController user,
+    // UserModel tenant,
   ) {
-    // events.add(
-    // EventModel(
-    //   title: title,
-    //   type: eventType,
-    //   description: description,
-    //   tenant: UserModel(
-    //     names: tenant.names,
-    //     adresse: tenant.adresse,
-    //     imgUrl: tenant.imgUrl,
-    //     num: tenant.num,
-    //     email: tenant.email,
-    //     passwords: tenant.passwords,
-    //     keywords: tenant.keywords,
-    //     userType: tenant.userType,
-    //   ),
-    //   owner: UserModel(
-    //     names: user.names,
-    //     adresse: user.adresse,
-    //     imgUrl: user.imgUrl,
-    //     tenants: user.tenants,
-    //     num: user.num,
-    //     email: user.email,
-    //     passwords: user.passwords,
-    //     keywords: user.keywords,
-    //     userType: user.userType,
-    //   ),
-    // time: "$startHour:$startMin",
-    //   place: eventPlace,
-    // ),
-    // );
+    events.add(
+      EventModel(
+        title: title,
+        type: eventType,
+        description: description,
+        tenant: UserModel(
+          names: eventTenant!,
+          num: "",
+          passwords: "",
+          keywords: "",
+          userType: "locataire",
+        ),
+        owner: UserModel(
+          names: user.names!,
+          imgUrl: user.imgUrl,
+          num: user.num!,
+          email: user.email,
+          passwords: user.passwords!,
+          keywords: user.keywords!,
+          userType: "propriétaire",
+        ),
+        time: "$startHour:$startMin",
+        place: eventPlace!,
+      ),
+    );
     notifyListeners();
   }
 }
@@ -244,6 +244,9 @@ String convertSmallMin(int minInt) {
   if (minInt < 10) {
     String newSmallMin;
     switch (minInt) {
+      case 0:
+        newSmallMin = "00";
+        break;
       case 1:
         newSmallMin = "01";
         break;
@@ -284,6 +287,9 @@ String convertSmallHour(int hourInt) {
   if (hourInt < 10) {
     String newSmallHour;
     switch (hourInt) {
+      case 0:
+        newSmallHour = "00";
+        break;
       case 1:
         newSmallHour = "01";
         break;

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "613130163439",
+    "project_id": "pangogest",
+    "storage_bucket": "pangogest.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613130163439:android:8eb6209c5980392962b71a",
+        "android_client_info": {
+          "package_name": "com.losingtech.pangogest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYVTqlkzNDoUqd4rpgMd5tkdGadevpE84"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

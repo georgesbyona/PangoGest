@@ -21,7 +21,6 @@ class BodyCalendarView extends StatelessWidget {
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
     final isLarge = width > height ? true : false;
-    final theme = Theme.of(context);
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -41,12 +40,9 @@ class BodyCalendarView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Icon(AppIcons.addEvent),
-                          const Gap(10),
                           Text(
                             "Pas d'événements",
-                            style: theme.textTheme.bodySmall!.copyWith(
-                              height: 3,
-                            ),
+                            style: GoogleFonts.indieFlower(height: 3),
                           ),
                         ],
                       )
@@ -56,9 +52,7 @@ class BodyCalendarView extends StatelessWidget {
                           const Icon(AppIcons.addEvent),
                           Text(
                             "Pas d'événements",
-                            style: theme.textTheme.bodySmall!.copyWith(
-                              height: 3,
-                            ),
+                            style: GoogleFonts.indieFlower(height: 3),
                           ),
                           Gap(height * 0.1),
                         ],
@@ -74,7 +68,7 @@ class BodyCalendarView extends StatelessWidget {
                     return EventCard(
                       title: calendar.events[index].title,
                       content: calendar.events[index].description,
-                      tenant: calendar.events[index].tenant.names,
+                      tenant: calendar.events[index].tenant!.names,
                       where: calendar.events[index].place,
                       time: calendar.events[index].time,
                     );

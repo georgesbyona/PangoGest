@@ -54,10 +54,10 @@ class EventSchedule extends StatelessWidget {
           EndDatePickView(
             calendar: calendar,
             onTapD: () async {
-              await calendar.pickStartDate(context);
+              await calendar.pickEndDate(context);
             },
             onTapT: () async {
-              await calendar.pickStartTime(context);
+              await calendar.pickEndTime(context);
             },
           ),
         ],

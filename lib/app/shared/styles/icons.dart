@@ -55,8 +55,10 @@ class AppIcons {
 
   static const send = MingCute.send_line;
 
-  static const addEvent = Iconsax.calendar_add_outline;
+  static const addEvent = Iconsax.note_add_outline;
   static const addMessage = Iconsax.message_add_outline;
+  static const addUser = Iconsax.user_add_outline;
+  static const addHouse = Iconsax.add_outline;
 
   static const eventType = Iconsax.calendar_tick_outline;
 
@@ -65,4 +67,5 @@ class AppIcons {
   static const edit = Iconsax.edit_2_outline;
 
   static const close = Icons.close_rounded;
+  static const description = Iconsax.textalign_left_outline;
 }

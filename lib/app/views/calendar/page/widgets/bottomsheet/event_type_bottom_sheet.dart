@@ -16,7 +16,7 @@ class EventTypeBottomSheet extends StatelessWidget {
     final eventsLabels = EventsTools.eventsTypes.keys.toList();
     final eventsColors = EventsTools.eventsTypes.values.toList();
     return Container(
-      height: 400,
+      height: 350,
       color: Colors.transparent,
       child: Column(
         children: [
@@ -64,6 +64,7 @@ class EventTypeBottomSheet extends StatelessWidget {
                             Text(
                               eventsLabels[index],
                               style: GoogleFonts.indieFlower(
+                                color: theme.colorScheme.inversePrimary,
                                 fontWeight: FontWeight.normal,
                                 fontSize: 16,
                               ),
@@ -71,7 +72,7 @@ class EventTypeBottomSheet extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const CustomDivider(),
+                        const CustomDivider(marginBottom: 15, marginTop: 15),
                       ],
                     ),
                   ),

@@ -9,12 +9,12 @@ import '../../../views.dart';
 class HeadView extends StatelessWidget {
   const HeadView({
     super.key,
-    required this.userData,
+    required this.user,
     required this.height,
     required this.width,
   });
 
-  final UserDataController userData;
+  final UserDataController user;
   final double height;
   final double width;
 
@@ -37,7 +37,7 @@ class HeadView extends StatelessWidget {
                 bottom: 0,
                 child: CachedNetworkImage(
                   width: size * 0.25,
-                  imageUrl: userData.imgUrl!,
+                  imageUrl: user.imgUrl!,
                   alignment: Alignment.center,
                   color: theme.unselectedWidgetColor,
                   progressIndicatorBuilder: (context, url, progress) {
@@ -94,9 +94,9 @@ class HeadView extends StatelessWidget {
           ),
         ),
         Gap(height * 0.025),
-        Text(userData.names!),
+        Text(user.names!),
         Text(
-          userData.email!,
+          user.email!,
           style: theme.textTheme.bodySmall!.copyWith(
             color: theme.unselectedWidgetColor,
             height: 2,

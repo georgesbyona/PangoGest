@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class CustomFAB extends StatelessWidget {
   const CustomFAB({
     super.key,
-    required this.icon,
+    this.icon = Iconsax.add_outline,
     required this.onPressed,
   });
 
@@ -33,7 +34,7 @@ class CustomFAB extends StatelessWidget {
 class CustomFABMini extends StatelessWidget {
   const CustomFABMini({
     super.key,
-    required this.icon,
+    this.icon = Iconsax.add_outline,
     required this.onPressed,
   });
 

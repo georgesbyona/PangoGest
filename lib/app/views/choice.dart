@@ -16,7 +16,7 @@ class ChoicePage extends StatelessWidget {
         decoration: const BoxDecoration(
           color: Colors.transparent,
           image: DecorationImage(
-            image: AssetImage(AppImages.bckground2),
+            image: AssetImage(AppImages.bckground),
             fit: BoxFit.cover,
             opacity: 0.2,
           ),

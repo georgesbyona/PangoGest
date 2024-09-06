@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'controllers/controllers.dart';
 import 'app/shared/shared.dart';
 import 'app/views/views.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   bool isDark = sharedPreferences.getBool('isDark') ?? false;
   runApp(PangoGest(isDark: isDark));
@@ -25,16 +28,15 @@ class PangoGest extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => UserDataController()..loadUserData(),
         ),
-        ChangeNotifierProvider(
-          create: (context) =>
-              MainController()..changeThemeMode(darkMode: isDark),
-        ),
+        ChangeNotifierProvider(create: (context) {
+          return MainController()..changeThemeMode(darkMode: isDark);
+        }),
         ChangeNotifierProvider(create: (context) => CalendarController()),
       ],
       child: Consumer<MainController>(
-        builder: (context, controller, state) {
+        builder: (context, mainController, state) {
           return Consumer<UserDataController>(
-            builder: (context, userData, child) {
+            builder: (context, user, child) {
               return Consumer<CalendarController>(
                 builder: (context, value, child) {
                   return MaterialApp(
@@ -44,14 +46,12 @@ class PangoGest extends StatelessWidget {
                     title: "PangoGest",
                     theme: AppTheme.lightTheme,
                     darkTheme: AppTheme.darkTheme,
-                    themeMode:
-                        controller.isDark ? ThemeMode.dark : ThemeMode.light,
-                    home: userData.isRegister && userData.isLoggedIn
-                        ? Wrapper(controller: controller, userData: userData)
-                        : Welcome(
-                            controller: controller,
-                            userData: userData,
-                          ),
+                    themeMode: mainController.isDark
+                        ? ThemeMode.dark
+                        : ThemeMode.light,
+                    home: user.isRegister && user.isLoggedIn
+                        ? Wrapper(controller: mainController, user: user)
+                        : Welcome(controller: mainController, user: user),
                   );
                 },
               );

@@ -99,7 +99,7 @@ class NotificationsDialogView extends StatelessWidget {
       contentPadding: const EdgeInsets.symmetric(vertical: 30),
       children: [
         Text(
-          "Crénaux de notifications",
+          "Créneaux de notification",
           style: theme.textTheme.titleSmall,
           textAlign: TextAlign.center,
         ),

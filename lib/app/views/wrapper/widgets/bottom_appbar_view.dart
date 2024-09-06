@@ -7,12 +7,12 @@ import '../../../../controllers/controllers.dart';
 class BottomAppBarView extends StatefulWidget {
   const BottomAppBarView({
     super.key,
-    required this.userData,
+    required this.user,
     required this.controller,
   });
 
   final MainController controller;
-  final UserDataController userData;
+  final UserDataController user;
 
   @override
   State<BottomAppBarView> createState() => _BottomAppBarViewState();
@@ -60,7 +60,7 @@ class _BottomAppBarViewState extends State<BottomAppBarView> {
                         ),
                       if (showGreetText) const Text("Salut,"),
                       Text(
-                        "${widget.userData.names!.split(' ')[0]} !",
+                        "${widget.user.names!.split(' ')[0]} !",
                         style: GoogleFonts.raleway(
                           color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.normal,

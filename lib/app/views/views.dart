@@ -1,6 +1,8 @@
 export 'choice.dart';
 export 'chat/chat.dart';
 export 'home/home.dart';
+export 'houses/houses.dart';
+export 'tenants/tenants.dart';
 export 'chat/chat_list.dart';
 export 'profile/profile.dart';
 export 'wrapper/wrapper.dart';

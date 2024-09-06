@@ -26,7 +26,10 @@ class CustomDropDownButton extends StatelessWidget {
           value: displayValue,
           hint: Text(hitnText, style: theme.textTheme.labelMedium),
           onChanged: onChanged,
-          style: GoogleFonts.indieFlower(fontSize: 16),
+          style: GoogleFonts.indieFlower(
+            color: theme.colorScheme.inversePrimary,
+            fontSize: 16,
+          ),
           buttonStyleData: ButtonStyleData(
             overlayColor: WidgetStateColor.transparent,
             width: MediaQuery.sizeOf(context).width,
@@ -44,7 +47,7 @@ class CustomDropDownButton extends StatelessWidget {
             maxHeight: MediaQuery.sizeOf(context).height * 0.3,
             decoration: BoxDecoration(
               color: theme.highlightColor,
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(10),
             ),
             scrollbarTheme: ScrollbarThemeData(
               thumbColor: WidgetStatePropertyAll(

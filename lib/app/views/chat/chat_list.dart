@@ -1,5 +1,6 @@
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pangogest/app/views/chat/chat.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -51,7 +52,7 @@ class _ChatListState extends State<ChatList> {
                 const Icon(AppIcons.addMessage),
                 Text(
                   "Pas de discussions",
-                  style: theme.textTheme.bodySmall!.copyWith(height: 3),
+                  style: GoogleFonts.indieFlower(height: 3),
                   textAlign: TextAlign.center,
                 ),
                 Gap(height * 0.1),
@@ -90,10 +91,7 @@ class _ChatListState extends State<ChatList> {
                       borderRadius: BorderRadius.circular(50),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 15,
-                      ),
+                      padding: const EdgeInsets.all(15),
                       child: Column(
                         children: [
                           Row(
@@ -159,15 +157,6 @@ class _ChatListState extends State<ChatList> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(chatListData[index].name),
-                                    // Text(
-                                    //   chatListData[index].id,
-                                    //   style: theme.textTheme.bodySmall!.copyWith(
-                                    //     color: theme.unselectedWidgetColor,
-                                    //     letterSpacing: 2,
-                                    //     fontSize: 10,
-                                    //   ),
-                                    // ),
-                                    // const Gap(5),
                                     Text(
                                       chatListData[index].lastMsg,
                                       style: theme.textTheme.bodySmall,

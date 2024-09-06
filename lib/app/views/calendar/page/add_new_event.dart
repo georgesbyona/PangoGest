@@ -26,7 +26,7 @@ class AddNewEventPage extends StatefulWidget {
 
 class _AddNewEventPageState extends State<AddNewEventPage> {
   final TextEditingController titleTextController = TextEditingController();
-  final TextEditingController descTextController = TextEditingController();
+  final TextEditingController descptTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +42,18 @@ class _AddNewEventPageState extends State<AddNewEventPage> {
                   context: context,
                   text: "Date & Heure ne doivent pas être idem",
                   backgroundColor: AppColors.red,
+                );
+              } else if (titleTextController.text.isEmpty) {
+                myCustomSnackBar(
+                  context: context,
+                  text: "Entrez un titre à l'événement",
+                  backgroundColor: AppColors.red,
+                );
+              } else {
+                widget.calendar.addNewEvent(
+                  titleTextController.text,
+                  descptTextController.text,
+                  widget.user,
                 );
               }
             },
@@ -70,8 +82,11 @@ class _AddNewEventPageState extends State<AddNewEventPage> {
                   EventDetails(user: widget.user, calendar: widget.calendar),
                   const CustomDivider(marginTop: 10, marginBottom: 10),
                   EventNotification(calendar: widget.calendar),
-                  const CustomDivider(marginTop: 15),
-                  EventDescription(calendar: widget.calendar),
+                  const CustomDivider(marginTop: 15, marginBottom: 5),
+                  EventDescription(
+                    calendar: widget.calendar,
+                    descptTextController: descptTextController,
+                  ),
                 ],
               ),
             ),

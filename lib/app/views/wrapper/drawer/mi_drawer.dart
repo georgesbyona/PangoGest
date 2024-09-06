@@ -9,12 +9,12 @@ import 'widgets/menus_view.dart';
 class MiDrawer extends StatelessWidget {
   const MiDrawer({
     super.key,
-    required this.userData,
+    required this.user,
     required this.controller,
   });
 
   final MainController controller;
-  final UserDataController userData;
+  final UserDataController user;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class MiDrawer extends StatelessWidget {
                 child: Column(
                   children: [
                     HeadView(
-                      userData: userData,
+                      user: user,
                       height: height,
                       width: width,
                     ),
@@ -51,7 +51,7 @@ class MiDrawer extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () async {
-                  await userData.signOutUser();
+                  await user.signOutUser();
                 },
                 child: Container(
                   decoration: const BoxDecoration(

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../colors.dart';
 
+import 'date_pickertheme.dart';
 import 'txttheme.dart';
 
 class AppTheme {
@@ -10,10 +11,11 @@ class AppTheme {
     useMaterial3: true,
     colorScheme: ColorScheme(
       brightness: Brightness.light,
-      primary: AppColors.whiteB,
-      onPrimary: AppColors.whiteO,
+      primary: AppColors.blackB,
+      onPrimary: AppColors.blackO,
       secondary: AppColors.whiteI,
-      onSecondary: AppColors.whiteB,
+      onSecondary: AppColors.black,
+      onTertiary: AppColors.black,
       error: AppColors.red.withOpacity(0.8),
       onError: AppColors.red,
       surface: AppColors.whiteOver,
@@ -40,7 +42,7 @@ class AppTheme {
       linearTrackColor: AppColors.whiteO,
     ),
     scaffoldBackgroundColor: AppColors.whiteB,
-    unselectedWidgetColor: Colors.grey.shade700,
+    unselectedWidgetColor: Colors.grey.shade600,
     appBarTheme: AppBarTheme(
       actionsIconTheme: const IconThemeData(color: AppColors.black),
       backgroundColor: Colors.transparent,
@@ -75,9 +77,7 @@ class AppTheme {
       hoverColor: AppColors.blackO,
       splashColor: AppColors.whiteO,
     ),
-    datePickerTheme: const DatePickerThemeData(
-      backgroundColor: AppColors.white,
-    ),
+    datePickerTheme: lightDatePickerTheme,
     timePickerTheme: const TimePickerThemeData(
       backgroundColor: AppColors.white,
     ),

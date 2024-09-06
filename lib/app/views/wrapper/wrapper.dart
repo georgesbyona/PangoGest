@@ -9,11 +9,11 @@ import 'drawer/mi_drawer.dart';
 import '../views.dart';
 
 class Wrapper extends StatelessWidget {
-  final UserDataController userData;
+  final UserDataController user;
   final MainController controller;
   const Wrapper({
     super.key,
-    required this.userData,
+    required this.user,
     required this.controller,
   });
 
@@ -36,8 +36,8 @@ class Wrapper extends StatelessWidget {
     final List<double> bottomHeight = [95, 50, 50];
     final List<Widget> screens = [
       const HomePage(),
-      CalendarPage(user: userData),
-      ChatList(user: userData, controller: controller),
+      CalendarPage(user: user),
+      ChatList(user: user, controller: controller),
     ];
     int chatNotifLength = 0;
     for (var chatData in chatListData.where((chatData) => !chatData.isRead)) {
@@ -68,10 +68,10 @@ class Wrapper extends StatelessWidget {
         ],
         bottom: PreferredSize(
           preferredSize: Size(double.maxFinite, bottomHeight[controller.index]),
-          child: BottomAppBarView(userData: userData, controller: controller),
+          child: BottomAppBarView(user: user, controller: controller),
         ),
       ),
-      drawer: MiDrawer(userData: userData, controller: controller),
+      drawer: MiDrawer(user: user, controller: controller),
       body: SafeArea(child: screens[controller.index]),
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(

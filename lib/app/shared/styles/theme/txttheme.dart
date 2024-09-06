@@ -20,6 +20,12 @@ class TxtTheme {
       fontWeight: FontWeight.w500,
       letterSpacing: 1.5,
     ),
+    bodyLarge: GoogleFonts.indieFlower(
+      color: AppColors.black,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 1.5,
+      fontSize: 15,
+    ),
     bodyMedium: GoogleFonts.raleway(
       color: AppColors.black,
       fontWeight: FontWeight.bold,
@@ -44,6 +50,7 @@ class TxtTheme {
       color: Colors.grey.shade700,
       fontWeight: FontWeight.normal,
       letterSpacing: 1.5,
+      fontSize: 20,
     ),
     displayLarge: GoogleFonts.raleway(
       color: AppColors.primary,
@@ -87,6 +94,12 @@ class TxtTheme {
       color: AppColors.white,
       fontWeight: FontWeight.w500,
       letterSpacing: 1.5,
+    ),
+    bodyLarge: GoogleFonts.indieFlower(
+      color: AppColors.white,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 1.5,
+      fontSize: 15,
     ),
     bodyMedium: GoogleFonts.raleway(
       color: AppColors.white,

@@ -10,7 +10,7 @@ class ChatModel {
   ChatModel({
     required this.id,
     required this.name,
-    this.imgUrl = 'https://www.flaticon.com/fr/icone-gratuite',
+    this.imgUrl = "https://uxwing.com/man-user-circle-black-icon",
     required this.lastMsg,
     this.lastMsgTotal = 1,
     required this.lastMsgTime,

@@ -10,17 +10,18 @@ import 'widgets/dialog_body.dart';
 class Welcome extends StatelessWidget {
   static const route = "/";
 
-  const Welcome({super.key, required this.userData, required this.controller});
-  final UserDataController userData;
+  const Welcome({super.key, required this.user, required this.controller});
+  final UserDataController user;
   final MainController controller;
   @override
   Widget build(BuildContext context) {
+    lightCustomSystemChrome();
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.maxWidth > constraints.maxHeight) {
-          return WelcomeScreen2(userData: userData, controller: controller);
+          return WelcomeScreen2(user: user, controller: controller);
         } else {
-          return WelcomeScreen(userData: userData, controller: controller);
+          return WelcomeScreen(user: user, controller: controller);
         }
       },
     );
@@ -28,11 +29,11 @@ class Welcome extends StatelessWidget {
 }
 
 class WelcomeScreen extends StatelessWidget {
-  final UserDataController userData;
+  final UserDataController user;
   final MainController controller;
   const WelcomeScreen({
     super.key,
-    required this.userData,
+    required this.user,
     required this.controller,
   });
 
@@ -48,7 +49,7 @@ class WelcomeScreen extends StatelessWidget {
         decoration: const BoxDecoration(
           color: Colors.transparent,
           image: DecorationImage(
-            image: AssetImage(AppImages.bckground1),
+            image: AssetImage(AppImages.bckground),
             fit: BoxFit.cover,
           ),
         ),
@@ -119,7 +120,7 @@ class WelcomeScreen extends StatelessWidget {
                             return Dialog(
                               alignment: Alignment.center,
                               backgroundColor: bckgroundColor.withOpacity(0.7),
-                              child: dialogBody(context, width, userData),
+                              child: dialogBody(context, width, user),
                             );
                           },
                         );
@@ -139,11 +140,11 @@ class WelcomeScreen extends StatelessWidget {
 }
 
 class WelcomeScreen2 extends StatelessWidget {
-  final UserDataController userData;
+  final UserDataController user;
   final MainController controller;
   const WelcomeScreen2({
     super.key,
-    required this.userData,
+    required this.user,
     required this.controller,
   });
 
@@ -159,7 +160,7 @@ class WelcomeScreen2 extends StatelessWidget {
         decoration: const BoxDecoration(
           color: Colors.transparent,
           image: DecorationImage(
-            image: AssetImage(AppImages.bckground1),
+            image: AssetImage(AppImages.bckground),
             fit: BoxFit.cover,
           ),
         ),
@@ -237,7 +238,7 @@ class WelcomeScreen2 extends StatelessWidget {
                                   alignment: Alignment.center,
                                   backgroundColor:
                                       bckgroundColor.withOpacity(0.7),
-                                  child: dialogBody(context, height, userData),
+                                  child: dialogBody(context, height, user),
                                 );
                               },
                             );

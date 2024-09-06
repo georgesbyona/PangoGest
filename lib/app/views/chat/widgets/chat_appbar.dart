@@ -43,6 +43,20 @@ ChatViewAppBar chatAppBar({
         ),
       );
     },
+    assetImageErrorBuilder: (context, url, error) {
+      return Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: theme.unselectedWidgetColor,
+          shape: BoxShape.circle,
+        ),
+        child: Icon(
+          AppIcons.profileB,
+          color: theme.primaryColorDark,
+          size: 20,
+        ),
+      );
+    },
     backGroundColor: theme!.scaffoldBackgroundColor,
     backArrowColor: theme.colorScheme.inversePrimary,
     chatTitleTextStyle: GoogleFonts.raleway(

@@ -3,17 +3,17 @@ class AdresseModel {
   final String ville;
   final String commune;
   final String quartier;
-  final String cellule;
+  final String? cellule;
   final String avenue;
   final String num;
 
   AdresseModel({
     required this.id,
-    required this.ville,
+    this.ville = "Bukavu",
     required this.commune,
     required this.quartier,
-    required this.cellule,
     required this.avenue,
-    required this.num,
+    this.num = "N° 0000",
+    this.cellule,
   });
 }

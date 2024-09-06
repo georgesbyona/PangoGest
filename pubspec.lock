@@ -101,10 +101,10 @@ packages:
     dependency: "direct main"
     description:
       name: chatview
-      sha256: "68f9cb1d15d25723aa6d3e92f09c9879e8f295000cc22b0e37a23f01aa26bcde"
+      sha256: "8817ecf230e6bfdf3f3f5ad94dc97743ee23f4e5c9eeb2da8e76fbc739ebf394"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.1"
+    version: "2.2.0"
   clock:
     dependency: transitive
     description:
@@ -249,6 +249,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.9.3+2"
+  firebase_core:
+    dependency: "direct main"
+    description:
+      name: firebase_core
+      sha256: "96607c0e829a581c2a483c658f04e8b159964c3bae2730f73297070bc85d40bb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.24.2"
+  firebase_core_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_core_platform_interface
+      sha256: f7d7180c7f99babd4b4c517754d41a09a4943a0f7a69b65c894ca5c68ba66315
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.2.1"
+  firebase_core_web:
+    dependency: transitive
+    description:
+      name: firebase_core_web
+      sha256: d585bdf3c656c3f7821ba1bd44da5f13365d22fcecaf5eb75c4295246aaa83c0
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.10.0"
   fixnum:
     dependency: transitive
     description:
@@ -456,6 +480,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.19.0"
+  js:
+    dependency: transitive
+    description:
+      name: js
+      sha256: f2c445dce49627136094980615a031419f7f3eb393237e4ecd97ac15dea343f3
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.6.7"
   leak_tracker:
     dependency: transitive
     description:
@@ -881,10 +913,10 @@ packages:
     dependency: transitive
     description:
       name: uuid
-      sha256: "83d37c7ad7aaf9aa8e275490669535c8080377cfa7a7004c24dfac53afffaa90"
+      sha256: f33d6bb662f0e4f79dcd7ada2e6170f3b3a2530c28fc41f49a411ddedd576a77
       url: "https://pub.dev"
     source: hosted
-    version: "4.4.2"
+    version: "4.5.0"
   vector_graphics:
     dependency: transitive
     description:
