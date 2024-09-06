@@ -3,7 +3,7 @@ class AdresseModel {
   final String ville;
   final String commune;
   final String quartier;
-  final String? cellule;
+  final String cellule;
   final String avenue;
   final String num;
 
@@ -14,6 +14,6 @@ class AdresseModel {
     required this.quartier,
     required this.avenue,
     this.num = "N° 0000",
-    this.cellule,
+    this.cellule = "",
   });
 }

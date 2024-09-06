@@ -41,7 +41,7 @@ class HouseDescription extends StatelessWidget {
             TextSpan(children: [
               const TextSpan(text: "Prix : "),
               TextSpan(
-                text: houses[index].price,
+                text: "${houses[index].price}\$",
                 style: GoogleFonts.indieFlower(
                   fontWeight: FontWeight.w600,
                   fontSize: 15,

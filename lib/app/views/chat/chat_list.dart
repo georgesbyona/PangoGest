@@ -95,7 +95,6 @@ class _ChatListState extends State<ChatList> {
                       child: Column(
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               CachedNetworkImage(
                                 alignment: Alignment.center,
@@ -105,8 +104,8 @@ class _ChatListState extends State<ChatList> {
                                     (context, url, progress) {
                                   return Container(
                                     alignment: Alignment.center,
-                                    width: 65,
-                                    height: 65,
+                                    width: 70,
+                                    height: 70,
                                     margin: const EdgeInsets.only(right: 15),
                                     decoration: BoxDecoration(
                                       color: theme.unselectedWidgetColor,
@@ -121,8 +120,8 @@ class _ChatListState extends State<ChatList> {
                                 },
                                 imageBuilder: (context, imageProvider) {
                                   return Container(
-                                    width: 65,
-                                    height: 65,
+                                    width: 70,
+                                    height: 70,
                                     margin: const EdgeInsets.only(right: 15),
                                     decoration: BoxDecoration(
                                       color: theme.unselectedWidgetColor,
@@ -137,8 +136,8 @@ class _ChatListState extends State<ChatList> {
                                 errorWidget: (context, url, error) {
                                   return Container(
                                     alignment: Alignment.center,
-                                    width: 65,
-                                    height: 65,
+                                    width: 70,
+                                    height: 70,
                                     margin: const EdgeInsets.only(right: 15),
                                     decoration: BoxDecoration(
                                       color: theme.unselectedWidgetColor,

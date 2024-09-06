@@ -11,7 +11,8 @@ class UserDataController extends ChangeNotifier {
 
   String? _names;
   String? _imgUrl;
-  String? _adresse;
+  String? _adresseString;
+  AdresseModel? _adresse;
   String? _email;
   String? _num;
   String? _passwords;
@@ -21,7 +22,7 @@ class UserDataController extends ChangeNotifier {
 
   String? get names => _names;
   String? get imgUrl => _imgUrl;
-  String? get adresse => _adresse;
+  AdresseModel? get adresse => _adresse;
   String? get email => _email;
   String? get num => _num;
   String? get passwords => _passwords;
@@ -33,13 +34,22 @@ class UserDataController extends ChangeNotifier {
     final prefs = await _prefs;
     _names = prefs.getString('userNames');
     _imgUrl = prefs.getString('userImgUrl');
-    _adresse = prefs.getString('userAdresse');
+    _adresseString = prefs.getString('userAdresse');
     _email = prefs.getString('userEmail');
     _num = prefs.getString('userNum');
     _passwords = prefs.getString('userPasswords');
     _keywords = prefs.getString('userKeywords');
     _isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
     _isRegister = prefs.getBool('isRegister') ?? false;
+    _adresse = AdresseModel(
+      id: _adresseString!.split(" ")[1],
+      ville: _adresseString!.split(" ")[5],
+      commune: _adresseString!.split(" ")[4],
+      quartier: _adresseString!.split(" ")[3],
+      cellule: _adresseString!.split(" ")[2],
+      avenue: _adresseString!.split(" ")[0],
+      num: _adresseString!.split(" ")[1],
+    );
     debugPrint('======================= User $_names succefully loading');
     notifyListeners();
   }
@@ -54,24 +64,34 @@ class UserDataController extends ChangeNotifier {
 
   bool isRegisterUser = false;
 
-  Future<void> registerUser(UserModel proprio) async {
+  Future<void> registerUser(OwnerModel owner) async {
+    final userAdresse =
+        "${owner.adresse.avenue} ${owner.adresse.num} ${owner.adresse.cellule} ${owner.adresse.quartier} ${owner.adresse.commune} ${owner.adresse.ville}";
     isRegisterUser = true;
     final prefs = await _prefs;
-    prefs.setString('userNames', proprio.names);
-    prefs.setString('userImgUrl', proprio.imgUrl!);
-    prefs.setString('userAdresse', proprio.adresse!.ville);
-    prefs.setString('userEmail', proprio.email!);
-    prefs.setString('userNum', proprio.num);
-    prefs.setString('userPasswords', proprio.passwords);
-    prefs.setString('userKeywords', proprio.keywords);
+    prefs.setString('userNames', owner.names);
+    prefs.setString('userImgUrl', owner.imgUrl!);
+    prefs.setString('userAdresse', userAdresse);
+    prefs.setString('userEmail', owner.email!);
+    prefs.setString('userNum', owner.num);
+    prefs.setString('userPasswords', owner.passwords);
+    prefs.setString('userKeywords', owner.keywords);
     prefs.setBool('isRegister', true);
-    _names = proprio.names;
-    _adresse = proprio.adresse!.ville;
-    _imgUrl = proprio.imgUrl;
-    _email = proprio.email;
-    _num = proprio.num;
-    _passwords = proprio.passwords;
-    _keywords = proprio.keywords;
+    _names = owner.names;
+    _adresse = AdresseModel(
+      id: owner.adresse.num,
+      ville: owner.adresse.ville,
+      commune: owner.adresse.commune,
+      quartier: owner.adresse.quartier,
+      cellule: owner.adresse.cellule,
+      avenue: owner.adresse.avenue,
+      num: owner.adresse.num,
+    );
+    _imgUrl = owner.imgUrl;
+    _email = owner.email;
+    _num = owner.num;
+    _passwords = owner.passwords;
+    _keywords = owner.keywords;
     _isRegister = true;
     debugPrint('======================= User $_names succefully register');
     await loadUserData();

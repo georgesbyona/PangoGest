@@ -127,7 +127,7 @@ class _ProprioInscriptionState extends State<ProprioInscription> {
                                 onTap: () async {
                                   if (_formKey.currentState!.validate()) {
                                     await userData.registerUser(
-                                      UserModel(
+                                      OwnerModel(
                                         names: namesController.text,
                                         imgUrl:
                                             "https://lh3.googleusercontent.com/a/ACg8ocLrFO4QlXqP0Elvw0cspu9YMHbut7Os8iSPpfxtzo6NTJZtw5s=s96-c",

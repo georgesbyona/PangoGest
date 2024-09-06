@@ -30,9 +30,9 @@ List<ChatModel> chatListData = [
   ),
   ChatModel(
     id: "mariereinenyota@gmail.com",
-    name: "Marie-Reine Nyota",
+    name: "Marie-Reine B",
     imgUrl: "https://avatars.githubusercontent.com/u/141399363?v=4",
-    lastMsg: "🤦‍♂🤦‍♂🤦‍♂🤦‍♂ je parle demain",
+    lastMsg: "🤦‍♂🤦‍♂🤦‍♂🤦‍♂ Oups !",
     lastMsgTime: "11:32 pm",
     lastMsgTotal: 2,
     isRead: false,

@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomSaveFormButton extends StatelessWidget {
-  const CustomSaveFormButton({super.key, required this.onTap});
+  const CustomSaveFormButton({
+    super.key,
+    required this.onTap,
+    this.btnText = "Ajouter",
+  });
 
   final VoidCallback onTap;
+  final String btnText;
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +27,8 @@ class CustomSaveFormButton extends StatelessWidget {
         ),
         margin: const EdgeInsets.only(right: 15),
         child: Text(
-          "Enregistrer",
-          style: theme.textTheme.bodySmall!.copyWith(
-            color: theme.highlightColor,
-          ),
+          btnText,
+          style: GoogleFonts.indieFlower(color: theme.highlightColor),
         ),
       ),
     );

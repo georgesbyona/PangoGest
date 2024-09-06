@@ -64,8 +64,13 @@ class AppIcons {
 
   static const clock = Iconsax.clock_outline;
   static const more = Iconsax.more_outline;
+  static const more2 = Iconsax.arrow_right_3_outline;
   static const edit = Iconsax.edit_2_outline;
 
   static const close = Icons.close_rounded;
   static const description = Iconsax.textalign_left_outline;
+
+  static const delete = Iconsax.trash_outline;
+  static const remind = Iconsax.timer_1_outline;
+  static const message = Iconsax.message_2_outline;
 }

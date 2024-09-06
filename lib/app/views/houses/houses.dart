@@ -14,7 +14,6 @@ class HousesList extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
     final theme = Theme.of(context);
-
     return Scaffold(
       appBar: AppBar(title: const Text("Tes maisons")),
       body: SafeArea(
@@ -48,34 +47,29 @@ class HousesList extends StatelessWidget {
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Column(
+                        padding: const EdgeInsets.all(15),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                if (houses[index].photo.isNotEmpty) ...{
-                                  HouseImageViewNetwork(index: index),
-                                } else ...{
-                                  Container(
-                                    alignment: Alignment.center,
-                                    width: 150,
-                                    height: 120,
-                                    margin: const EdgeInsets.only(right: 10),
-                                    decoration: BoxDecoration(
-                                      color: theme.unselectedWidgetColor,
-                                      borderRadius: BorderRadius.circular(15),
-                                      image: const DecorationImage(
-                                        image: AssetImage(AppImages.bckground),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
+                            if (houses[index].photo.isNotEmpty) ...{
+                              HouseNetworkImageView(index: index),
+                            } else ...{
+                              Container(
+                                alignment: Alignment.center,
+                                width: 150,
+                                height: 120,
+                                margin: const EdgeInsets.only(right: 15),
+                                decoration: BoxDecoration(
+                                  color: theme.unselectedWidgetColor,
+                                  borderRadius: BorderRadius.circular(15),
+                                  image: const DecorationImage(
+                                    image: AssetImage(AppImages.bckground),
+                                    fit: BoxFit.cover,
                                   ),
-                                },
-                                HouseDescription(index: index),
-                              ],
-                            ),
+                                ),
+                              ),
+                            },
+                            HouseDescription(index: index),
                           ],
                         ),
                       ),

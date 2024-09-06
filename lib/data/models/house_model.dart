@@ -5,8 +5,9 @@ class HouseModel {
   final AdresseModel adresse;
   final String surface;
   final String description;
-  final String price;
+  final double price;
   final String photo;
+  final bool isOccupied;
 
   HouseModel({
     required this.id,
@@ -15,6 +16,7 @@ class HouseModel {
     required this.description,
     required this.price,
     this.photo = "",
+    this.isOccupied = false,
   });
 }
 
@@ -30,7 +32,7 @@ List<HouseModel> houses = [
     ),
     description:
         "Maison du premier niveau avec 1 salon, 1 chambre, toilette & douche interne",
-    price: "100\$",
+    price: 100,
     photo:
         'https://firebasestorage.googleapis.com/v0/b/pangogest.appspot.com/o/demo-houses%2F01.jpg?alt=media&token=bbefbcf8-c266-414e-bef7-e1d3b1408791',
   ),
@@ -44,7 +46,7 @@ List<HouseModel> houses = [
     ),
     description:
         "Maison du deuxième niveau avec 1 salon, 2 chambres, toilette & douche interne",
-    price: "150\$",
+    price: 150,
     photo:
         "https://firebasestorage.googleapis.com/v0/b/pangogest.appspot.com/o/demo-houses%2F02.jpg?alt=media&token=f507e58e-8243-474b-a3a5-abbf88359f8c",
   ),
@@ -59,7 +61,8 @@ List<HouseModel> houses = [
     ),
     description:
         "Maison simple avec 1 salon, 3 chambres, toilette & douche externe, un cours pour enfant et verdure",
-    price: "130\$",
+    price: 130,
+    isOccupied: true,
     photo:
         "https://firebasestorage.googleapis.com/v0/b/pangogest.appspot.com/o/demo-houses%2F03.jpg?alt=media&token=e52bee36-2bcc-4e16-b0a8-c23c07703344",
   ),
@@ -74,7 +77,8 @@ List<HouseModel> houses = [
     ),
     description:
         "Maison simple, 1 salon, 2 chambres, toilette & douche interne",
-    price: "150\$",
+    price: 150,
+    isOccupied: true,
     photo:
         "https://firebasestorage.googleapis.com/v0/b/pangogest.appspot.com/o/demo-houses%2F04.jpg?alt=media&token=1a1938f3-2312-44b1-8711-967fdc6246c4",
   ),
@@ -88,7 +92,7 @@ List<HouseModel> houses = [
     ),
     description:
         "Maison du rez-de-chaussée avec 1 salon, 3 chambres, toilette & douche externe, clôturée",
-    price: "125\$",
+    price: 125,
     photo:
         "https://firebasestorage.googleapis.com/v0/b/pangogest.appspot.com/o/demo-houses%2F05.jpg?alt=media&token=92aa0953-b12d-42f4-b488-c5659cbe2432",
   ),

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import '../../../shared/shared.dart';
 import '../../../../data/data.dart';
+import '../../../shared/shared.dart';
 
-class HouseNetworkImageView extends StatelessWidget {
-  const HouseNetworkImageView({super.key, required this.index});
+class TenantNetworkImageView extends StatelessWidget {
+  const TenantNetworkImageView({
+    super.key,
+    required this.index,
+    required this.tenants,
+  });
 
+  final List<TenantModel> tenants;
   final int index;
 
   @override
@@ -15,27 +20,27 @@ class HouseNetworkImageView extends StatelessWidget {
     return CachedNetworkImage(
       alignment: Alignment.center,
       color: theme.unselectedWidgetColor,
-      imageUrl: houses[index].photo,
+      imageUrl: tenants[index].imgUrl,
       progressIndicatorBuilder: (context, url, progress) {
         return Container(
           alignment: Alignment.center,
-          width: 150,
-          height: 120,
-          margin: const EdgeInsets.only(right: 15),
+          width: 80,
+          height: 80,
+          margin: const EdgeInsets.only(right: 10),
           decoration: BoxDecoration(
             color: theme.unselectedWidgetColor.withOpacity(0.5),
-            borderRadius: BorderRadius.circular(15),
+            shape: BoxShape.circle,
           ),
         );
       },
       imageBuilder: (context, imageProvider) {
         return Container(
-          width: 150,
-          height: 120,
-          margin: const EdgeInsets.only(right: 15),
+          width: 80,
+          height: 80,
+          margin: const EdgeInsets.only(right: 10),
           decoration: BoxDecoration(
             color: theme.unselectedWidgetColor,
-            borderRadius: BorderRadius.circular(15),
+            shape: BoxShape.circle,
             image: DecorationImage(
               image: imageProvider,
               fit: BoxFit.cover,
@@ -46,16 +51,17 @@ class HouseNetworkImageView extends StatelessWidget {
       errorWidget: (context, url, error) {
         return Container(
           alignment: Alignment.center,
-          width: 150,
-          height: 120,
-          margin: const EdgeInsets.only(right: 15),
+          width: 80,
+          height: 80,
+          margin: const EdgeInsets.only(right: 10),
           decoration: BoxDecoration(
             color: theme.unselectedWidgetColor,
-            borderRadius: BorderRadius.circular(15),
-            image: const DecorationImage(
-              image: AssetImage(AppImages.bckground),
-              fit: BoxFit.cover,
-            ),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            AppIcons.profileB,
+            color: theme.primaryColorDark,
+            size: 35,
           ),
         );
       },

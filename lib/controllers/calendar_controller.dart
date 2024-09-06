@@ -139,17 +139,20 @@ class CalendarController extends ChangeNotifier {
         title: title,
         type: eventType,
         description: description,
-        tenant: UserModel(
+        tenant: TenantModel(
+          id: "",
           names: eventTenant!,
           num: "",
+          maisonID: "01",
           passwords: "",
           keywords: "",
           userType: "locataire",
         ),
-        owner: UserModel(
+        owner: OwnerModel(
           names: user.names!,
           imgUrl: user.imgUrl,
           num: user.num!,
+          adresse: user.adresse!,
           email: user.email,
           passwords: user.passwords!,
           keywords: user.keywords!,

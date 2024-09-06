@@ -1,3 +1,4 @@
+import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../controllers/controllers.dart';
@@ -66,9 +67,10 @@ class _AddNewEventPageState extends State<AddNewEventPage> {
           children: [
             Text(
               "Nouvel Evénement",
-              style: theme.textTheme.titleLarge!.copyWith(height: 2.5),
+              style: theme.textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
+            const Gap(5),
             Expanded(
               child: ListView(
                 shrinkWrap: false,

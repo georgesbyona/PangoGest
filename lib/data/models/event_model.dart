@@ -5,8 +5,8 @@ class EventModel {
   final String type;
   final String description;
   final String? imgUrl;
-  final UserModel? tenant;
-  final UserModel owner;
+  final TenantModel? tenant;
+  final OwnerModel owner;
   final String place;
   final String time;
 
