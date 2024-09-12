@@ -52,13 +52,6 @@ class _AddNewTenantPageState extends State<AddNewTenantPage> {
                   backgroundColor: AppColors.red,
                 );
               } else {
-                widget.controller.addNewTenant(
-                  namesController.text,
-                  houseIDController.text,
-                  numController.text,
-                  emailController.text,
-                  keywordController.text,
-                );
                 namesController.clear();
                 houseIDController.clear();
                 numController.clear();

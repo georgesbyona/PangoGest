@@ -1,5 +1,6 @@
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../shared/shared.dart';
 import '../../../../data/data.dart';
@@ -50,11 +51,12 @@ class SystemView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(notificationData.title),
+                        const Gap(3),
                         Text(
                           notificationData.content,
                           style: theme.textTheme.bodySmall,
-                          maxLines: 2,
                           overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
                         ),
                       ],
                     ),
@@ -62,9 +64,8 @@ class SystemView extends StatelessWidget {
                   const Gap(10),
                   Text(
                     notificationData.time,
-                    style: theme.textTheme.bodySmall!.copyWith(
+                    style: GoogleFonts.indieFlower(
                       color: theme.unselectedWidgetColor,
-                      fontWeight: FontWeight.bold,
                       height: 2,
                     ),
                   ),

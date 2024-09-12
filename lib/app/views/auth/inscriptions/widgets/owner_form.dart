@@ -9,7 +9,6 @@ class ProprioForm extends StatefulWidget {
   final TextEditingController mailController;
   final TextEditingController numController;
   final TextEditingController passwordsController;
-  final TextEditingController keywordsController;
   const ProprioForm({
     super.key,
     required this.namesController,
@@ -17,7 +16,6 @@ class ProprioForm extends StatefulWidget {
     required this.mailController,
     required this.numController,
     required this.passwordsController,
-    required this.keywordsController,
   });
 
   @override
@@ -37,7 +35,6 @@ class _ProprioFormState extends State<ProprioForm> {
       AppIcons.email,
       AppIcons.phone,
       AppIcons.passwords,
-      AppIcons.keywords,
     ];
     final List labelTexts = [
       "Noms *",
@@ -45,7 +42,6 @@ class _ProprioFormState extends State<ProprioForm> {
       "Email",
       "N° Tél *",
       "Mot de passe *",
-      "Mot clé *",
     ];
     final List hintTexts = [
       "Georges Byona",
@@ -53,7 +49,6 @@ class _ProprioFormState extends State<ProprioForm> {
       "georgesbyona@gmail.com",
       "+243844300329",
       "pangogest#2k24",
-      "g-maison#2k24",
     ];
     final List controllers = [
       widget.namesController,
@@ -61,7 +56,6 @@ class _ProprioFormState extends State<ProprioForm> {
       widget.mailController,
       widget.numController,
       widget.passwordsController,
-      widget.keywordsController,
     ];
     return ListView(
       scrollDirection: Axis.vertical,

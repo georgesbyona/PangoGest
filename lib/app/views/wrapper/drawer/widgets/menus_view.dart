@@ -41,7 +41,7 @@ class MenusView extends StatelessWidget {
     return Expanded(
       child: ListView(
         shrinkWrap: true,
-        padding: const EdgeInsets.only(top: 0, left: 5),
+        padding: const EdgeInsets.only(top: 0, left: 15),
         children: [
           Padding(
             padding: const EdgeInsets.only(right: 15),

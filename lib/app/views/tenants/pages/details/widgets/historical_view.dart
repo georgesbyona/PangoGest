@@ -17,7 +17,7 @@ class HistoricalView extends StatelessWidget {
         ),
         const Gap(15),
         Text(
-          "--- Aucun historique pour l'instant ---",
+          "--- Aucune historique pour l'instant ---",
           style: GoogleFonts.indieFlower(fontWeight: FontWeight.normal),
         ),
       ],

@@ -10,9 +10,10 @@ ChatViewAppBar chatAppBar({
   MainController? controller,
   ChatController? chatController,
 }) {
+  final firstLetter = chatController!.otherUsers.first.name.substring(0, 1);
   return ChatViewAppBar(
     elevation: 0,
-    chatTitle: chatController!.otherUsers.first.name,
+    chatTitle: chatController.otherUsers.first.name,
     imageType: ImageType.network,
     profilePicture: chatController.otherUsers.first.profilePhoto,
     networkImageProgressIndicatorBuilder: (context, url, error) {
@@ -36,10 +37,12 @@ ChatViewAppBar chatAppBar({
           color: theme.unselectedWidgetColor,
           shape: BoxShape.circle,
         ),
-        child: Icon(
-          AppIcons.profileB,
-          color: theme.primaryColorDark,
-          size: 20,
+        child: Text(
+          firstLetter,
+          style: GoogleFonts.indieFlower(
+            color: theme.colorScheme.inversePrimary,
+            fontSize: 20,
+          ),
         ),
       );
     },
@@ -50,10 +53,12 @@ ChatViewAppBar chatAppBar({
           color: theme.unselectedWidgetColor,
           shape: BoxShape.circle,
         ),
-        child: Icon(
-          AppIcons.profileB,
-          color: theme.primaryColorDark,
-          size: 20,
+        child: Text(
+          firstLetter,
+          style: GoogleFonts.indieFlower(
+            color: theme.colorScheme.inversePrimary,
+            fontSize: 20,
+          ),
         ),
       );
     },

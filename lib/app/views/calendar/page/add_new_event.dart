@@ -6,7 +6,6 @@ import 'widgets/event_notification.dart';
 import 'widgets/event_description.dart';
 import 'widgets/event_schedule.dart';
 import '../../../shared/shared.dart';
-import '../widgets/event_card.dart';
 import 'widgets/event_details.dart';
 import 'widgets/title_field.dart';
 import 'widgets/event_type.dart';
@@ -56,6 +55,7 @@ class _AddNewEventPageState extends State<AddNewEventPage> {
                   descptTextController.text,
                   widget.user,
                 );
+                Navigator.pop(context);
               }
             },
           ),
@@ -99,37 +99,37 @@ class _AddNewEventPageState extends State<AddNewEventPage> {
   }
 }
 
-const List<EventCard> eventLists = [
-  EventCard(
-    title: "VISITE",
-    content:
-        "Rendre visite aux maisons de l'Hyppodrome pour s'assurer leur état et rappeler aux locataires le paiement de ce mois.",
-    tenant: "John L. ",
-    where: "Chez John ",
-    time: "13h00 ",
-  ),
-  EventCard(
-    title: "CONVOCATION",
-    content:
-        "Rencontrer Georges pour l'incident qui est arrivé la semaine passée entre lui et le voisin d'à côté.",
-    tenant: "Georges ",
-    where: "A la maison ",
-    time: "11h30 ",
-  ),
-  EventCard(
-    title: "RAPPEL - Paiement",
-    content:
-        "Percevoir le paiement du mois de Septembre de Kévin, et rappeler à Faith pour sa régularisation du paiement de mois d'Août.",
-    tenant: "Kevin ",
-    where: "",
-    time: "",
-  ),
-  EventCard(
-    title: "FIN DU CONTRAT",
-    content:
-        "15 jours restant avant la fin du contrat de Hervé, prendre un moment pour lui faire signe et commencer à régulariser les affaires pour sa sortie de la maison.",
-    tenant: " John ",
-    where: "",
-    time: "",
-  ),
-];
+// const List<EventCard> eventLists = [
+//   EventCard(
+//     title: "VISITE",
+//     content:
+//         "Rendre visite aux maisons de l'Hyppodrome pour s'assurer leur état et rappeler aux locataires le paiement de ce mois.",
+//     tenant: "John L. ",
+//     where: "Chez John ",
+//     time: "13h00 ",
+//   ),
+//   EventCard(
+//     title: "CONVOCATION",
+//     content:
+//         "Rencontrer Georges pour l'incident qui est arrivé la semaine passée entre lui et le voisin d'à côté.",
+//     tenant: "Georges ",
+//     where: "A la maison ",
+//     time: "11h30 ",
+//   ),
+//   EventCard(
+//     title: "RAPPEL - Paiement",
+//     content:
+//         "Percevoir le paiement du mois de Septembre de Kévin, et rappeler à Faith pour sa régularisation du paiement de mois d'Août.",
+//     tenant: "Kevin ",
+//     where: "",
+//     time: "",
+//   ),
+//   EventCard(
+//     title: "FIN DU CONTRAT",
+//     content:
+//         "15 jours restant avant la fin du contrat de Hervé, prendre un moment pour lui faire signe et commencer à régulariser les affaires pour sa sortie de la maison.",
+//     tenant: " John ",
+//     where: "",
+//     time: "",
+//   ),
+// ];

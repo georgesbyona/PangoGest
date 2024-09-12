@@ -11,7 +11,7 @@ class TenantNetworkImageView extends StatelessWidget {
     required this.tenants,
   });
 
-  final List<TenantModel> tenants;
+  final List<UserModel> tenants;
   final int index;
 
   @override
@@ -20,7 +20,7 @@ class TenantNetworkImageView extends StatelessWidget {
     return CachedNetworkImage(
       alignment: Alignment.center,
       color: theme.unselectedWidgetColor,
-      imageUrl: tenants[index].imgUrl,
+      imageUrl: tenants[index].imgUrl!,
       progressIndicatorBuilder: (context, url, progress) {
         return Container(
           alignment: Alignment.center,

@@ -12,7 +12,7 @@ class TenantDescriptions extends StatelessWidget {
     required this.tenants,
   });
 
-  final List<TenantModel> tenants;
+  final List<UserModel> tenants;
   final int index;
 
   @override
@@ -82,7 +82,7 @@ class TenantDescriptions extends StatelessWidget {
               children: [
                 const TextSpan(text: 'Maison : '),
                 TextSpan(
-                  text: "N° ${tenants[index].maisonID}",
+                  text: "N° ${tenants[index].num}",
                   style: GoogleFonts.indieFlower(),
                 ),
               ],

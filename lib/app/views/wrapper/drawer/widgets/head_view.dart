@@ -1,10 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:pangogest/app/shared/shared.dart';
+import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../controllers/controllers.dart';
-import '../../../views.dart';
 
 class HeadView extends StatelessWidget {
   const HeadView({
@@ -22,6 +21,7 @@ class HeadView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final size = width > height ? height : width;
+    final firstLetter = user.names!.substring(0, 1);
     return Column(
       children: [
         SizedBox(
@@ -35,60 +35,83 @@ class HeadView extends StatelessWidget {
               ),
               Positioned(
                 bottom: 0,
-                child: CachedNetworkImage(
-                  width: size * 0.25,
-                  imageUrl: user.imgUrl!,
-                  alignment: Alignment.center,
-                  color: theme.unselectedWidgetColor,
-                  progressIndicatorBuilder: (context, url, progress) {
-                    return Container(
-                      width: size * 0.25,
-                      height: size * 0.25,
-                      decoration: BoxDecoration(
-                        color: theme.highlightColor,
-                        shape: BoxShape.circle,
-                      ),
-                    );
-                  },
-                  errorWidget: (context, url, error) {
-                    return Container(
-                      alignment: Alignment.center,
-                      width: size * 0.25,
-                      height: size * 0.25,
-                      decoration: BoxDecoration(
+                child: user.imgUrl == null
+                    ? Container(
+                        alignment: Alignment.center,
+                        width: size * 0.25,
+                        height: size * 0.25,
+                        decoration: BoxDecoration(
+                          color: theme.unselectedWidgetColor,
+                          border: Border.all(
+                            color: theme.highlightColor,
+                            width: 3,
+                          ),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Text(
+                          firstLetter,
+                          style: GoogleFonts.indieFlower(
+                            color: theme.colorScheme.inversePrimary,
+                            fontSize: 20,
+                          ),
+                        ),
+                      )
+                    : CachedNetworkImage(
+                        width: size * 0.25,
+                        imageUrl: user.imgUrl!,
+                        alignment: Alignment.center,
                         color: theme.unselectedWidgetColor,
-                        border: Border.all(
-                          color: theme.highlightColor,
-                          width: 3,
-                        ),
-                        shape: BoxShape.circle,
+                        progressIndicatorBuilder: (context, url, progress) {
+                          return Container(
+                            width: size * 0.25,
+                            height: size * 0.25,
+                            decoration: BoxDecoration(
+                              color: theme.highlightColor,
+                              shape: BoxShape.circle,
+                            ),
+                          );
+                        },
+                        errorWidget: (context, url, error) {
+                          return Container(
+                            alignment: Alignment.center,
+                            width: size * 0.25,
+                            height: size * 0.25,
+                            decoration: BoxDecoration(
+                              color: theme.unselectedWidgetColor,
+                              border: Border.all(
+                                color: theme.highlightColor,
+                                width: 3,
+                              ),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Text(
+                              firstLetter,
+                              style: GoogleFonts.indieFlower(
+                                color: theme.colorScheme.inversePrimary,
+                                fontSize: 20,
+                              ),
+                            ),
+                          );
+                        },
+                        imageBuilder: (context, imageProvider) {
+                          return Container(
+                            width: size * 0.25,
+                            height: size * 0.25,
+                            decoration: BoxDecoration(
+                              color: theme.unselectedWidgetColor,
+                              border: Border.all(
+                                color: theme.highlightColor,
+                                width: 3,
+                              ),
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                      child: Icon(
-                        AppIcons.profileB,
-                        size: size * 0.1,
-                        color: theme.primaryColorDark,
-                      ),
-                    );
-                  },
-                  imageBuilder: (context, imageProvider) {
-                    return Container(
-                      width: size * 0.25,
-                      height: size * 0.25,
-                      decoration: BoxDecoration(
-                        color: theme.unselectedWidgetColor,
-                        border: Border.all(
-                          color: theme.highlightColor,
-                          width: 3,
-                        ),
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    );
-                  },
-                ),
               ),
             ],
           ),
@@ -102,30 +125,30 @@ class HeadView extends StatelessWidget {
             height: 2,
           ),
         ),
-        Gap(height * 0.025),
-        GestureDetector(
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const ProfilePage(),
-            ),
-          ),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              border: Border.all(color: theme.primaryColor, width: 1),
-              borderRadius: BorderRadius.circular(100),
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            child: Text(
-              "Voir le profil",
-              style: theme.textTheme.bodySmall!.copyWith(
-                color: theme.primaryColor,
-                height: 2,
-              ),
-            ),
-          ),
-        ),
+        // Gap(height * 0.025),
+        // GestureDetector(
+        //   onTap: () => Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => const ProfilePage(),
+        //     ),
+        //   ),
+        //   child: Container(
+        //     decoration: BoxDecoration(
+        //       color: Colors.transparent,
+        //       border: Border.all(color: theme.primaryColor, width: 1),
+        //       borderRadius: BorderRadius.circular(100),
+        //     ),
+        //     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        //     child: Text(
+        //       "Voir le profil",
+        //       style: theme.textTheme.bodySmall!.copyWith(
+        //         color: theme.primaryColor,
+        //         height: 2,
+        //       ),
+        //     ),
+        //   ),
+        // ),
         Gap(height * 0.025),
       ],
     );

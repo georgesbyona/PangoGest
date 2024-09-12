@@ -106,7 +106,6 @@ class _ProprioInscriptionState extends State<ProprioInscription> {
                               mailController: mailController,
                               numController: numController,
                               passwordsController: passwordsController,
-                              keywordsController: keywordsController,
                             ),
                           ),
                         ),
@@ -127,30 +126,23 @@ class _ProprioInscriptionState extends State<ProprioInscription> {
                                 onTap: () async {
                                   if (_formKey.currentState!.validate()) {
                                     await userData.registerUser(
-                                      OwnerModel(
+                                      UserModel(
                                         names: namesController.text,
-                                        imgUrl:
-                                            "https://lh3.googleusercontent.com/a/ACg8ocLrFO4QlXqP0Elvw0cspu9YMHbut7Os8iSPpfxtzo6NTJZtw5s=s96-c",
+                                        imgUrl: mailController.text ==
+                                                "georgesbyona@gmail.com"
+                                            ? "https://lh3.googleusercontent.com/a/ACg8ocLrFO4QlXqP0Elvw0cspu9YMHbut7Os8iSPpfxtzo6NTJZtw5s=s96-c"
+                                            : null,
                                         adresse: AdresseModel(
-                                          id: adressController.text,
-                                          ville: adressController.text
-                                              .split(',')[3],
-                                          commune: adressController.text
-                                              .split(',')[2],
-                                          quartier: adressController.text
-                                              .split(',')[1],
+                                          ville: "Bukavu",
+                                          commune: "Ibanda",
+                                          quartier: "Ndendere",
                                           cellule: "",
-                                          avenue: adressController.text
-                                              .split(',')[0]
-                                              .split(" ")[1],
-                                          num: adressController.text
-                                              .split(',')[0]
-                                              .split(" ")[0],
+                                          avenue: "Fizi",
+                                          num: "N° 0000",
                                         ),
                                         email: mailController.text,
                                         num: numController.text,
-                                        passwords: passwordsController.text,
-                                        keywords: keywordsController.text,
+                                        password: passwordsController.text,
                                         userType: "propriétaire",
                                       ),
                                     );

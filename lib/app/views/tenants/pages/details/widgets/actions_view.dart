@@ -15,7 +15,7 @@ class ActionsView extends StatelessWidget {
     required this.index,
   });
 
-  final List<TenantModel> tenants;
+  final List<UserModel> tenants;
   final int index;
 
   @override
@@ -49,9 +49,9 @@ class ActionsView extends StatelessWidget {
                         user: user,
                         controller: controller,
                         otherU: ChatModel(
-                          id: tenants[index].id,
+                          id: tenants[index].email ?? tenants[index].num,
                           name: tenants[index].names,
-                          imgUrl: tenants[index].imgUrl,
+                          imgUrl: tenants[index].imgUrl!,
                           lastMsgTime: "",
                           lastMsg: "",
                           isRead: true,

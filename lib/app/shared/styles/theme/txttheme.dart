@@ -67,6 +67,12 @@ class TxtTheme {
       fontWeight: FontWeight.bold,
       letterSpacing: 1.5,
     ),
+    labelLarge: GoogleFonts.indieFlower(
+      fontWeight: FontWeight.bold,
+      color: Colors.black,
+      letterSpacing: 1.5,
+      fontSize: 13,
+    ),
     labelMedium: GoogleFonts.raleway(
       color: Colors.grey.shade700,
       fontWeight: FontWeight.w500,
@@ -141,6 +147,12 @@ class TxtTheme {
       color: AppColors.primary,
       fontWeight: FontWeight.bold,
       letterSpacing: 1.5,
+    ),
+    labelLarge: GoogleFonts.indieFlower(
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+      letterSpacing: 1.5,
+      fontSize: 13,
     ),
     labelMedium: GoogleFonts.raleway(
       color: Colors.grey.shade400,

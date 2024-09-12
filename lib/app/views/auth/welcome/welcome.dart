@@ -161,7 +161,7 @@ class WelcomeScreen2 extends StatelessWidget {
           color: Colors.transparent,
           image: DecorationImage(
             image: AssetImage(AppImages.bckground),
-            fit: BoxFit.cover,
+            fit: BoxFit.cover,            
           ),
         ),
         child: Stack(

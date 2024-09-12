@@ -12,7 +12,7 @@ class HeadView extends StatelessWidget {
     required this.tenants,
   });
 
-  final List<TenantModel> tenants;
+  final List<UserModel> tenants;
   final int index;
 
   @override
@@ -39,7 +39,7 @@ class HeadView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 CachedNetworkImage(
-                  imageUrl: tenants[index].imgUrl,
+                  imageUrl: tenants[index].imgUrl!,
                   progressIndicatorBuilder: (context, url, progress) {
                     return Container(
                       width: 125,

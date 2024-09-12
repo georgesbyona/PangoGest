@@ -31,6 +31,23 @@ class CalendarController extends ChangeNotifier {
       _endDate ?? DateFormat('yyyy-MM-dd').format(DateTime.now());
   TimeOfDay get endTime => _endTime ?? TimeOfDay.now();
 
+  void resetScheduleData() {
+    startDayString = convertWeekDayToString(DateTime.now().weekday);
+    startDay = DateTime.now().day.toString();
+    startMonth = convertMonthToString(DateTime.now().month);
+    startYear = DateTime.now().year.toString();
+    startHour = convertSmallHour(TimeOfDay.now().hour);
+    startMin = convertSmallMin(TimeOfDay.now().minute);
+
+    endDayString = convertWeekDayToString(DateTime.now().weekday);
+    endDay = DateTime.now().day.toString();
+    endMonth = convertMonthToString(DateTime.now().month);
+    endYear = DateTime.now().year.toString();
+    endHour = convertSmallHour(TimeOfDay.now().hour);
+    endMin = convertSmallMin(TimeOfDay.now().minute);
+    notifyListeners();
+  }
+
   Future<void> pickStartDate(BuildContext context) async {
     _startDate = await showDatePicker(
       context: context,
@@ -139,26 +156,9 @@ class CalendarController extends ChangeNotifier {
         title: title,
         type: eventType,
         description: description,
-        tenant: TenantModel(
-          id: "",
-          names: eventTenant!,
-          num: "",
-          maisonID: "01",
-          passwords: "",
-          keywords: "",
-          userType: "locataire",
-        ),
-        owner: OwnerModel(
-          names: user.names!,
-          imgUrl: user.imgUrl,
-          num: user.num!,
-          adresse: user.adresse!,
-          email: user.email,
-          passwords: user.passwords!,
-          keywords: user.keywords!,
-          userType: "propriétaire",
-        ),
-        time: "$startHour:$startMin",
+        tenant: eventTenant!,
+        time: "$endHour:$endMin",
+        ownerID: user.email ?? user.num!,
         place: eventPlace!,
       ),
     );

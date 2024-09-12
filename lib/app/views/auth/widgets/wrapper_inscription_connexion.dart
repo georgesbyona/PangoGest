@@ -19,8 +19,6 @@ class WrapperInscriptionConnexion extends StatelessWidget {
     final theme = Theme.of(context);
     return GestureDetector(
       onTap: () {
-        debugPrint("From Connexion : $fromConnexion");
-        debugPrint("Can pop : $canPop");
         canPop
             ? Navigator.pop(context)
             : fromConnexion

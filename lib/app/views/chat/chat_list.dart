@@ -64,6 +64,7 @@ class _ChatListState extends State<ChatList> {
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
               itemCount: chatListData.length,
               itemBuilder: (context, index) {
+                final firstLetter = chatListData[index].name.substring(0, 1);
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -138,15 +139,16 @@ class _ChatListState extends State<ChatList> {
                                     alignment: Alignment.center,
                                     width: 70,
                                     height: 70,
-                                    margin: const EdgeInsets.only(right: 15),
                                     decoration: BoxDecoration(
                                       color: theme.unselectedWidgetColor,
                                       shape: BoxShape.circle,
                                     ),
-                                    child: Icon(
-                                      AppIcons.profileB,
-                                      color: theme.primaryColorDark,
-                                      size: 30,
+                                    child: Text(
+                                      firstLetter,
+                                      style: GoogleFonts.indieFlower(
+                                        color: theme.colorScheme.inversePrimary,
+                                        fontSize: 20,
+                                      ),
                                     ),
                                   );
                                 },
@@ -156,11 +158,12 @@ class _ChatListState extends State<ChatList> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(chatListData[index].name),
+                                    const Gap(3),
                                     Text(
                                       chatListData[index].lastMsg,
                                       style: theme.textTheme.bodySmall,
-                                      maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
+                                      maxLines: 3,
                                     ),
                                   ],
                                 ),
@@ -170,9 +173,8 @@ class _ChatListState extends State<ChatList> {
                                 children: [
                                   Text(
                                     chatListData[index].lastMsgTime,
-                                    style: theme.textTheme.bodySmall!.copyWith(
+                                    style: GoogleFonts.indieFlower(
                                       color: theme.unselectedWidgetColor,
-                                      fontWeight: FontWeight.bold,
                                       height: 2,
                                     ),
                                   ),
@@ -188,9 +190,9 @@ class _ChatListState extends State<ChatList> {
                                           ),
                                           child: Text(
                                             "${chatListData[index].lastMsgTotal}",
-                                            style: theme.textTheme.bodySmall!
-                                                .copyWith(
+                                            style: GoogleFonts.indieFlower(
                                               color: AppColors.white,
+                                              fontSize: 11,
                                             ),
                                           ),
                                         ),

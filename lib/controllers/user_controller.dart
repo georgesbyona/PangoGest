@@ -15,8 +15,8 @@ class UserDataController extends ChangeNotifier {
   AdresseModel? _adresse;
   String? _email;
   String? _num;
-  String? _passwords;
-  String? _keywords;
+  String? _password;
+  String? _userType;
   bool _isLoggedIn = false;
   bool _isRegister = false;
 
@@ -25,8 +25,8 @@ class UserDataController extends ChangeNotifier {
   AdresseModel? get adresse => _adresse;
   String? get email => _email;
   String? get num => _num;
-  String? get passwords => _passwords;
-  String? get keywords => _keywords;
+  String? get password => _password;
+  String? get userType => _userType;
   bool get isLoggedIn => _isLoggedIn;
   bool get isRegister => _isRegister;
 
@@ -37,12 +37,11 @@ class UserDataController extends ChangeNotifier {
     _adresseString = prefs.getString('userAdresse');
     _email = prefs.getString('userEmail');
     _num = prefs.getString('userNum');
-    _passwords = prefs.getString('userPasswords');
-    _keywords = prefs.getString('userKeywords');
+    _password = prefs.getString('userPassword');
+    _userType = prefs.getString('userType');
     _isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
     _isRegister = prefs.getBool('isRegister') ?? false;
     _adresse = AdresseModel(
-      id: _adresseString!.split(" ")[1],
       ville: _adresseString!.split(" ")[5],
       commune: _adresseString!.split(" ")[4],
       quartier: _adresseString!.split(" ")[3],
@@ -64,34 +63,33 @@ class UserDataController extends ChangeNotifier {
 
   bool isRegisterUser = false;
 
-  Future<void> registerUser(OwnerModel owner) async {
+  Future<void> registerUser(UserModel user) async {
     final userAdresse =
-        "${owner.adresse.avenue} ${owner.adresse.num} ${owner.adresse.cellule} ${owner.adresse.quartier} ${owner.adresse.commune} ${owner.adresse.ville}";
+        "${user.adresse.avenue} ${user.adresse.num} ${user.adresse.cellule} ${user.adresse.quartier} ${user.adresse.commune} ${user.adresse.ville}";
     isRegisterUser = true;
     final prefs = await _prefs;
-    prefs.setString('userNames', owner.names);
-    prefs.setString('userImgUrl', owner.imgUrl!);
+    prefs.setString('userNames', user.names);
+    prefs.setString('userImgUrl', user.imgUrl!);
     prefs.setString('userAdresse', userAdresse);
-    prefs.setString('userEmail', owner.email!);
-    prefs.setString('userNum', owner.num);
-    prefs.setString('userPasswords', owner.passwords);
-    prefs.setString('userKeywords', owner.keywords);
+    prefs.setString('userEmail', user.email!);
+    prefs.setString('userNum', user.num);
+    prefs.setString('userPassword', user.password);
+    prefs.setString('userType', user.userType);
     prefs.setBool('isRegister', true);
-    _names = owner.names;
+    _names = user.names;
     _adresse = AdresseModel(
-      id: owner.adresse.num,
-      ville: owner.adresse.ville,
-      commune: owner.adresse.commune,
-      quartier: owner.adresse.quartier,
-      cellule: owner.adresse.cellule,
-      avenue: owner.adresse.avenue,
-      num: owner.adresse.num,
+      ville: user.adresse.ville,
+      commune: user.adresse.commune,
+      quartier: user.adresse.quartier,
+      cellule: user.adresse.cellule,
+      avenue: user.adresse.avenue,
+      num: user.adresse.num,
     );
-    _imgUrl = owner.imgUrl;
-    _email = owner.email;
-    _num = owner.num;
-    _passwords = owner.passwords;
-    _keywords = owner.keywords;
+    _imgUrl = user.imgUrl;
+    _email = user.email;
+    _num = user.num;
+    _password = user.password;
+    _userType = user.userType;
     _isRegister = true;
     debugPrint('======================= User $_names succefully register');
     await loadUserData();
@@ -111,21 +109,21 @@ class UserDataController extends ChangeNotifier {
     final prefs = await _prefs;
     _email = prefs.getString('userEmail');
     _num = prefs.getString('userNum');
-    _passwords = prefs.getString('userPasswords');
-    debugPrint("$_email || $_num || $_passwords");
-    if ((_email == userKey || _num == userKey) && (_passwords != userWords)) {
+    _password = prefs.getString('userPassword');
+    debugPrint("$_email || $_num || $_password");
+    if ((_email == userKey || _num == userKey) && (_password != userWords)) {
       myCustomSnackBar(
         context: context,
         text: "Mots de passe incorrect",
       );
     } else if ((_email != userKey && _num != userKey) &&
-        (_passwords == userWords)) {
+        (_password == userWords)) {
       myCustomSnackBar(
         context: context,
         text: "Email/N° Tél incorrect",
       );
     } else if ((_email == userKey || _num == userKey) &&
-        (_passwords == userWords)) {
+        (_password == userWords)) {
       prefs.setBool('isLoggedIn', true);
       _isLoggedIn = true;
       Navigator.pop(context);

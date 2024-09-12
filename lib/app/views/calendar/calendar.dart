@@ -56,6 +56,9 @@ class _CalendarPageState extends State<CalendarPage> {
       floatingActionButton: _isAtTop || calendar.events.isEmpty
           ? CustomFAB(
               onPressed: () {
+                calendar.eventType = "Paiement";
+                calendar.eventTenant = null;
+                calendar.resetScheduleData();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -70,6 +73,9 @@ class _CalendarPageState extends State<CalendarPage> {
             )
           : CustomFABMini(
               onPressed: () {
+                calendar.eventType = "Paiement";
+                calendar.eventTenant = null;
+                calendar.resetScheduleData();
                 Navigator.push(
                   context,
                   MaterialPageRoute(

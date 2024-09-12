@@ -6,14 +6,14 @@ class EventCard extends StatelessWidget {
   const EventCard({
     super.key,
     required this.title,
-    required this.content,
+    required this.description,
     required this.tenant,
     required this.where,
     required this.time,
   });
 
   final String title;
-  final String content;
+  final String description;
   final String tenant;
   final String where;
   final String time;
@@ -38,13 +38,14 @@ class EventCard extends StatelessWidget {
               title,
               style: GoogleFonts.raleway(height: 2),
             ),
-            Text(
-              content,
-              style: theme.textTheme.bodySmall!.copyWith(
-                letterSpacing: 2,
-                fontSize: 13,
+            if (description.isNotEmpty)
+              Text(
+                description,
+                style: theme.textTheme.bodySmall!.copyWith(
+                  letterSpacing: 2,
+                  fontSize: 13,
+                ),
               ),
-            ),
             const Gap(5),
             if (tenant.isNotEmpty)
               BottomEventCardDetails(title: "Locataire", text: tenant),

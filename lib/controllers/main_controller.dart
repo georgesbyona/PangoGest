@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:pangogest/data/data.dart';
 import '../app/shared/shared.dart';
 
 class MainController extends ChangeNotifier {
@@ -72,30 +71,6 @@ class MainController extends ChangeNotifier {
         text: "Erreur... Vérifie ta connexion",
       );
     }
-    notifyListeners();
-  }
-
-  List<TenantModel> tenants = [];
-
-  void addNewTenant(
-    String names,
-    String maisonID,
-    String num,
-    String email,
-    String keyword,
-  ) {
-    final id = email.isEmpty ? num : email;
-    tenants.add(
-      TenantModel(
-        id: id,
-        names: names,
-        num: num,
-        email: email,
-        keywords: keyword,
-        maisonID: maisonID,
-        passwords: "",
-      ),
-    );
     notifyListeners();
   }
 }

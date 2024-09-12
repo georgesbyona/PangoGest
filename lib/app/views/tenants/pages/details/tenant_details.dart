@@ -14,7 +14,7 @@ class TenantDetailsPage extends StatelessWidget {
     required this.tenants,
   });
 
-  final List<TenantModel> tenants;
+  final List<UserModel> tenants;
   final int index;
 
   @override

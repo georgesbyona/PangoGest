@@ -1,25 +1,23 @@
 import '../data.dart';
 
-class OwnerModel {
+class UserModel {
   final String names;
   final String? imgUrl;
   final AdresseModel adresse;
   final String? email;
   final String num;
-  final String passwords;
-  final String keywords;
+  final String password;
+  final String? maisonID;
   final String userType;
-  final List<TenantModel> tenants;
 
-  OwnerModel({
+  UserModel({
     required this.names,
     required this.num,
-    required this.passwords,
-    required this.keywords,
+    required this.password,
     required this.adresse,
-    this.userType = "propriétaire",
+    required this.userType,
+    this.imgUrl = "https://iconscout.com/icons/person",
+    this.maisonID,
     this.email,
-    this.imgUrl,
-    this.tenants = const [],
   });
 }

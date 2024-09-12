@@ -15,12 +15,7 @@ class BodyView extends StatelessWidget {
     return Expanded(
       child: ListView(
         shrinkWrap: true,
-        padding: const EdgeInsets.only(
-          top: 0,
-          left: 20,
-          right: 20,
-          bottom: 20,
-        ),
+        padding: const EdgeInsets.all(20),
         children: [
           DetailsPartView(house: house),
           CardsView(house: house),

@@ -20,11 +20,7 @@ class CustomBadge extends StatelessWidget {
       showBadge: content == null ? false : true,
       badgeContent: Text(
         content ?? "",
-        style: GoogleFonts.poiretOne(
-          fontWeight: FontWeight.bold,
-          color: AppColors.white,
-          fontSize: 8,
-        ),
+        style: GoogleFonts.indieFlower(color: AppColors.white, fontSize: 10),
       ),
       badgeAnimation: const badges.BadgeAnimation.scale(
         curve: Curves.easeOutQuint,

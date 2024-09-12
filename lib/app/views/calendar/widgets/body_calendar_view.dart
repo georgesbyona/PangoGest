@@ -67,8 +67,8 @@ class BodyCalendarView extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return EventCard(
                       title: calendar.events[index].title,
-                      content: calendar.events[index].description,
-                      tenant: calendar.events[index].tenant!.names,
+                      description: calendar.events[index].description,
+                      tenant: calendar.events[index].tenant,
                       where: calendar.events[index].place,
                       time: calendar.events[index].time,
                     );

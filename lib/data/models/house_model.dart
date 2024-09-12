@@ -24,7 +24,6 @@ List<HouseModel> houses = [
   HouseModel(
     id: "01",
     adresse: AdresseModel(
-      id: "01",
       commune: "Ibanda",
       quartier: "Ndendere",
       avenue: "Fizi",
@@ -39,7 +38,6 @@ List<HouseModel> houses = [
   HouseModel(
     id: "02",
     adresse: AdresseModel(
-      id: "02",
       commune: "Ibanda",
       quartier: "Nyalukemba",
       avenue: "E.P. Lumumba",
@@ -53,7 +51,6 @@ List<HouseModel> houses = [
   HouseModel(
     id: "03",
     adresse: AdresseModel(
-      id: "03",
       commune: "Bagira",
       quartier: "Nyakavogo",
       avenue: "B4",
@@ -69,7 +66,6 @@ List<HouseModel> houses = [
   HouseModel(
     id: "04",
     adresse: AdresseModel(
-      id: "04",
       commune: "Kadutu",
       quartier: "Essence",
       avenue: "Major Vandu",
@@ -85,7 +81,6 @@ List<HouseModel> houses = [
   HouseModel(
     id: "05",
     adresse: AdresseModel(
-      id: "05",
       commune: "Bagira",
       quartier: "Chikera",
       avenue: "C5",

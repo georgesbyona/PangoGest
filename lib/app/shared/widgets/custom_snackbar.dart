@@ -26,9 +26,6 @@ void myCustomSnackBar({
 
 Widget mySnackBar(BuildContext context, String text, Color? backgroundColor) {
   final bckColor = backgroundColor ?? Theme.of(context).primaryColorDark;
-  final textColor = backgroundColor == null
-      ? Theme.of(context).highlightColor
-      : AppColors.black;
   final height = MediaQuery.sizeOf(context).height;
   final width = MediaQuery.sizeOf(context).width;
   return Container(
@@ -38,8 +35,8 @@ Widget mySnackBar(BuildContext context, String text, Color? backgroundColor) {
     ),
     margin: EdgeInsets.only(bottom: height * 0.085),
     decoration: BoxDecoration(
-      color: bckColor,
       borderRadius: BorderRadius.circular(25),
+      color: bckColor,
     ),
     child: SizedBox(
       height: width * 0.065,
@@ -58,10 +55,7 @@ Widget mySnackBar(BuildContext context, String text, Color? backgroundColor) {
             padding: EdgeInsets.only(left: width * 0.07),
             child: Text(
               text,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(fontSize: width * 0.025, color: textColor),
+              style: Theme.of(context).textTheme.labelLarge,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
               maxLines: 1,
