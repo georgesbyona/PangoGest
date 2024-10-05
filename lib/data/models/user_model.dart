@@ -1,23 +1,41 @@
-import '../data.dart';
-
 class UserModel {
-  final String names;
+  final int id;
+  final String firstName;
+  final String lastName;
+  final String? userName;
   final String? imgUrl;
-  final AdresseModel adresse;
   final String? email;
   final String num;
   final String password;
-  final String? maisonID;
   final String userType;
+  final int? maisonID;
+  final int? adresseID;
 
   UserModel({
-    required this.names,
+    required this.id,
+    required this.firstName,
+    required this.lastName,
     required this.num,
     required this.password,
-    required this.adresse,
     required this.userType,
     this.imgUrl = "https://iconscout.com/icons/person",
+    this.adresseID,
+    this.userName,
     this.maisonID,
     this.email,
   });
+
+  factory UserModel.fromJson(dynamic json) {
+    return UserModel(
+      id: json["id"] as int,
+      firstName: json["first_name"] as String,
+      lastName: json["last_name"] as String,
+      email: json["email"] as String,
+      num: json["telephone"] as String,
+      password: json["password"] as String,
+      imgUrl: json["photo_url"] as String,
+      userType: json['user_type'] as String,
+      adresseID: json['id_adresse'] as int,
+    );
+  }
 }

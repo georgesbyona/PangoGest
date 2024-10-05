@@ -91,7 +91,7 @@ class HeadView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      tenants[index].names,
+                      "${tenants[index].firstName} ${tenants[index].lastName}",
                       style: theme.textTheme.bodyMedium!.copyWith(fontSize: 16),
                     ),
                     if (tenants[index].email!.isNotEmpty) ...{

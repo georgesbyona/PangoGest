@@ -50,7 +50,7 @@ Widget customDialogView(
             ),
             Gap(width * 0.02),
             bottomDialogButtonView(
-              context: context,
+              context,
               onTap: onTap,
               confirmText: 'Envoyer',
             ),
@@ -61,13 +61,14 @@ Widget customDialogView(
   );
 }
 
-Row bottomDialogButtonView({context, onTap, confirmText}) {
+Row bottomDialogButtonView(context, {isCenter = false, onTap, confirmText}) {
   final height = MediaQuery.sizeOf(context).height;
   final width = MediaQuery.sizeOf(context).width;
   final sizeWidth = width > height ? height : width;
   final theme = Theme.of(context);
   return Row(
-    mainAxisAlignment: MainAxisAlignment.end,
+    mainAxisAlignment:
+        isCenter ? MainAxisAlignment.center : MainAxisAlignment.end,
     children: [
       GestureDetector(
         onTap: () => Navigator.pop(context),
@@ -104,7 +105,7 @@ Row bottomDialogButtonView({context, onTap, confirmText}) {
             borderRadius: BorderRadius.circular(50),
           ),
           child: Text(
-            '$confirmText',
+            confirmText ?? "Envoyer",
             style: TextStyle(fontSize: sizeWidth * 0.025),
           ),
         ),

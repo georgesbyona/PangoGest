@@ -5,8 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'controllers/controllers.dart';
 import 'app/shared/shared.dart';
-import 'app/views/views.dart';
 import 'firebase_options.dart';
+import 'app/views/views.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

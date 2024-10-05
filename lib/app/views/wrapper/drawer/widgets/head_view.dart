@@ -35,7 +35,7 @@ class HeadView extends StatelessWidget {
               ),
               Positioned(
                 bottom: 0,
-                child: user.imgUrl == null
+                child: user.imgUrl != null
                     ? Container(
                         alignment: Alignment.center,
                         width: size * 0.25,
@@ -51,8 +51,8 @@ class HeadView extends StatelessWidget {
                         child: Text(
                           firstLetter,
                           style: GoogleFonts.indieFlower(
-                            color: theme.colorScheme.inversePrimary,
-                            fontSize: 20,
+                            color: theme.highlightColor,
+                            fontSize: 50,
                           ),
                         ),
                       )

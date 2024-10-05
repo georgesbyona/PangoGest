@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../controllers/controllers.dart';
 import '../../../../shared/shared.dart';
+import 'tenant_dialog_body.dart';
 import '../../../views.dart';
 
 Container dialogBody(
@@ -22,15 +23,16 @@ Container dialogBody(
     height: 225,
     child: Column(
       children: [
+        const Gap(15),
         Text(
           "Continuer en tant que",
           style: GoogleFonts.raleway(
             color: AppColors.white,
             fontWeight: FontWeight.bold,
             fontSize: width * 0.04,
-            height: 3,
           ),
         ),
+        const Gap(15),
         accountView(
           width,
           text: "Propriétaire",
@@ -60,11 +62,17 @@ Container dialogBody(
           text: "Locataire",
           icon: AppIcons.tenant,
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ChoicePage(),
-              ),
+            const bckgroundColor = AppColors.blackOver;
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (context) {
+                return Dialog(
+                  alignment: Alignment.center,
+                  backgroundColor: bckgroundColor,
+                  child: tenantDialogBody(context, width),
+                );
+              },
             );
           },
         ),

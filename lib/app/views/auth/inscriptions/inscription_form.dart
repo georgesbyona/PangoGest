@@ -1,61 +1,67 @@
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../shared/shared.dart';
+import '../../../shared/shared.dart';
 
-class ProprioForm extends StatefulWidget {
-  final TextEditingController namesController;
-  final TextEditingController adressController;
+class InscriptionForm extends StatefulWidget {
+  final TextEditingController firstNameController;
+  final TextEditingController lastNameController;
   final TextEditingController mailController;
   final TextEditingController numController;
-  final TextEditingController passwordsController;
-  const ProprioForm({
+  final TextEditingController passwordController;
+  final TextEditingController confirmPasswordCtr;
+  const InscriptionForm({
     super.key,
-    required this.namesController,
-    required this.adressController,
+    required this.firstNameController,
+    required this.lastNameController,
     required this.mailController,
     required this.numController,
-    required this.passwordsController,
+    required this.passwordController,
+    required this.confirmPasswordCtr,
   });
 
   @override
-  State<ProprioForm> createState() => _ProprioFormState();
+  State<InscriptionForm> createState() => _InscriptionFormState();
 }
 
-class _ProprioFormState extends State<ProprioForm> {
+class _InscriptionFormState extends State<InscriptionForm> {
   bool isShowed = false;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
     final size = width > height ? height : width;
-    final List icons = [
+    final List<IconData> icons = [
       AppIcons.profile,
-      AppIcons.adresse,
+      AppIcons.profileB,
       AppIcons.email,
       AppIcons.phone,
       AppIcons.passwords,
+      AppIcons.passwords,
     ];
-    final List labelTexts = [
-      "Noms *",
-      "Adresse *",
-      "Email",
+    final List<String> labelTexts = [
+      "Prenom *",
+      "Nom *",
+      "Email *",
       "N° Tél *",
       "Mot de passe *",
+      "Confirmer Mot de passe",
     ];
-    final List hintTexts = [
-      "Georges Byona",
-      "N° M047 Av. Fizi, Q. Ndendere, C. Ibanda, Bukavu",
+    final List<String> hintTexts = [
+      "Georges",
+      "Byona",
       "georgesbyona@gmail.com",
       "+243844300329",
-      "pangogest#2k24",
+      "********",
+      "********",
     ];
-    final List controllers = [
-      widget.namesController,
-      widget.adressController,
+    final List<TextEditingController> controllers = [
+      widget.firstNameController,
+      widget.lastNameController,
       widget.mailController,
       widget.numController,
-      widget.passwordsController,
+      widget.passwordController,
+      widget.confirmPasswordCtr,
     ];
     return ListView(
       scrollDirection: Axis.vertical,
@@ -72,18 +78,12 @@ class _ProprioFormState extends State<ProprioForm> {
                   controller: controllers[index],
                   labelText: labelTexts[index],
                   hintText: hintTexts[index],
-                  // helperText: index == 2
-                  //     ? "Si t'en as pas, laisse le champ vide"
-                  //     : index == 3
-                  //         ? "Avec le code du pays (+243)"
-                  //         : index == 5
-                  //             ? "Ce mot qu'utilisera tes locataires pour se connecter"
-                  //             : null,
                   keyboardType: index == 2
                       ? TextInputType.emailAddress
                       : index == 3
                           ? TextInputType.phone
                           : TextInputType.text,
+                  maxLength: index == 3 ? 13 : null,
                   obscureText: index == 4 || index == 5 ? !isShowed : false,
                 ),
               ),

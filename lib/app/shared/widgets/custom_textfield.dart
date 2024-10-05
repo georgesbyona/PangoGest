@@ -10,21 +10,28 @@ class CustomTextField extends StatelessWidget {
     this.hintText,
     this.labelText,
     this.helperText,
+    this.maxLength,
     this.obscureText = false,
+    this.enabled,
+    this.isNotRequired = false,
     this.keyboardType = TextInputType.text,
   });
 
   final TextEditingController controller;
   final bool obscureText;
+  final bool? enabled;
+  final bool isNotRequired;
   final String? hintText;
   final String? labelText;
   final String? helperText;
+  final int? maxLength;
   final TextInputType keyboardType;
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
     return TextFormField(
       autocorrect: false,
+      enabled: enabled,
       controller: controller,
       obscureText: obscureText,
       onTapOutside: (event) {
@@ -38,6 +45,7 @@ class CustomTextField extends StatelessWidget {
         fontSize: 15,
       ),
       keyboardType: keyboardType,
+      maxLength: maxLength,
       decoration: InputDecoration(
         labelText: labelText,
         labelStyle: GoogleFonts.raleway(
@@ -81,12 +89,14 @@ class CustomTextField extends StatelessWidget {
           fontWeight: FontWeight.w300,
         ),
       ),
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Veuillez remplir ce champ !';
-        }
-        return null;
-      },
+      validator: isNotRequired
+          ? null
+          : (value) {
+              if (value == null || value.isEmpty) {
+                return 'Veuillez remplir ce champ !';
+              }
+              return null;
+            },
     );
   }
 }

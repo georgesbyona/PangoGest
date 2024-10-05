@@ -139,6 +139,7 @@ class _ChatListState extends State<ChatList> {
                                     alignment: Alignment.center,
                                     width: 70,
                                     height: 70,
+                                    margin: const EdgeInsets.only(right: 15),
                                     decoration: BoxDecoration(
                                       color: theme.unselectedWidgetColor,
                                       shape: BoxShape.circle,
@@ -146,8 +147,8 @@ class _ChatListState extends State<ChatList> {
                                     child: Text(
                                       firstLetter,
                                       style: GoogleFonts.indieFlower(
-                                        color: theme.colorScheme.inversePrimary,
-                                        fontSize: 20,
+                                        color: theme.highlightColor,
+                                        fontSize: 25,
                                       ),
                                     ),
                                   );

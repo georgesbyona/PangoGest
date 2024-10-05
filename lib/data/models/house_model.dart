@@ -2,7 +2,7 @@ import '../data.dart';
 
 class HouseModel {
   final String id;
-  final AdresseModel adresse;
+  final AddressModel adresse;
   final String surface;
   final String description;
   final double price;
@@ -23,7 +23,8 @@ class HouseModel {
 List<HouseModel> houses = [
   HouseModel(
     id: "01",
-    adresse: AdresseModel(
+    adresse: AddressModel(
+      id: 1,
       commune: "Ibanda",
       quartier: "Ndendere",
       avenue: "Fizi",
@@ -37,7 +38,8 @@ List<HouseModel> houses = [
   ),
   HouseModel(
     id: "02",
-    adresse: AdresseModel(
+    adresse: AddressModel(
+      id: 2,
       commune: "Ibanda",
       quartier: "Nyalukemba",
       avenue: "E.P. Lumumba",
@@ -50,7 +52,8 @@ List<HouseModel> houses = [
   ),
   HouseModel(
     id: "03",
-    adresse: AdresseModel(
+    adresse: AddressModel(
+      id: 3,
       commune: "Bagira",
       quartier: "Nyakavogo",
       avenue: "B4",
@@ -65,7 +68,8 @@ List<HouseModel> houses = [
   ),
   HouseModel(
     id: "04",
-    adresse: AdresseModel(
+    adresse: AddressModel(
+      id: 4,
       commune: "Kadutu",
       quartier: "Essence",
       avenue: "Major Vandu",
@@ -80,7 +84,8 @@ List<HouseModel> houses = [
   ),
   HouseModel(
     id: "05",
-    adresse: AdresseModel(
+    adresse: AddressModel(
+      id: 5,
       commune: "Bagira",
       quartier: "Chikera",
       avenue: "C5",

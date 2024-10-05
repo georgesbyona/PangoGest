@@ -1,4 +1,4 @@
-export 'adresse_model.dart';
+export 'address_model.dart';
 export 'chat_model.dart';
 export 'contract_model.dart';
 export 'event_model.dart';

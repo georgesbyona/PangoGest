@@ -11,18 +11,17 @@ class UserDataController extends ChangeNotifier {
 
   String? _names;
   String? _imgUrl;
-  String? _adresseString;
-  AdresseModel? _adresse;
   String? _email;
   String? _num;
   String? _password;
   String? _userType;
+  AddressModel? _userAddress;
   bool _isLoggedIn = false;
   bool _isRegister = false;
 
   String? get names => _names;
   String? get imgUrl => _imgUrl;
-  AdresseModel? get adresse => _adresse;
+  AddressModel? get address => _userAddress;
   String? get email => _email;
   String? get num => _num;
   String? get password => _password;
@@ -34,21 +33,23 @@ class UserDataController extends ChangeNotifier {
     final prefs = await _prefs;
     _names = prefs.getString('userNames');
     _imgUrl = prefs.getString('userImgUrl');
-    _adresseString = prefs.getString('userAdresse');
     _email = prefs.getString('userEmail');
     _num = prefs.getString('userNum');
     _password = prefs.getString('userPassword');
     _userType = prefs.getString('userType');
-    _isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
     _isRegister = prefs.getBool('isRegister') ?? false;
-    _adresse = AdresseModel(
-      ville: _adresseString!.split(" ")[5],
-      commune: _adresseString!.split(" ")[4],
-      quartier: _adresseString!.split(" ")[3],
-      cellule: _adresseString!.split(" ")[2],
-      avenue: _adresseString!.split(" ")[0],
-      num: _adresseString!.split(" ")[1],
-    );
+    _isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+    if (names != null) {
+      _userAddress = AddressModel(
+        id: int.parse(prefs.getString('userAID')!),
+        ville: prefs.getString('userT')!,
+        commune: prefs.getString('userC')!,
+        quartier: prefs.getString('userQ')!,
+        cellule: prefs.getString('userC')!,
+        avenue: prefs.getString('userA')!,
+        num: prefs.getString('userN')!,
+      );
+    }
     debugPrint('======================= User $_names succefully loading');
     notifyListeners();
   }
@@ -63,34 +64,42 @@ class UserDataController extends ChangeNotifier {
 
   bool isRegisterUser = false;
 
-  Future<void> registerUser(UserModel user) async {
-    final userAdresse =
-        "${user.adresse.avenue} ${user.adresse.num} ${user.adresse.cellule} ${user.adresse.quartier} ${user.adresse.commune} ${user.adresse.ville}";
+  Future<void> registerUser(UserModel user, AddressModel address) async {
     isRegisterUser = true;
+    final userName = "${user.firstName} ${user.lastName}";
     final prefs = await _prefs;
-    prefs.setString('userNames', user.names);
+    prefs.setString('userNames', userName);
     prefs.setString('userImgUrl', user.imgUrl!);
-    prefs.setString('userAdresse', userAdresse);
     prefs.setString('userEmail', user.email!);
     prefs.setString('userNum', user.num);
     prefs.setString('userPassword', user.password);
     prefs.setString('userType', user.userType);
+    prefs.setString('userAID', user.adresseID.toString());
+    prefs.setString('userT', address.ville);
+    prefs.setString('userC', address.commune);
+    prefs.setString('userQ', address.quartier);
+    prefs.setString('userC', address.cellule);
+    prefs.setString('userA', address.avenue);
+    prefs.setString('userN', address.num);
     prefs.setBool('isRegister', true);
-    _names = user.names;
-    _adresse = AdresseModel(
-      ville: user.adresse.ville,
-      commune: user.adresse.commune,
-      quartier: user.adresse.quartier,
-      cellule: user.adresse.cellule,
-      avenue: user.adresse.avenue,
-      num: user.adresse.num,
-    );
-    _imgUrl = user.imgUrl;
+    prefs.setBool('isLoggedIn', true);
+    _names = userName;
     _email = user.email;
     _num = user.num;
+    _imgUrl = user.imgUrl;
     _password = user.password;
     _userType = user.userType;
+    _userAddress = AddressModel(
+      id: user.adresseID!,
+      ville: address.ville,
+      commune: address.commune,
+      quartier: address.quartier,
+      cellule: address.cellule,
+      avenue: address.avenue,
+      num: address.num,
+    );
     _isRegister = true;
+    _isLoggedIn = true;
     debugPrint('======================= User $_names succefully register');
     await loadUserData();
     isRegisterUser = false;

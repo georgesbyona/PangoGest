@@ -42,6 +42,7 @@ class WelcomeScreen extends StatelessWidget {
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.black,
       body: Container(
         width: width,
@@ -153,6 +154,7 @@ class WelcomeScreen2 extends StatelessWidget {
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.black,
       body: Container(
         width: width,
@@ -161,7 +163,7 @@ class WelcomeScreen2 extends StatelessWidget {
           color: Colors.transparent,
           image: DecorationImage(
             image: AssetImage(AppImages.bckground),
-            fit: BoxFit.cover,            
+            fit: BoxFit.cover,
           ),
         ),
         child: Stack(
