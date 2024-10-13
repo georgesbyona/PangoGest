@@ -150,6 +150,7 @@ class _AddAdresseState extends State<AddAddress> {
                                     if (addressIsRegister) {
                                       Navigator.pop(context);
                                       Navigator.pop(context);
+                                      Navigator.pop(context);
                                     } else {
                                       myCustomSnackBar(
                                         context: context,

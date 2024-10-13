@@ -94,7 +94,7 @@ class HeadView extends StatelessWidget {
                       "${tenants[index].firstName} ${tenants[index].lastName}",
                       style: theme.textTheme.bodyMedium!.copyWith(fontSize: 16),
                     ),
-                    if (tenants[index].email!.isNotEmpty) ...{
+                    if (tenants[index].email.isNotEmpty) ...{
                       Text.rich(
                         TextSpan(
                           children: [

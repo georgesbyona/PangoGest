@@ -10,6 +10,7 @@ class BottomBoxesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
     List<IconData> icons = [AppIcons.tenants, AppIcons.houses];
     List<String> labels = ["Locataires", "Maisons"];
     return Row(
@@ -35,8 +36,8 @@ class BottomBoxesView extends StatelessWidget {
             }
           },
           child: SizedBox(
-            width: 200,
-            height: 200,
+            width: width * 0.48,
+            height: width * 0.48,
             child: Card(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

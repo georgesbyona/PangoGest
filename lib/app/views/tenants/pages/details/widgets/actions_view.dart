@@ -49,7 +49,7 @@ class ActionsView extends StatelessWidget {
                         user: user,
                         controller: controller,
                         otherU: ChatModel(
-                          id: tenants[index].email ?? tenants[index].num,
+                          id: tenants[index].email,
                           name: tenants[index].firstName,
                           imgUrl: tenants[index].imgUrl!,
                           lastMsgTime: "",
