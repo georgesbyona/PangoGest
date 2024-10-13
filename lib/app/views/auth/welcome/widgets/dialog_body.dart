@@ -38,8 +38,7 @@ Container dialogBody(
           text: "Propriétaire",
           icon: AppIcons.owner,
           onTap: () {
-            Navigator.pop(context);
-            if (userData.isRegister) {
+            if (userData.isRegister && userData.userExist) {
               Navigator.push(
                 context,
                 MaterialPageRoute(

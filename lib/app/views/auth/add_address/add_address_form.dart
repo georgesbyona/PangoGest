@@ -32,7 +32,7 @@ class _AddAddressFormState extends State<AddAddressForm> {
       "Quartier *",
       "Cellule ",
       "Avenue *",
-      "N° Maison *",
+      "N° Maison",
     ];
     final List<String> hintTexts = [
       "",
@@ -75,7 +75,7 @@ class _AddAddressFormState extends State<AddAddressForm> {
                     hintText: hintTexts[index],
                     keyboardType: index == 2
                         ? TextInputType.emailAddress
-                        : index == 3
+                        : index == 5
                             ? TextInputType.phone
                             : TextInputType.text,
                     isNotRequired: index == 3 || index == 5 ? true : false,

@@ -1,12 +1,12 @@
 class ContractModel {
-  final String id;
+  final int id;
   final String dateDebut;
   final String dateFin;
   final String duree;
   final String price;
   final bool inProgress;
-  final String ownerID;
-  final String tenantID;
+  final int? ownerID;
+  final int? tenantID;
 
   ContractModel({
     required this.id,
@@ -14,8 +14,17 @@ class ContractModel {
     required this.dateFin,
     required this.duree,
     required this.price,
-    required this.ownerID,
-    required this.tenantID,
+    this.ownerID,
+    this.tenantID,
     this.inProgress = false,
   });
+
+  factory ContractModel.fromJson(json) => ContractModel(
+        id: json['id'] as int,
+        dateDebut: json['date_debut'] as String,
+        dateFin: json['date_contrat'] as String,
+        duree: json['date_contrat'] as String,
+        price: json['prix'] as String,
+        inProgress: json['encours'] as bool,
+      );
 }

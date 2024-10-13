@@ -1,20 +1,20 @@
 class AddressModel {
-  final int id;
+  final int? id;
   final String ville;
   final String commune;
   final String quartier;
-  final String cellule;
+  final String? cellule;
   final String avenue;
   final String num;
 
   AddressModel({
-    required this.id,
+    this.id,
     required this.commune,
     required this.quartier,
     required this.avenue,
     this.ville = "Bukavu",
-    this.num = "N° 0000",
-    this.cellule = "",
+    this.num = "0000",
+    this.cellule,
   });
 
   factory AddressModel.fromJson(dynamic json) {
@@ -26,7 +26,6 @@ class AddressModel {
       cellule: json["cellule"] == null ? "" : json["cellule"] as String,
       avenue: json['avenue'] as String,
       num: json["num_av"] as String,
-      // adresseID: json['adresse'] as String,
     );
   }
 }

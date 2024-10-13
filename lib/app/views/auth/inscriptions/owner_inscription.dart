@@ -1,15 +1,15 @@
-import 'dart:convert';
-
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../controllers/controllers.dart';
 import '../widgets/wrapper_inscription_connexion.dart';
 import '../widgets/auth_bottom_view.dart';
 import '../add_address/add_address.dart';
 import '../../../shared/shared.dart';
+import '../../../../data/data.dart';
 import 'inscription_form.dart';
 
 class ProprioInscription extends StatefulWidget {
@@ -30,12 +30,13 @@ class _ProprioInscriptionState extends State<ProprioInscription> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordCtr = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool isRegisterUser = false;
 
   @override
   Widget build(BuildContext context) {
     lightCustomSystemChrome();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-
+    final userData = Provider.of<UserDataController>(context);
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
     final size = width > height ? height : width;
@@ -108,74 +109,73 @@ class _ProprioInscriptionState extends State<ProprioInscription> {
                       ),
                     ),
                     const Gap(15),
-                    CustomMainButton(
-                      onTap: () async {
-                        if (_formKey.currentState!.validate()) {
-                          final url = Uri.parse(
-                            "http://192.168.1.116:8000/api/utilisateurs/",
-                          );
-                          var body = jsonEncode(
-                            {
-                              "username": mailController.text,
-                              "first_name": firstNameController.text,
-                              "last_name": lastNameController.text,
-                              "email": mailController.text,
-                              "telephone": numController.text,
-                              "photo_url": mailController.text ==
-                                      "georgesbyona@gmail.com"
-                                  ? "https://lh3.googleusercontent.com/a/ACg8ocLrFO4QlXqP0Elvw0cspu9YMHbut7Os8iSPpfxtzo6NTJZtw5s=s96-c"
-                                  : "https://firebasestorage.googleapis.com/v0/b/pangogest.appspot.com/o/profil.png?alt=media&token=800f4279-9fb1-463f-8add-c0f485310caa",
-                              "password": passwordController.text,
-                              "user_type": "bailleur"
+                    isRegisterUser
+                        ? Container(
+                            alignment: Alignment.center,
+                            color: Colors.transparent,
+                            padding: EdgeInsets.symmetric(
+                              vertical: height * 0.02,
+                            ),
+                            margin: EdgeInsets.symmetric(
+                              vertical: height * 0.015,
+                            ),
+                            child: const CircularProgressIndicator(
+                              strokeWidth: 2,
+                            ),
+                          )
+                        : CustomMainButton(
+                            onTap: () async {
+                              if (passwordController.text.length < 8) {
+                                myCustomSnackBar(
+                                  context: context,
+                                  text: "Le mot de passe doit être >= à 8",
+                                );
+                              } else if (confirmPasswordCtr.text !=
+                                  passwordController.text) {
+                                myCustomSnackBar(
+                                  context: context,
+                                  text: "Vérifie les 2 mots de passe",
+                                );
+                              } else {
+                                if (_formKey.currentState!.validate()) {
+                                  registeringInProgress();
+                                  bool userIsRegister =
+                                      await userData.registerUser(
+                                    UserModel(
+                                      firstName:
+                                          firstNameController.text.trim(),
+                                      lastName: lastNameController.text.trim(),
+                                      email: mailController.text.trim(),
+                                      num: numController.text.trim(),
+                                      password: confirmPasswordCtr.text.trim(),
+                                      userType: "bailleur",
+                                    ),
+                                  );
+                                  userIsRegister
+                                      ? Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => AddAddress(
+                                              email: mailController.text,
+                                            ),
+                                          ),
+                                        )
+                                      : myCustomSnackBar(
+                                          context: context,
+                                          text: "Erreur lors d'enregistrement",
+                                        );
+                                  // firstNameController.clear();
+                                  // lastNameController.clear();
+                                  // mailController.clear();
+                                  // numController.clear();
+                                  // passwordController.clear();
+                                  // confirmPasswordCtr.clear();
+                                  registeringInProgress();
+                                }
+                              }
                             },
-                          );
-                          try {
-                            final response = await http.post(
-                              url,
-                              headers: {
-                                'Content-Type':
-                                    'application/json; charset=UTF-8',
-                              },
-                              body: body,
-                            );
-                            if (response.statusCode == 201) {
-                              debugPrint(
-                                "======================== User ${firstNameController.text} is successfully created",
-                              );
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => AddAddress(
-                                    email: mailController.text,
-                                  ),
-                                ),
-                              );
-                            } else if (response.statusCode == 400) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => AddAddress(
-                                    email: mailController.text,
-                                  ),
-                                ),
-                              );
-                            } else {
-                              debugPrint("Body : ${response.body}");
-                              debugPrint("Error : ${response.statusCode}");
-                            }
-                          } catch (e) {
-                            debugPrint("Erreur lors du post : $e");
-                          }
-                          // firstNameController.clear();
-                          // lastNameController.clear();
-                          // mailController.clear();
-                          // numController.clear();
-                          // passwordsController.clear();
-                          // Navigator.pop(context);
-                        }
-                      },
-                      text: "S'inscrire",
-                    ),
+                            text: "Continuer",
+                          ),
                   ],
                 ),
               ),
@@ -190,5 +190,11 @@ class _ProprioInscriptionState extends State<ProprioInscription> {
         ),
       ),
     );
+  }
+
+  void registeringInProgress() {
+    setState(() {
+      isRegisterUser = !isRegisterUser;
+    });
   }
 }

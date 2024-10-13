@@ -1,13 +1,13 @@
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../controllers/controllers.dart';
-import '../../../shared/shared.dart';
-import '../widgets/auth_bottom_view.dart';
 import '../widgets/wrapper_inscription_connexion.dart';
-import 'widgets/connexion_form.dart';
+import '../../../../controllers/controllers.dart';
+import '../widgets/auth_bottom_view.dart';
+import '../../../shared/shared.dart';
+import 'connexion_form.dart';
 
 class ConnexionPage extends StatefulWidget {
   const ConnexionPage({super.key, this.fromInscription = false});
@@ -20,8 +20,10 @@ class ConnexionPage extends StatefulWidget {
 
 class _ConnexionPageState extends State<ConnexionPage> {
   final TextEditingController keyController = TextEditingController();
-  final TextEditingController wordsController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool isConnecting = false;
+
   @override
   Widget build(BuildContext context) {
     final userData = Provider.of<UserDataController>(context);
@@ -95,19 +97,21 @@ class _ConnexionPageState extends State<ConnexionPage> {
                             key: _formKey,
                             child: ConnexionForm(
                               keyController: keyController,
-                              wordsController: wordsController,
+                              passwordController: passwordController,
                             ),
                           ),
                         ),
                         Gap(height * 0.015),
-                        userData.isConnecting
+                        isConnecting
                             ? Container(
                                 alignment: Alignment.center,
                                 color: Colors.transparent,
                                 padding: EdgeInsets.symmetric(
-                                    vertical: height * 0.02),
+                                  vertical: height * 0.02,
+                                ),
                                 margin: EdgeInsets.symmetric(
-                                    vertical: height * 0.015),
+                                  vertical: height * 0.015,
+                                ),
                                 child: const CircularProgressIndicator(
                                   strokeWidth: 2,
                                 ),
@@ -115,11 +119,13 @@ class _ConnexionPageState extends State<ConnexionPage> {
                             : CustomMainButton(
                                 onTap: () async {
                                   if (_formKey.currentState!.validate()) {
+                                    connectingInProgress();
                                     await userData.connectUser(
                                       context,
                                       keyController.text,
-                                      wordsController.text,
+                                      passwordController.text,
                                     );
+                                    connectingInProgress();
                                   }
                                 },
                                 text: "Se connecter",
@@ -140,5 +146,11 @@ class _ConnexionPageState extends State<ConnexionPage> {
         );
       },
     );
+  }
+
+  void connectingInProgress() {
+    setState(() {
+      isConnecting = !isConnecting;
+    });
   }
 }

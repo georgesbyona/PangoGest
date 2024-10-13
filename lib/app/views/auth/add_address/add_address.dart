@@ -1,9 +1,6 @@
-import 'dart:convert';
-
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -29,7 +26,7 @@ class _AddAdresseState extends State<AddAddress> {
   final TextEditingController quarterController = TextEditingController();
   final TextEditingController avenueController = TextEditingController();
   final TextEditingController numController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  bool isRegisterUser = false;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +66,7 @@ class _AddAdresseState extends State<AddAddress> {
                       children: [
                         Gap(height * 0.015),
                         Text(
-                          " User ID : ${widget.email}\n\nVeuillez prendre un petit momen...",
+                          "User ID : ${widget.email}\n\nVeuillez prendre un petit momen...",
                           style: GoogleFonts.raleway(
                             color: Colors.grey.shade300,
                             fontWeight: FontWeight.normal,
@@ -99,19 +96,16 @@ class _AddAdresseState extends State<AddAddress> {
                         ),
                         Gap(height * 0.015),
                         Expanded(
-                          child: Form(
-                            key: _formKey,
-                            child: AddAddressForm(
-                              communeController: communeController,
-                              celluleController: celluleController,
-                              quarterController: quarterController,
-                              avenueController: avenueController,
-                              numController: numController,
-                            ),
+                          child: AddAddressForm(
+                            communeController: communeController,
+                            celluleController: celluleController,
+                            quarterController: quarterController,
+                            avenueController: avenueController,
+                            numController: numController,
                           ),
                         ),
                         Gap(height * 0.015),
-                        userData.isRegisterUser
+                        isRegisterUser
                             ? Container(
                                 alignment: Alignment.center,
                                 color: Colors.transparent,
@@ -127,101 +121,42 @@ class _AddAdresseState extends State<AddAddress> {
                               )
                             : CustomMainButton(
                                 onTap: () async {
-                                  if (_formKey.currentState!.validate()) {
-                                    final url = Uri.parse(
-                                      "http://192.168.1.116:8000/api/adresse/",
+                                  if (communeController.text.isEmpty ||
+                                      quarterController.text.isEmpty ||
+                                      avenueController.text.isEmpty) {
+                                    myCustomSnackBar(
+                                      context: context,
+                                      text:
+                                          "Veuillez compléter les champs obligatoires",
                                     );
-                                    var body = jsonEncode(
-                                      {
-                                        "ville": "Bukavu",
-                                        "commune": communeController.text,
-                                        "quartier": quarterController.text,
-                                        "cellule":
+                                  } else {
+                                    registeringInProgress();
+                                    bool addressIsRegister =
+                                        await userData.registerAddress(
+                                      AddressModel(
+                                        ville: "Bukavu",
+                                        commune: communeController.text.trim(),
+                                        quartier: quarterController.text.trim(),
+                                        cellule:
                                             celluleController.text.isNotEmpty
                                                 ? celluleController.text
                                                 : null,
-                                        "avenue": avenueController.text,
-                                        "num_av": numController.text.isNotEmpty
+                                        avenue: avenueController.text.trim(),
+                                        num: numController.text.isNotEmpty
                                             ? numController.text
                                             : "0000",
-                                      },
+                                      ),
                                     );
-                                    try {
-                                      final response = await http.post(
-                                        url,
-                                        headers: {
-                                          'Content-Type':
-                                              'application/json; charset=UTF-8',
-                                        },
-                                        body: body,
+                                    if (addressIsRegister) {
+                                      Navigator.pop(context);
+                                      Navigator.pop(context);
+                                    } else {
+                                      myCustomSnackBar(
+                                        context: context,
+                                        text: "Erreur lors d'enregistrement",
                                       );
-                                      if (response.statusCode == 201) {
-                                        debugPrint(
-                                          "======================== Address successfully created",
-                                        );
-                                        final json = jsonDecode(response.body);
-                                        final address =
-                                            AddressModel.fromJson(json);
-                                        debugPrint(json["id"].toString());
-                                        final urlFilter = Uri.parse(
-                                          "http://192.168.1.116:8000/api/utilisateurs/?username=${widget.email}&first_name=&last_name=&user_type=",
-                                        );
-
-                                        try {
-                                          var body = jsonEncode(
-                                            {"id_adresse": json["id"]},
-                                          );
-                                          final response2 =
-                                              await http.get(urlFilter);
-                                          List jsonList =
-                                              jsonDecode(response2.body);
-                                          final jsonUser = jsonList.first;
-                                          final userID =
-                                              jsonUser["id"].toString();
-                                          final urlUpdate = Uri.parse(
-                                            "http://192.168.1.116:8000/api/utilisateurs/$userID/",
-                                          );
-                                          try {
-                                            final response = await http.patch(
-                                              urlUpdate,
-                                              headers: {
-                                                'Content-Type':
-                                                    'application/json; charset=UTF-8',
-                                              },
-                                              body: body,
-                                            );
-                                            debugPrint(response.body);
-                                            final json =
-                                                jsonDecode(response.body);
-                                            final user =
-                                                UserModel.fromJson(json);
-                                            await userData.registerUser(
-                                              user,
-                                              address,
-                                            );
-                                            communeController.clear();
-                                            quarterController.clear();
-                                            celluleController.clear();
-                                            avenueController.clear();
-                                            numController.clear();
-                                            Navigator.pop(context);
-                                            Navigator.pop(context);
-                                          } catch (e) {
-                                            debugPrint(
-                                                "Update error: ${e.toString()}");
-                                          }
-                                        } catch (e) {
-                                          debugPrint(
-                                              "Filter error: ${e.toString()}");
-                                        }
-                                      } else {
-                                        debugPrint("Body : ${response.body}");
-                                        debugPrint(
-                                            "Error : ${response.statusCode}");
-                                      }
-                                    } catch (e) {
-                                      debugPrint("Erreur lors du post : $e");
                                     }
+                                    registeringInProgress();
                                   }
                                 },
                                 text: "S'inscrire",
@@ -242,5 +177,11 @@ class _AddAdresseState extends State<AddAddress> {
         );
       },
     );
+  }
+
+  void registeringInProgress() {
+    setState(() {
+      isRegisterUser = !isRegisterUser;
+    });
   }
 }

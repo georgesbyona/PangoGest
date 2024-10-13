@@ -48,6 +48,9 @@ class Wrapper extends StatelessWidget {
       appBar: AppBar(
         actions: [
           GestureDetector(
+            // onTap: () async {
+            //   await UserAPI.userDeleted(user.userID);
+            // },
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(

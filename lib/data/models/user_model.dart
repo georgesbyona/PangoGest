@@ -1,10 +1,9 @@
 class UserModel {
-  final int id;
+  final int? id;
   final String firstName;
   final String lastName;
-  final String? userName;
   final String? imgUrl;
-  final String? email;
+  final String email;
   final String num;
   final String password;
   final String userType;
@@ -12,17 +11,16 @@ class UserModel {
   final int? adresseID;
 
   UserModel({
-    required this.id,
+    this.id,
     required this.firstName,
     required this.lastName,
+    required this.email,
     required this.num,
     required this.password,
     required this.userType,
     this.imgUrl = "https://iconscout.com/icons/person",
     this.adresseID,
-    this.userName,
     this.maisonID,
-    this.email,
   });
 
   factory UserModel.fromJson(dynamic json) {
@@ -35,7 +33,7 @@ class UserModel {
       password: json["password"] as String,
       imgUrl: json["photo_url"] as String,
       userType: json['user_type'] as String,
-      adresseID: json['id_adresse'] as int,
+      adresseID: json['id_adresse'],
     );
   }
 }

@@ -109,25 +109,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                 ),
                               ),
                               Gap(height * 0.02),
-                              userData.isConnecting
-                                  ? Container(
-                                      alignment: Alignment.center,
-                                      color: Colors.transparent,
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: height * 0.02),
-                                      margin: EdgeInsets.symmetric(
-                                          vertical: height * 0.015),
-                                      child: const CircularProgressIndicator(
-                                        strokeWidth: 2,
-                                      ),
-                                    )
-                                  : CustomMainButton(
-                                      onTap: () async {
-                                        if (_formKey.currentState!
-                                            .validate()) {}
-                                      },
-                                      text: "Envoyer",
-                                    ),
+                              CustomMainButton(
+                                onTap: () async {
+                                  if (_formKey.currentState!.validate()) {}
+                                },
+                                text: "Envoyer",
+                              ),
                             ],
                           ),
                         ),

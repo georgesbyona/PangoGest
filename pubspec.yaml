@@ -11,6 +11,7 @@ dependencies:
   badges: ^3.1.2
   cached_network_image: ^3.4.0
   chatview: ^2.1.1
+  cloud_firestore: ^5.4.4
   device_info_plus: ^10.1.2
   dropdown_button2: ^2.3.9
   easy_date_timeline: ^1.1.3

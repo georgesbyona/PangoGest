@@ -48,10 +48,10 @@ class _InscriptionFormState extends State<InscriptionForm> {
       "Confirmer Mot de passe",
     ];
     final List<String> hintTexts = [
-      "Georges",
-      "Byona",
-      "georgesbyona@gmail.com",
-      "+243844300329",
+      "Toussaint",
+      "Mushamuka",
+      "toussaintmushamuka4@gmail.com",
+      "+243994822893",
       "********",
       "********",
     ];
@@ -65,44 +65,49 @@ class _InscriptionFormState extends State<InscriptionForm> {
     ];
     return ListView(
       scrollDirection: Axis.vertical,
-      children: List.generate(
-        icons.length,
-        (index) => Container(
-          margin: const EdgeInsets.only(bottom: 10),
-          child: Row(
-            children: [
-              Icon(icons[index], color: AppColors.white),
-              Gap(size * 0.03),
-              Expanded(
-                child: CustomTextField(
-                  controller: controllers[index],
-                  labelText: labelTexts[index],
-                  hintText: hintTexts[index],
-                  keyboardType: index == 2
-                      ? TextInputType.emailAddress
-                      : index == 3
-                          ? TextInputType.phone
-                          : TextInputType.text,
-                  maxLength: index == 3 ? 13 : null,
-                  obscureText: index == 4 || index == 5 ? !isShowed : false,
-                ),
-              ),
-              if (index == 4 || index == 5) ...{
-                GestureDetector(
-                  onTap: onShowPasswords,
-                  child: Container(
-                    padding: EdgeInsets.only(left: size * 0.05),
-                    child: Icon(
-                      isShowed ? AppIcons.eyeShow : AppIcons.eyeHide,
-                      color: Colors.white,
+      children: [
+        Column(
+          children: List.generate(
+            icons.length,
+            (index) => Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              child: Row(
+                children: [
+                  Icon(icons[index], color: AppColors.white),
+                  Gap(size * 0.03),
+                  Expanded(
+                    child: CustomTextField(
+                      controller: controllers[index],
+                      labelText: labelTexts[index],
+                      hintText: hintTexts[index],
+                      keyboardType: index == 2
+                          ? TextInputType.emailAddress
+                          : index == 3
+                              ? TextInputType.phone
+                              : TextInputType.text,
+                      maxLength: index == 3 ? 13 : null,
+                      obscureText: index == 4 || index == 5 ? !isShowed : false,
                     ),
                   ),
-                ),
-              }
-            ],
+                  if (index == 4 || index == 5) ...{
+                    GestureDetector(
+                      onTap: onShowPasswords,
+                      child: Container(
+                        padding: EdgeInsets.only(left: size * 0.05),
+                        child: Icon(
+                          isShowed ? AppIcons.eyeShow : AppIcons.eyeHide,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  }
+                ],
+              ),
+            ),
           ),
         ),
-      ),
+        const Gap(200),
+      ],
     );
   }
 

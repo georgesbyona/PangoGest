@@ -2,6 +2,7 @@ import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pangogest/data/data.dart';
 
 import '../widgets/auth_bottom_view.dart';
 import '../../../shared/shared.dart';
@@ -98,6 +99,24 @@ class _TenantInscriptionState extends State<TenantInscription> {
                       ),
                     ),
                     const Gap(15),
+                    CustomMainButton(
+                      onTap: () {
+                        if (_formKey.currentState!.validate()) {
+                          FireStoreDB().registerUser(
+                            UserModel(
+                              firstName: firstNameController.text.trim(),
+                              lastName: lastNameController.text.trim(),
+                              email: mailController.text.trim(),
+                              num: numController.text.trim(),
+                              password: passwordController.text.trim(),
+                              userType: "tenant",
+                            ),
+                            "georgesbyona@gmail.com",
+                          );
+                        }
+                      },
+                      text: "Continuer",
+                    ),
                   ],
                 ),
               ),

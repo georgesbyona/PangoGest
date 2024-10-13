@@ -2,16 +2,16 @@ import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../shared/shared.dart';
-import '../../forgot_password/forgot_password.dart';
+import '../forgot_password/forgot_password.dart';
+import '../../../shared/shared.dart';
 
 class ConnexionForm extends StatefulWidget {
-  final TextEditingController wordsController;
+  final TextEditingController passwordController;
   final TextEditingController keyController;
   const ConnexionForm({
     super.key,
     required this.keyController,
-    required this.wordsController,
+    required this.passwordController,
   });
 
   @override
@@ -52,7 +52,7 @@ class _ConnexionFormState extends State<ConnexionForm> {
               Gap(size * 0.03),
               Expanded(
                 child: CustomTextField(
-                  controller: widget.wordsController,
+                  controller: widget.passwordController,
                   labelText: "Mot de passe",
                   keyboardType: TextInputType.text,
                   obscureText: !isShowed,

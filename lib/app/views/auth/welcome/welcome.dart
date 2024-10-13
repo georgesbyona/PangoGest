@@ -113,7 +113,7 @@ class WelcomeScreen extends StatelessWidget {
                       ],
                     ),
                     CustomMainButton(
-                      onTap: () {
+                      onTap: () async {
                         const bckgroundColor = AppColors.blackOver;
                         showDialog(
                           context: context,
