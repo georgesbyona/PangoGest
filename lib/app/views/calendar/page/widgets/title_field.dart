@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../shared/shared.dart';
 
@@ -22,14 +21,14 @@ class TitleField extends StatelessWidget {
         cursorColor: theme.colorScheme.inversePrimary,
         cursorErrorColor: AppColors.red,
         maxLines: 1,
-        style: GoogleFonts.raleway(
+        style: TextStyle(
           color: theme.colorScheme.inverseSurface,
           fontWeight: FontWeight.normal,
           fontSize: 25,
         ),
         decoration: InputDecoration(
           hintText: "Taper un titre",
-          hintStyle: GoogleFonts.raleway(
+          hintStyle: TextStyle(
             color: theme.colorScheme.inverseSurface,
             fontWeight: FontWeight.normal,
             fontSize: 25,

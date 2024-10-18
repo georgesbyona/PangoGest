@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../controllers/controllers.dart';
 import '../../../shared/shared.dart';
@@ -31,18 +30,18 @@ class BodyCalendarView extends StatelessWidget {
               calendar.events.isNotEmpty && calendar.events.length == 1
                   ? "Evénement du jour :"
                   : "Evénements du jour :",
-              style: GoogleFonts.indieFlower(height: 3),
+              style: const TextStyle(height: 3),
             ),
             if (calendar.events.isEmpty) ...{
               Expanded(
                 child: isLarge
-                    ? Row(
+                    ? const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(AppIcons.addEvent),
+                          Icon(AppIcons.addEvent),
                           Text(
                             "Pas d'événements",
-                            style: GoogleFonts.indieFlower(height: 3),
+                            style: TextStyle(height: 3),
                           ),
                         ],
                       )
@@ -50,9 +49,9 @@ class BodyCalendarView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Icon(AppIcons.addEvent),
-                          Text(
+                          const Text(
                             "Pas d'événements",
-                            style: GoogleFonts.indieFlower(height: 3),
+                            style: TextStyle(height: 3),
                           ),
                           Gap(height * 0.1),
                         ],

@@ -33,14 +33,15 @@ ChatViewAppBar chatAppBar({
     networkImageErrorBuilder: (context, url, error) {
       return Container(
         alignment: Alignment.center,
+        padding: const EdgeInsets.only(top: 8),
         decoration: BoxDecoration(
           color: theme.unselectedWidgetColor,
           shape: BoxShape.circle,
         ),
         child: Text(
           firstLetter,
-          style: GoogleFonts.indieFlower(
-            color: theme.colorScheme.inversePrimary,
+          style: GoogleFonts.specialElite(
+            color: theme.highlightColor,
             fontSize: 20,
           ),
         ),
@@ -49,14 +50,15 @@ ChatViewAppBar chatAppBar({
     assetImageErrorBuilder: (context, url, error) {
       return Container(
         alignment: Alignment.center,
+        padding: const EdgeInsets.only(top: 8),
         decoration: BoxDecoration(
           color: theme.unselectedWidgetColor,
           shape: BoxShape.circle,
         ),
         child: Text(
           firstLetter,
-          style: GoogleFonts.indieFlower(
-            color: theme.colorScheme.inversePrimary,
+          style: GoogleFonts.specialElite(
+            color: theme.highlightColor,
             fontSize: 20,
           ),
         ),

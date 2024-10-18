@@ -8,7 +8,7 @@ class UserModel {
   final String password;
   final String userType;
   final int? maisonID;
-  final int? adresseID;
+  final int? addressID;
 
   UserModel({
     this.id,
@@ -19,7 +19,7 @@ class UserModel {
     required this.password,
     required this.userType,
     this.imgUrl = "https://iconscout.com/icons/person",
-    this.adresseID,
+    this.addressID,
     this.maisonID,
   });
 
@@ -33,7 +33,7 @@ class UserModel {
       password: json["password"] as String,
       imgUrl: json["photo_url"] as String,
       userType: json['user_type'] as String,
-      adresseID: json['id_adresse'],
+      addressID: json['id_adresse'],
     );
   }
 }

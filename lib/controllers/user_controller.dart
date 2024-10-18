@@ -47,11 +47,11 @@ class UserDataController extends ChangeNotifier {
     _isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
     if (_isRegister) {
       _userAddress = AddressModel(
-        id: prefs.getInt('userAID')!,
+        id: prefs.getInt('userAID'),
         ville: prefs.getString('userT')!,
         commune: prefs.getString('userC')!,
         quartier: prefs.getString('userQ')!,
-        cellule: prefs.getString('userC')!,
+        cellule: prefs.getString('userCell'),
         avenue: prefs.getString('userA')!,
         num: prefs.getString('userN')!,
       );
@@ -69,19 +69,23 @@ class UserDataController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> registerUser(UserModel user) async {
+  Future<bool> registerUser(
+    UserModel user, {
+    BuildContext? context,
+    bool fromConnection = false,
+  }) async {
     final userName = "${user.firstName} ${user.lastName}";
     final prefs = await _prefs;
     final registered = await UserAPI.registerUser(user);
-    if (registered.first) {
-      prefs.setInt('userID', registered.last);
+    if (fromConnection) {
+      prefs.setInt('userID', user.id!);
       prefs.setString('userNames', userName);
       prefs.setString('userImgUrl', user.imgUrl!);
       prefs.setString('userEmail', user.email);
       prefs.setString('userNum', user.num);
       prefs.setString('userPassword', user.password);
       prefs.setString('userType', user.userType);
-      _userID = registered.last;
+      _userID = user.id;
       _names = userName;
       _email = user.email;
       _num = user.num;
@@ -92,27 +96,57 @@ class UserDataController extends ChangeNotifier {
       notifyListeners();
       return true;
     } else {
-      notifyListeners();
-      return false;
+      if (registered.first == true) {
+        prefs.setInt('userID', registered.last);
+        prefs.setString('userNames', userName);
+        prefs.setString('userImgUrl', user.imgUrl!);
+        prefs.setString('userEmail', user.email);
+        prefs.setString('userNum', user.num);
+        prefs.setString('userPassword', user.password);
+        prefs.setString('userType', user.userType);
+        _userID = registered.last;
+        _names = userName;
+        _email = user.email;
+        _num = user.num;
+        _imgUrl = user.imgUrl;
+        _password = user.password;
+        _userType = user.userType;
+        debugPrint('======================= User $_names succefully register');
+        notifyListeners();
+        return true;
+      } else if (registered.first == null) {
+        myCustomSnackBar(context: context, text: registered.last);
+        notifyListeners();
+        return false;
+      } else {
+        myCustomSnackBar(
+          context: context,
+          text: "Erreur lors d'enregistrement",
+        );
+        notifyListeners();
+        return false;
+      }
     }
   }
 
-  Future<bool> registerAddress(AddressModel address) async {
+  Future<bool> registerAddress(
+    AddressModel address, {
+    bool fromConnection = false,
+  }) async {
     final prefs = await _prefs;
-    final registered = await AddressAPI.registerAddress(_userID!, address);
-    if (registered.first) {
-      await UserAPI.userAddressUpdate(_userID!, registered.last);
-      prefs.setInt('userAID', registered.last);
+    final registered = await AddressAPI.registerAddress(address);
+    if (fromConnection) {
+      prefs.setInt('userAID', address.id!);
       prefs.setString('userT', address.ville);
       prefs.setString('userC', address.commune);
       prefs.setString('userQ', address.quartier);
-      prefs.setString('userC', address.cellule != null ? address.cellule! : "");
+      prefs.setString('userCell', address.cellule!);
       prefs.setString('userA', address.avenue);
       prefs.setString('userN', address.num);
       prefs.setBool('isRegister', true);
       prefs.setBool('isLoggedIn', true);
       _userAddress = AddressModel(
-        id: registered.last,
+        id: address.id,
         ville: address.ville,
         commune: address.commune,
         quartier: address.quartier,
@@ -128,49 +162,77 @@ class UserDataController extends ChangeNotifier {
       notifyListeners();
       return true;
     } else {
-      debugPrint('================== isRegister ? $_isRegister');
-      notifyListeners();
-      return false;
+      if (registered.first) {
+        await UserAPI.userAddressUpdate(_userID!, registered.last);
+        prefs.setInt('userAID', registered.last);
+        prefs.setString('userT', address.ville);
+        prefs.setString('userC', address.commune);
+        prefs.setString('userQ', address.quartier);
+        prefs.setString(
+            'userCell', address.cellule != null ? address.cellule! : "");
+        prefs.setString('userA', address.avenue);
+        prefs.setString('userN', address.num);
+        prefs.setBool('isRegister', true);
+        prefs.setBool('isLoggedIn', true);
+        _userAddress = AddressModel(
+          id: registered.last,
+          ville: address.ville,
+          commune: address.commune,
+          quartier: address.quartier,
+          cellule: address.cellule,
+          avenue: address.avenue,
+          num: address.num,
+        );
+        _isRegister = true;
+        _isLoggedIn = true;
+        debugPrint('======================= User $_names succefully register');
+        await loadUserData();
+        debugPrint('================== isRegister ? $_isRegister');
+        notifyListeners();
+        return true;
+      } else {
+        debugPrint('================== isRegister ? $_isRegister');
+        notifyListeners();
+        return false;
+      }
     }
   }
 
-  Future<void> connectUser(
+  Future<bool> connectUser(
     BuildContext context,
     String userKey,
     String userPassword,
   ) async {
     final prefs = await _prefs;
-    // _email = prefs.getString('userEmail');
-    // _num = prefs.getString('userNum');
-    // _password = prefs.getString('userPassword');
-    // debugPrint("$_email || $_num || $_password");
     final connected = await UserAPI.connectUser(userKey, userPassword);
     if (connected.first == true) {
-      prefs.setInt('userAID', connected.last);
+      final address = await AddressAPI.checkAddress(connected.last.addressID);
+      await registerUser(connected.last, fromConnection: true);
+      await registerAddress(address.last, fromConnection: true);
+      prefs.setBool('isRegister', true);
       prefs.setBool('isLoggedIn', true);
-      await loadUserData();
+      _isRegister = true;
       _isLoggedIn = true;
+      await loadUserData();
       Navigator.pop(context);
       Navigator.pop(context);
+      notifyListeners();
+      return true;
     } else if (connected.first == null) {
       myCustomSnackBar(
         context: context,
         text: connected.last,
       );
+      notifyListeners();
+      return false;
     } else {
       myCustomSnackBar(
         context: context,
         text: connected.last,
       );
+      notifyListeners();
+      return false;
     }
-    // if ((_email == userKey || _num == userKey) && (_password != userPassword)) {
-    // } else if ((_email != userKey && _num != userKey) &&
-    //     (_password == userPassword)) {
-    // } else if ((_email == userKey || _num == userKey) &&
-    //     (_password == userPassword)) {
-    // } else {
-    // }
-    notifyListeners();
   }
 
   bool isConnected = false;

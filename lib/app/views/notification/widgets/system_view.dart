@@ -1,6 +1,5 @@
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../shared/shared.dart';
 import '../../../../data/data.dart';
@@ -64,8 +63,9 @@ class SystemView extends StatelessWidget {
                   const Gap(10),
                   Text(
                     notificationData.time,
-                    style: GoogleFonts.indieFlower(
+                    style: TextStyle(
                       color: theme.unselectedWidgetColor,
+                      fontSize: 11,
                       height: 2,
                     ),
                   ),

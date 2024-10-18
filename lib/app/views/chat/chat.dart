@@ -1,5 +1,5 @@
-import 'package:chatview/chatview.dart';
 import 'package:flutter/material.dart';
+import 'package:chatview/chatview.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../controllers/controllers.dart';
@@ -252,7 +252,7 @@ class _ChatPageState extends State<ChatPage> {
                 vertical: 10,
                 horizontal: 12,
               ),
-              reactedUserTextStyle: GoogleFonts.raleway(
+              reactedUserTextStyle: const TextStyle(
                 fontWeight: FontWeight.normal,
               ),
               reactionWidgetDecoration: BoxDecoration(
@@ -289,7 +289,7 @@ class _ChatPageState extends State<ChatPage> {
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: theme.colorScheme.inversePrimary),
             ),
-            textStyle: GoogleFonts.raleway(
+            textStyle: const TextStyle(
               letterSpacing: 1,
               fontSize: 12,
             ),

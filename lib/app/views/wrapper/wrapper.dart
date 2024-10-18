@@ -83,7 +83,7 @@ class Wrapper extends StatelessWidget {
           indicatorColor: Colors.transparent,
           backgroundColor: Colors.transparent,
           labelTextStyle: WidgetStatePropertyAll(
-            GoogleFonts.indieFlower(
+            GoogleFonts.raleway(
               fontWeight: FontWeight.w600,
               letterSpacing: 1,
               fontSize: 12,

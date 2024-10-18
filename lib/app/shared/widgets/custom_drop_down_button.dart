@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CustomDropDownButton extends StatelessWidget {
   const CustomDropDownButton({
@@ -26,10 +25,7 @@ class CustomDropDownButton extends StatelessWidget {
           value: displayValue,
           hint: Text(hitnText, style: theme.textTheme.labelMedium),
           onChanged: onChanged,
-          style: GoogleFonts.indieFlower(
-            color: theme.colorScheme.inversePrimary,
-            fontSize: 16,
-          ),
+          style: theme.textTheme.bodySmall,
           buttonStyleData: ButtonStyleData(
             overlayColor: WidgetStateColor.transparent,
             width: MediaQuery.sizeOf(context).width,

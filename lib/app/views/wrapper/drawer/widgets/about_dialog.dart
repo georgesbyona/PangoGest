@@ -82,7 +82,7 @@ class AboutDialogBody extends StatelessWidget {
             ],
           ),
           Gap(size * 0.05),
-          socialmediaView(width, theme, context),
+          socialmediaView(theme, context),
         ],
       ),
     );

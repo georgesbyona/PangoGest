@@ -106,7 +106,6 @@ class _InscriptionFormState extends State<InscriptionForm> {
             ),
           ),
         ),
-        const Gap(200),
       ],
     );
   }

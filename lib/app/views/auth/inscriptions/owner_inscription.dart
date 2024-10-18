@@ -43,7 +43,7 @@ class _ProprioInscriptionState extends State<ProprioInscription> {
     final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: AppColors.blackB,
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -125,19 +125,19 @@ class _ProprioInscriptionState extends State<ProprioInscription> {
                           )
                         : CustomMainButton(
                             onTap: () async {
-                              if (passwordController.text.length < 8) {
-                                myCustomSnackBar(
-                                  context: context,
-                                  text: "Le mot de passe doit être >= à 8",
-                                );
-                              } else if (confirmPasswordCtr.text !=
-                                  passwordController.text) {
-                                myCustomSnackBar(
-                                  context: context,
-                                  text: "Vérifie les 2 mots de passe",
-                                );
-                              } else {
-                                if (_formKey.currentState!.validate()) {
+                              if (_formKey.currentState!.validate()) {
+                                if (passwordController.text.length < 8) {
+                                  myCustomSnackBar(
+                                    context: context,
+                                    text: "Le mot de passe doit être >= à 8",
+                                  );
+                                } else if (confirmPasswordCtr.text !=
+                                    passwordController.text) {
+                                  myCustomSnackBar(
+                                    context: context,
+                                    text: "Vérifie les 2 mots de passe",
+                                  );
+                                } else {
                                   registeringInProgress();
                                   bool userIsRegister =
                                       await userData.registerUser(
@@ -150,26 +150,19 @@ class _ProprioInscriptionState extends State<ProprioInscription> {
                                       password: confirmPasswordCtr.text.trim(),
                                       userType: "bailleur",
                                     ),
+                                    context: context,
                                   );
-                                  userIsRegister
-                                      ? Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => AddAddress(
-                                              email: mailController.text,
-                                            ),
-                                          ),
-                                        )
-                                      : myCustomSnackBar(
-                                          context: context,
-                                          text: "Erreur lors d'enregistrement",
-                                        );
-                                  // firstNameController.clear();
-                                  // lastNameController.clear();
-                                  // mailController.clear();
-                                  // numController.clear();
-                                  // passwordController.clear();
-                                  // confirmPasswordCtr.clear();
+                                  if (userIsRegister) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => AddAddress(
+                                          email: mailController.text,
+                                          fromConnexion: widget.fromConnexion,
+                                        ),
+                                      ),
+                                    );
+                                  }
                                   registeringInProgress();
                                 }
                               }

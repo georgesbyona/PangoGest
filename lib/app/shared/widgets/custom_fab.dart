@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 class CustomFAB extends StatelessWidget {
@@ -23,10 +22,7 @@ class CustomFAB extends StatelessWidget {
       backgroundColor: theme.highlightColor,
       icon: Icon(icon),
       label: const Text("Nouveau"),
-      extendedTextStyle: GoogleFonts.indieFlower(
-        fontWeight: FontWeight.w600,
-        letterSpacing: 1.5,
-      ),
+      extendedTextStyle: theme.textTheme.bodySmall,
     );
   }
 }

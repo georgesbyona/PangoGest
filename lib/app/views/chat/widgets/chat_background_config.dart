@@ -6,7 +6,7 @@ ChatBackgroundConfiguration chatBckConfig(ThemeData theme) {
   return ChatBackgroundConfiguration(
     messageTimeIconColor: theme.primaryColor,
     messageTimeTextStyle: GoogleFonts.poiretOne(
-      fontWeight: FontWeight.w300,
+      fontWeight: FontWeight.normal,
       fontSize: 12,
     ),
     defaultGroupSeparatorConfig: DefaultGroupSeparatorConfiguration(

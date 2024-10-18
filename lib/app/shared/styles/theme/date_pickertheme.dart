@@ -14,22 +14,22 @@ DatePickerThemeData lightDatePickerTheme = DatePickerThemeData(
     textStyle: WidgetStatePropertyAll(GoogleFonts.raleway()),
   ),
   dayForegroundColor: const WidgetStatePropertyAll(AppColors.black),
-  dayStyle: GoogleFonts.indieFlower(
+  dayStyle: GoogleFonts.raleway(
     color: AppColors.blackO,
   ),
   dividerColor: AppColors.blackO,
   headerForegroundColor: AppColors.black,
-  headerHeadlineStyle: GoogleFonts.indieFlower(
+  headerHeadlineStyle: GoogleFonts.raleway(
     color: AppColors.black,
   ),
-  headerHelpStyle: GoogleFonts.indieFlower(
+  headerHelpStyle: GoogleFonts.raleway(
     color: AppColors.black,
   ),
   rangePickerBackgroundColor: AppColors.primary,
-  rangePickerHeaderHeadlineStyle: GoogleFonts.indieFlower(
+  rangePickerHeaderHeadlineStyle: GoogleFonts.raleway(
     color: AppColors.black,
   ),
-  rangePickerHeaderHelpStyle: GoogleFonts.indieFlower(
+  rangePickerHeaderHelpStyle: GoogleFonts.raleway(
     color: AppColors.black,
   ),
   rangeSelectionBackgroundColor: AppColors.yellow,
@@ -37,19 +37,19 @@ DatePickerThemeData lightDatePickerTheme = DatePickerThemeData(
   rangePickerHeaderForegroundColor: AppColors.black,
   todayForegroundColor: const WidgetStatePropertyAll(AppColors.black),
   todayBorder: const BorderSide(color: AppColors.blackI),
-  weekdayStyle: GoogleFonts.indieFlower(
+  weekdayStyle: GoogleFonts.raleway(
     color: AppColors.black,
   ),
   inputDecorationTheme: InputDecorationTheme(
-    hintStyle: GoogleFonts.indieFlower(
+    hintStyle: GoogleFonts.raleway(
       fontWeight: FontWeight.normal,
       color: AppColors.black,
     ),
-    labelStyle: GoogleFonts.indieFlower(
+    labelStyle: GoogleFonts.raleway(
       fontWeight: FontWeight.normal,
       color: AppColors.black,
     ),
-    errorStyle: GoogleFonts.indieFlower(
+    errorStyle: GoogleFonts.raleway(
       fontWeight: FontWeight.normal,
       color: AppColors.red,
     ),
@@ -62,5 +62,5 @@ DatePickerThemeData lightDatePickerTheme = DatePickerThemeData(
     ),
   ),
   yearForegroundColor: const WidgetStatePropertyAll(AppColors.black),
-  yearStyle: GoogleFonts.indieFlower(color: AppColors.black),
+  yearStyle: GoogleFonts.raleway(color: AppColors.black),
 );

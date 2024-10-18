@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EventCard extends StatelessWidget {
@@ -36,7 +36,7 @@ class EventCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: GoogleFonts.raleway(height: 2),
+              style: const TextStyle(height: 2),
             ),
             if (description.isNotEmpty)
               Text(

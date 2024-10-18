@@ -1,6 +1,5 @@
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../controllers/controllers.dart';
 import '../../../../shared/shared.dart';
@@ -39,9 +38,7 @@ class StartDatePickView extends StatelessWidget {
                       const Gap(5),
                       Text(
                         "${calendar.startDayString}, ${calendar.startDay} ${calendar.startMonth} ${calendar.startYear}",
-                        style: GoogleFonts.indieFlower(
-                          fontWeight: FontWeight.normal,
-                        ),
+                        style: const TextStyle(fontWeight: FontWeight.normal),
                       ),
                     ],
                   ),
@@ -66,9 +63,7 @@ class StartDatePickView extends StatelessWidget {
                       const Gap(5),
                       Text(
                         "${calendar.startHour}:${calendar.startMin}",
-                        style: GoogleFonts.indieFlower(
-                          fontWeight: FontWeight.normal,
-                        ),
+                        style: const TextStyle(fontWeight: FontWeight.normal),
                       ),
                     ],
                   ),
@@ -117,9 +112,7 @@ class EndDatePickView extends StatelessWidget {
                       const Gap(5),
                       Text(
                         "${calendar.endDayString}, ${calendar.endDay} ${calendar.endMonth} ${calendar.endYear}",
-                        style: GoogleFonts.indieFlower(
-                          fontWeight: FontWeight.normal,
-                        ),
+                        style: const TextStyle(fontWeight: FontWeight.normal),
                       ),
                     ],
                   ),
@@ -144,9 +137,7 @@ class EndDatePickView extends StatelessWidget {
                       const Gap(5),
                       Text(
                         "${calendar.endHour}:${calendar.endMin}",
-                        style: GoogleFonts.indieFlower(
-                          fontWeight: FontWeight.normal,
-                        ),
+                        style: const TextStyle(fontWeight: FontWeight.normal),
                       ),
                     ],
                   ),

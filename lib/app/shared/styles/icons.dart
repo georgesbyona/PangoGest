@@ -73,4 +73,7 @@ class AppIcons {
   static const delete = Iconsax.trash_outline;
   static const remind = Iconsax.timer_1_outline;
   static const message = Iconsax.message_2_outline;
+
+  static const price = Iconsax.dollar_circle_outline;
+  static const surface = Iconsax.box_1_outline;
 }

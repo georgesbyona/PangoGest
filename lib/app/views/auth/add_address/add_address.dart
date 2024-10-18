@@ -12,9 +12,14 @@ import 'add_address_form.dart';
 
 class AddAddress extends StatefulWidget {
   static const route = "/addAddresse";
-  const AddAddress({super.key, required this.email});
+  const AddAddress({
+    super.key,
+    required this.email,
+    required this.fromConnexion,
+  });
 
   final String email;
+  final bool fromConnexion;
 
   @override
   State<AddAddress> createState() => _AddAdresseState();
@@ -40,7 +45,7 @@ class _AddAdresseState extends State<AddAddress> {
       builder: (context, constraints) {
         return Scaffold(
           backgroundColor: AppColors.blackB,
-          resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: true,
           appBar: AppBar(
             iconTheme: const IconThemeData(color: AppColors.white),
             title: Text(
@@ -139,11 +144,11 @@ class _AddAdresseState extends State<AddAddress> {
                                         quartier: quarterController.text.trim(),
                                         cellule:
                                             celluleController.text.isNotEmpty
-                                                ? celluleController.text
+                                                ? celluleController.text.trim()
                                                 : null,
                                         avenue: avenueController.text.trim(),
                                         num: numController.text.isNotEmpty
-                                            ? numController.text
+                                            ? numController.text.trim()
                                             : "0000",
                                       ),
                                     );
@@ -156,6 +161,10 @@ class _AddAdresseState extends State<AddAddress> {
                                         context: context,
                                         text: "Erreur lors d'enregistrement",
                                       );
+                                    }
+                                    if (addressIsRegister &&
+                                        widget.fromConnexion) {
+                                      Navigator.pop(context);
                                     }
                                     registeringInProgress();
                                   }

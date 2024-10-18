@@ -113,7 +113,15 @@ class WelcomeScreen extends StatelessWidget {
                       ],
                     ),
                     CustomMainButton(
-                      onTap: () async {
+                      onTap: () {
+                        // final response = await UserAPI.connectUser(
+                        //     "georgesbyona@gmail.com", "00000000");
+                        // debugPrint("${response.first}");
+                        // debugPrint("${response.last.id}");
+                        // final address = await AddressAPI.checkAddress(
+                        //     response.last.addressID);
+                        // debugPrint("${address.first}");
+                        // debugPrint("${address.last.cellule}");
                         const bckgroundColor = AppColors.blackOver;
                         showDialog(
                           context: context,

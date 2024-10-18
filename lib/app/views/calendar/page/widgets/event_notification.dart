@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../../controllers/controllers.dart';
 import '../../../../shared/shared.dart';
@@ -38,7 +37,7 @@ class EventNotification extends StatelessWidget {
                           children: [
                             Text(
                               calendar.updatedNotifications[index],
-                              style: GoogleFonts.indieFlower(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.normal,
                                 fontSize: 16,
                               ),
@@ -118,7 +117,7 @@ class NotificationsDialogView extends StatelessWidget {
                   children: [
                     Text(
                       calendar.notifications[index],
-                      style: GoogleFonts.indieFlower(
+                      style: const TextStyle(
                         fontSize: 16,
                         letterSpacing: 2,
                       ),

@@ -50,9 +50,9 @@ class _ChatListState extends State<ChatList> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Icon(AppIcons.addMessage),
-                Text(
+                const Text(
                   "Pas de discussions",
-                  style: GoogleFonts.indieFlower(height: 3),
+                  style: TextStyle(height: 3),
                   textAlign: TextAlign.center,
                 ),
                 Gap(height * 0.1),
@@ -140,15 +140,20 @@ class _ChatListState extends State<ChatList> {
                                     width: 70,
                                     height: 70,
                                     margin: const EdgeInsets.only(right: 15),
+                                    padding: const EdgeInsets.only(top: 8),
                                     decoration: BoxDecoration(
                                       color: theme.unselectedWidgetColor,
+                                      border: Border.all(
+                                        color: theme.highlightColor,
+                                        width: 3,
+                                      ),
                                       shape: BoxShape.circle,
                                     ),
                                     child: Text(
                                       firstLetter,
-                                      style: GoogleFonts.indieFlower(
+                                      style: GoogleFonts.specialElite(
                                         color: theme.highlightColor,
-                                        fontSize: 25,
+                                        fontSize: 30,
                                       ),
                                     ),
                                   );
@@ -174,8 +179,9 @@ class _ChatListState extends State<ChatList> {
                                 children: [
                                   Text(
                                     chatListData[index].lastMsgTime,
-                                    style: GoogleFonts.indieFlower(
+                                    style: TextStyle(
                                       color: theme.unselectedWidgetColor,
+                                      fontSize: 11,
                                       height: 2,
                                     ),
                                   ),
@@ -191,7 +197,7 @@ class _ChatListState extends State<ChatList> {
                                           ),
                                           child: Text(
                                             "${chatListData[index].lastMsgTotal}",
-                                            style: GoogleFonts.indieFlower(
+                                            style: const TextStyle(
                                               color: AppColors.white,
                                               fontSize: 11,
                                             ),

@@ -7,10 +7,10 @@ import '../data.dart';
 
 class AddressAPI {
   // static String baseUrl = "http://192.168.196.133:8000/api";
-  static String baseUrl = "http://34.45.123.91:8080/api";
+  // static String baseUrl = "http://34.45.123.91:8080/api";
+  static String baseUrl = "https://projettutorepangogest.onrender.com/api";
 
   static Future<List> registerAddress(
-    int userID,
     AddressModel address,
   ) async {
     final url = Uri.parse("$baseUrl/adresse/");
@@ -41,6 +41,28 @@ class AddressAPI {
       }
     } catch (e) {
       debugPrint("Erreur lors du post : $e");
+      return [false, null];
+    }
+  }
+
+  static Future<List> checkAddress(int addressID) async {
+    final url = Uri.parse("$baseUrl/adresse/$addressID/");
+    try {
+      final response = await http.get(
+        url,
+        headers: {'Content-Type': 'application/json; charset=UTF-8'},
+      );
+      if (response.statusCode == 200) {
+        final myJson = jsonDecode(response.body);
+        final data = AddressModel.fromJson(myJson);
+        return [true, data];
+      } else {
+        debugPrint("Body : ${response.body}");
+        debugPrint("StatusCode Error : ${response.statusCode}");
+        return [true, null];
+      }
+    } catch (e) {
+      debugPrint("Erreur lors de get : $e");
       return [false, null];
     }
   }

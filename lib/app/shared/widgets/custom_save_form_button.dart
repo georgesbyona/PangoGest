@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CustomSaveFormButton extends StatelessWidget {
   const CustomSaveFormButton({
@@ -28,7 +27,7 @@ class CustomSaveFormButton extends StatelessWidget {
         margin: const EdgeInsets.only(right: 15),
         child: Text(
           btnText,
-          style: GoogleFonts.indieFlower(color: theme.highlightColor),
+          style: TextStyle(color: theme.highlightColor),
         ),
       ),
     );

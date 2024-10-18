@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 
 class HeadCalendarView extends StatefulWidget {
@@ -22,11 +21,11 @@ class _HeadCalendarViewState extends State<HeadCalendarView> {
       headerProps: EasyHeaderProps(
         monthPickerType: MonthPickerType.dropDown,
         dateFormatter: const DateFormatter.fullDateDMonthAsStrY(),
-        monthStyle: GoogleFonts.indieFlower(
+        monthStyle: TextStyle(
           fontWeight: FontWeight.bold,
           color: theme.colorScheme.inversePrimary,
         ),
-        selectedDateStyle: GoogleFonts.indieFlower(),
+        selectedDateStyle: const TextStyle(),
         showHeader: true,
       ),
       dayProps: EasyDayProps(
@@ -34,9 +33,9 @@ class _HeadCalendarViewState extends State<HeadCalendarView> {
         dayStructure: DayStructure.dayStrDayNum,
         inactiveDayStyle: DayStyle(
           splashBorder: const BorderRadius.all(Radius.circular(50)),
-          monthStrStyle: GoogleFonts.indieFlower(),
-          dayNumStyle: GoogleFonts.indieFlower(),
-          dayStrStyle: GoogleFonts.raleway(),
+          monthStrStyle: const TextStyle(),
+          dayNumStyle: const TextStyle(),
+          dayStrStyle: const TextStyle(),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(
               Radius.circular(15),
@@ -53,9 +52,9 @@ class _HeadCalendarViewState extends State<HeadCalendarView> {
         ),
         activeDayStyle: DayStyle(
           splashBorder: const BorderRadius.all(Radius.circular(50)),
-          monthStrStyle: GoogleFonts.indieFlower(),
-          dayNumStyle: GoogleFonts.indieFlower(),
-          dayStrStyle: GoogleFonts.raleway(),
+          monthStrStyle: const TextStyle(),
+          dayNumStyle: const TextStyle(),
+          dayStrStyle: const TextStyle(),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(15)),
             gradient: LinearGradient(
@@ -72,9 +71,9 @@ class _HeadCalendarViewState extends State<HeadCalendarView> {
         ),
         todayStyle: DayStyle(
           splashBorder: const BorderRadius.all(Radius.circular(50)),
-          monthStrStyle: GoogleFonts.indieFlower(),
-          dayNumStyle: GoogleFonts.indieFlower(),
-          dayStrStyle: GoogleFonts.raleway(),
+          monthStrStyle: const TextStyle(),
+          dayNumStyle: const TextStyle(),
+          dayStrStyle: const TextStyle(),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(15)),
             border: Border.all(

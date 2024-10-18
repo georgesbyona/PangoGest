@@ -66,42 +66,42 @@ class DetailsPartView extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Av. ${house.first.adresse.avenue} ${house.first.adresse.num}",
-                        style: GoogleFonts.indieFlower(
-                          fontWeight: FontWeight.normal,
-                          letterSpacing: 0.5,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
-                      Text(
-                        "Q. ${house.first.adresse.quartier}",
-                        style: GoogleFonts.indieFlower(
-                          fontWeight: FontWeight.normal,
-                          letterSpacing: 0.5,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
-                      Text(
-                        "C. ${house.first.adresse.commune}",
-                        style: GoogleFonts.indieFlower(
-                          fontWeight: FontWeight.normal,
-                          letterSpacing: 0.5,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
-                      Text(
-                        "Ville : ${house.first.adresse.ville}",
-                        style: GoogleFonts.indieFlower(
-                          fontWeight: FontWeight.normal,
-                          letterSpacing: 0.5,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
+                      // Text(
+                      //   "Av. ${house.first.adresse.avenue} ${house.first.adresse.num}",
+                      //   style: GoogleFonts.indieFlower(
+                      //     fontWeight: FontWeight.normal,
+                      //     letterSpacing: 0.5,
+                      //   ),
+                      //   overflow: TextOverflow.ellipsis,
+                      //   maxLines: 1,
+                      // ),
+                      // Text(
+                      //   "Q. ${house.first.adresse.quartier}",
+                      //   style: GoogleFonts.indieFlower(
+                      //     fontWeight: FontWeight.normal,
+                      //     letterSpacing: 0.5,
+                      //   ),
+                      //   overflow: TextOverflow.ellipsis,
+                      //   maxLines: 1,
+                      // ),
+                      // Text(
+                      //   "C. ${house.first.adresse.commune}",
+                      //   style: GoogleFonts.indieFlower(
+                      //     fontWeight: FontWeight.normal,
+                      //     letterSpacing: 0.5,
+                      //   ),
+                      //   overflow: TextOverflow.ellipsis,
+                      //   maxLines: 1,
+                      // ),
+                      // Text(
+                      //   "Ville : ${house.first.adresse.ville}",
+                      //   style: GoogleFonts.indieFlower(
+                      //     fontWeight: FontWeight.normal,
+                      //     letterSpacing: 0.5,
+                      //   ),
+                      //   overflow: TextOverflow.ellipsis,
+                      //   maxLines: 1,
+                      // ),
                     ],
                   ),
                 ),

@@ -33,7 +33,7 @@ class _TenantInscriptionState extends State<TenantInscription> {
     final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: AppColors.blackB,
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(

@@ -40,6 +40,7 @@ class HeadView extends StatelessWidget {
                         alignment: Alignment.center,
                         width: size * 0.25,
                         height: size * 0.25,
+                        padding: const EdgeInsets.only(top: 15),
                         decoration: BoxDecoration(
                           color: theme.unselectedWidgetColor,
                           border: Border.all(
@@ -50,7 +51,7 @@ class HeadView extends StatelessWidget {
                         ),
                         child: Text(
                           firstLetter,
-                          style: GoogleFonts.indieFlower(
+                          style: GoogleFonts.specialElite(
                             color: theme.highlightColor,
                             fontSize: 50,
                           ),
@@ -76,6 +77,7 @@ class HeadView extends StatelessWidget {
                             alignment: Alignment.center,
                             width: size * 0.25,
                             height: size * 0.25,
+                            padding: const EdgeInsets.only(top: 15),
                             decoration: BoxDecoration(
                               color: theme.unselectedWidgetColor,
                               border: Border.all(
@@ -86,9 +88,9 @@ class HeadView extends StatelessWidget {
                             ),
                             child: Text(
                               firstLetter,
-                              style: GoogleFonts.indieFlower(
-                                color: theme.colorScheme.inversePrimary,
-                                fontSize: 20,
+                              style: GoogleFonts.specialElite(
+                                color: theme.highlightColor,
+                                fontSize: 50,
                               ),
                             ),
                           );

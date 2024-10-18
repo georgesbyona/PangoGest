@@ -11,7 +11,9 @@ class CustomTextField extends StatelessWidget {
     this.labelText,
     this.helperText,
     this.maxLength,
+    this.maxLines,
     this.obscureText = false,
+    this.canChange = false,
     this.enabled,
     this.isNotRequired = false,
     this.keyboardType = TextInputType.text,
@@ -19,12 +21,14 @@ class CustomTextField extends StatelessWidget {
 
   final TextEditingController controller;
   final bool obscureText;
+  final bool canChange;
   final bool? enabled;
   final bool isNotRequired;
   final String? hintText;
   final String? labelText;
   final String? helperText;
   final int? maxLength;
+  final int? maxLines;
   final TextInputType keyboardType;
   @override
   Widget build(BuildContext context) {
@@ -37,21 +41,28 @@ class CustomTextField extends StatelessWidget {
       onTapOutside: (event) {
         FocusScope.of(context).requestFocus(FocusNode());
       },
-      cursorColor: AppColors.white,
+      cursorColor: canChange
+          ? Theme.of(context).colorScheme.inversePrimary
+          : AppColors.white,
       cursorErrorColor: AppColors.red,
       style: GoogleFonts.raleway(
-        color: AppColors.white,
+        color: canChange
+            ? Theme.of(context).colorScheme.inversePrimary
+            : AppColors.white,
         fontWeight: FontWeight.w600,
         fontSize: 15,
       ),
       keyboardType: keyboardType,
       maxLength: maxLength,
+      maxLines: maxLines,
       decoration: InputDecoration(
         labelText: labelText,
-        labelStyle: GoogleFonts.raleway(
-          color: AppColors.white,
-          fontSize: 13,
+        labelStyle: TextStyle(
+          color: canChange
+              ? Theme.of(context).colorScheme.inversePrimary
+              : AppColors.white,
           fontWeight: FontWeight.normal,
+          fontSize: 13,
         ),
         hintText: hintText,
         hintStyle: GoogleFonts.raleway(
@@ -67,9 +78,11 @@ class CustomTextField extends StatelessWidget {
             width: 1,
           ),
         ),
-        focusedBorder: const UnderlineInputBorder(
+        focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: AppColors.white,
+            color: canChange
+                ? Theme.of(context).colorScheme.inversePrimary
+                : AppColors.white,
             style: BorderStyle.solid,
             width: 1,
           ),
@@ -84,7 +97,9 @@ class CustomTextField extends StatelessWidget {
         helperText: helperText,
         helperMaxLines: 2,
         helperStyle: GoogleFonts.raleway(
-          color: AppColors.white,
+          color: canChange
+              ? Theme.of(context).colorScheme.inversePrimary
+              : AppColors.white,
           fontSize: width * 0.025,
           fontWeight: FontWeight.w300,
         ),

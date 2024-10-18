@@ -6,6 +6,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../app/shared/shared.dart';
+import '../data/data.dart';
 
 class MainController extends ChangeNotifier {
   bool _isDark = false;
@@ -17,6 +18,15 @@ class MainController extends ChangeNotifier {
   void navigationController(int i) {
     index = i;
     notifyListeners();
+  }
+
+  List houses = [];
+  Future<void> readHouses() async {
+    final housesList = await RealEstateAPI.readRealEstate();
+    for (var h in housesList) {
+      final house = HouseModel.fromJson(h);
+      houses.add(house);
+    }
   }
 
   Future<void> sendFeedback({

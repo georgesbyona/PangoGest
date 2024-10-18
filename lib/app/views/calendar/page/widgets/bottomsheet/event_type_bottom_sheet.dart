@@ -1,6 +1,5 @@
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../controllers/controllers.dart';
 import '../../../../../shared/shared.dart';
@@ -63,7 +62,7 @@ class EventTypeBottomSheet extends StatelessWidget {
                             ),
                             Text(
                               eventsLabels[index],
-                              style: GoogleFonts.indieFlower(
+                              style: TextStyle(
                                 color: theme.colorScheme.inversePrimary,
                                 fontWeight: FontWeight.normal,
                                 fontSize: 16,

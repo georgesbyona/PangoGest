@@ -1,6 +1,5 @@
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../controllers/controllers.dart';
 import '../../../../shared/shared.dart';
@@ -36,7 +35,7 @@ class EventDescription extends StatelessWidget {
               onTapOutside: (event) {
                 FocusScope.of(context).requestFocus(FocusNode());
               },
-              style: GoogleFonts.raleway(
+              style: TextStyle(
                 color: theme.colorScheme.inverseSurface,
                 fontWeight: FontWeight.normal,
                 letterSpacing: 1.5,
@@ -44,7 +43,7 @@ class EventDescription extends StatelessWidget {
               ),
               decoration: InputDecoration(
                 hintText: "Entrer une description de l'événement ici ...",
-                hintStyle: GoogleFonts.raleway(
+                hintStyle: TextStyle(
                   color: theme.colorScheme.inverseSurface,
                   fontWeight: FontWeight.normal,
                   fontSize: 15,

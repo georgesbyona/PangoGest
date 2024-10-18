@@ -1,6 +1,5 @@
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../controllers/controllers.dart';
 import 'start_end_date_picker.dart';
@@ -23,9 +22,9 @@ class EventSchedule extends StatelessWidget {
             "Date & Heure du début - ",
             style: theme.textTheme.labelMedium,
           ),
-          Text(
+          const Text(
             "Cliquer dessus pour modifier : ",
-            style: GoogleFonts.indieFlower(fontWeight: FontWeight.normal),
+            style: TextStyle(fontWeight: FontWeight.normal),
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
           ),
@@ -44,9 +43,9 @@ class EventSchedule extends StatelessWidget {
             "Date & Heure de la fin - ",
             style: theme.textTheme.labelMedium,
           ),
-          Text(
+          const Text(
             "Cliquer dessus pour modifier : ",
-            style: GoogleFonts.indieFlower(fontWeight: FontWeight.normal),
+            style: TextStyle(fontWeight: FontWeight.normal),
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
           ),

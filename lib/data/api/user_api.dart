@@ -7,7 +7,8 @@ import '../data.dart';
 
 class UserAPI {
   // static String baseUrl = "http://192.168.196.133:8000/api";
-  static String baseUrl = "http://34.45.123.91:8080/api";
+  // static String baseUrl = "http://34.45.123.91:8080/api";
+  static String baseUrl = "https://projettutorepangogest.onrender.com/api";
 
   static Future<List> registerUser(UserModel user) async {
     final url = Uri.parse("$baseUrl/utilisateurs/");
@@ -67,7 +68,8 @@ class UserAPI {
       if (response.statusCode == 200) {
         debugPrint("User $email's successfully connected");
         final myJson = jsonDecode(response.body);
-        return [true, myJson['id']];
+        final data = UserModel.fromJson(myJson);
+        return [true, data];
       } else if (response.statusCode == 401) {
         return [null, "Mot de passe invalide"];
       } else {

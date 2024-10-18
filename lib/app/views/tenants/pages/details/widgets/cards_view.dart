@@ -16,7 +16,7 @@ class CardsView extends StatelessWidget {
     final height = MediaQuery.sizeOf(context).height;
     final size = width > height ? height : width;
     int garantie = 6;
-    int total = (house.first.price * garantie).toInt();
+    int total = 100;
     final List<String> titles = ["Garantie", "Total", "Rappel"];
     final List<int> datas = [garantie, total, 15];
     return Row(

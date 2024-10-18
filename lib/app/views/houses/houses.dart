@@ -1,23 +1,25 @@
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
+import '../../../controllers/controllers.dart';
 import 'widgets/house_network_image_view.dart';
 import 'widgets/house_description.dart';
 import '../../shared/shared.dart';
-import '../../../data/data.dart';
+import 'pages/add_house.dart';
 
 class HousesList extends StatelessWidget {
   const HousesList({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<MainController>(context);
     final height = MediaQuery.sizeOf(context).height;
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(title: const Text("Tes maisons")),
       body: SafeArea(
-        child: houses.isEmpty
+        child: controller.houses.isEmpty
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -25,7 +27,7 @@ class HousesList extends StatelessWidget {
                   const Icon(AppIcons.houses),
                   Text(
                     "Aucune maison retrouvée",
-                    style: GoogleFonts.indieFlower(height: 3),
+                    style: TextStyle(height: 3),
                     textAlign: TextAlign.center,
                   ),
                   Gap(height * 0.1),
@@ -37,7 +39,7 @@ class HousesList extends StatelessWidget {
                   vertical: 5,
                   horizontal: 15,
                 ),
-                itemCount: houses.length,
+                itemCount: controller.houses.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {},
@@ -51,7 +53,7 @@ class HousesList extends StatelessWidget {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            if (houses[index].photo.isNotEmpty) ...{
+                            if (controller.houses[index].photo.isNotEmpty) ...{
                               HouseNetworkImageView(index: index),
                             } else ...{
                               Container(
@@ -79,7 +81,14 @@ class HousesList extends StatelessWidget {
               ),
       ),
       floatingActionButton: CustomFAB(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AddHouse(),
+            ),
+          );
+        },
       ),
     );
   }

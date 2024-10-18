@@ -20,7 +20,7 @@ class TxtTheme {
       fontWeight: FontWeight.w500,
       letterSpacing: 1.5,
     ),
-    bodyLarge: GoogleFonts.indieFlower(
+    bodyLarge: GoogleFonts.raleway(
       color: AppColors.black,
       fontWeight: FontWeight.w600,
       letterSpacing: 1.5,
@@ -67,7 +67,7 @@ class TxtTheme {
       fontWeight: FontWeight.bold,
       letterSpacing: 1.5,
     ),
-    labelLarge: GoogleFonts.indieFlower(
+    labelLarge: GoogleFonts.raleway(
       fontWeight: FontWeight.bold,
       color: Colors.black,
       letterSpacing: 1.5,
@@ -101,7 +101,7 @@ class TxtTheme {
       fontWeight: FontWeight.w500,
       letterSpacing: 1.5,
     ),
-    bodyLarge: GoogleFonts.indieFlower(
+    bodyLarge: GoogleFonts.raleway(
       color: AppColors.white,
       fontWeight: FontWeight.w600,
       letterSpacing: 1.5,
@@ -148,7 +148,7 @@ class TxtTheme {
       fontWeight: FontWeight.bold,
       letterSpacing: 1.5,
     ),
-    labelLarge: GoogleFonts.indieFlower(
+    labelLarge: GoogleFonts.raleway(
       fontWeight: FontWeight.bold,
       color: Colors.white,
       letterSpacing: 1.5,

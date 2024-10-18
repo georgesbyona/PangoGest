@@ -27,7 +27,6 @@ class _ConnexionPageState extends State<ConnexionPage> {
   @override
   Widget build(BuildContext context) {
     final userData = Provider.of<UserDataController>(context);
-    final userName = userData.names!.split(' ')[0];
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
     final theme = Theme.of(context);
@@ -38,7 +37,7 @@ class _ConnexionPageState extends State<ConnexionPage> {
             : constraints.maxWidth;
         return Scaffold(
           backgroundColor: AppColors.blackB,
-          resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: true,
           body: SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(
@@ -70,14 +69,6 @@ class _ConnexionPageState extends State<ConnexionPage> {
                                 fontWeight: FontWeight.w600,
                                 fontSize: size * 0.04,
                                 letterSpacing: 1,
-                              ),
-                            ),
-                            Text(
-                              "$userName !",
-                              style: GoogleFonts.raleway(
-                                color: Theme.of(context).primaryColor,
-                                fontWeight: FontWeight.normal,
-                                fontSize: size * 0.05,
                               ),
                             ),
                             Text(
@@ -120,11 +111,15 @@ class _ConnexionPageState extends State<ConnexionPage> {
                                 onTap: () async {
                                   if (_formKey.currentState!.validate()) {
                                     connectingInProgress();
-                                    await userData.connectUser(
+                                    final connected =
+                                        await userData.connectUser(
                                       context,
                                       keyController.text,
                                       passwordController.text,
                                     );
+                                    if (widget.fromInscription && connected) {
+                                      Navigator.pop(context);
+                                    }
                                     connectingInProgress();
                                   }
                                 },

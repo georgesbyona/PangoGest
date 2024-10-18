@@ -1,6 +1,5 @@
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../controllers/controllers.dart';
 import 'bottomsheet/event_type_bottom_sheet.dart';
@@ -56,7 +55,7 @@ class EventType extends StatelessWidget {
                         ),
                         Text(
                           calendar.eventType,
-                          style: GoogleFonts.indieFlower(
+                          style: const TextStyle(
                             fontWeight: FontWeight.normal,
                           ),
                           textAlign: TextAlign.start,
