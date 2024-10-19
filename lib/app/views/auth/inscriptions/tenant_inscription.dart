@@ -33,7 +33,7 @@ class _TenantInscriptionState extends State<TenantInscription> {
     final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: AppColors.blackB,
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -102,14 +102,14 @@ class _TenantInscriptionState extends State<TenantInscription> {
                     CustomMainButton(
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
-                          FireStoreDB().registerUser(
+                          UserDBServices.registerUser(
                             UserModel(
                               firstName: firstNameController.text.trim(),
                               lastName: lastNameController.text.trim(),
                               email: mailController.text.trim(),
                               num: numController.text.trim(),
                               password: passwordController.text.trim(),
-                              userType: "tenant",
+                              userType: "locataire",
                             ),
                             "georgesbyona@gmail.com",
                           );

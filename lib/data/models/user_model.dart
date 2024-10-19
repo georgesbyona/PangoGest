@@ -9,6 +9,7 @@ class UserModel {
   final String userType;
   final int? maisonID;
   final int? addressID;
+  final String ownerEmail;
 
   UserModel({
     this.id,
@@ -21,6 +22,7 @@ class UserModel {
     this.imgUrl = "https://iconscout.com/icons/person",
     this.addressID,
     this.maisonID,
+    this.ownerEmail = "",
   });
 
   factory UserModel.fromJson(dynamic json) {
@@ -34,6 +36,7 @@ class UserModel {
       imgUrl: json["photo_url"] as String,
       userType: json['user_type'] as String,
       addressID: json['id_adresse'],
+      ownerEmail: json['ownerEmail'],
     );
   }
 }

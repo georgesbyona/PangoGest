@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../controllers/controllers.dart';
 import '../widgets/wrapper_inscription_connexion.dart';
+import '../../../../controllers/controllers.dart';
 import '../widgets/auth_bottom_view.dart';
 import '../add_address/add_address.dart';
 import '../../../shared/shared.dart';
@@ -13,7 +13,6 @@ import '../../../../data/data.dart';
 import 'inscription_form.dart';
 
 class ProprioInscription extends StatefulWidget {
-  static const route = "/proprioInstruction";
   const ProprioInscription({super.key, this.fromConnexion = false});
 
   final bool fromConnexion;
@@ -32,6 +31,12 @@ class _ProprioInscriptionState extends State<ProprioInscription> {
   final _formKey = GlobalKey<FormState>();
   bool isRegisterUser = false;
 
+  void registeringInProgress() {
+    setState(() {
+      isRegisterUser = !isRegisterUser;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     lightCustomSystemChrome();
@@ -41,9 +46,10 @@ class _ProprioInscriptionState extends State<ProprioInscription> {
     final width = MediaQuery.sizeOf(context).width;
     final size = width > height ? height : width;
     final theme = Theme.of(context);
+
     return Scaffold(
       backgroundColor: AppColors.blackB,
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -139,6 +145,11 @@ class _ProprioInscriptionState extends State<ProprioInscription> {
                                   );
                                 } else {
                                   registeringInProgress();
+                                  final userExist =
+                                      await UserDBServices.checkUser(
+                                    mailController.text.trim(),
+                                    "",
+                                  );
                                   bool userIsRegister =
                                       await userData.registerUser(
                                     UserModel(
@@ -152,7 +163,13 @@ class _ProprioInscriptionState extends State<ProprioInscription> {
                                     ),
                                     context: context,
                                   );
-                                  if (userIsRegister) {
+                                  if (userExist) {
+                                    myCustomSnackBar(
+                                      context: context,
+                                      text:
+                                          "Utilisateur existant, veuillez vous connecter",
+                                    );
+                                  } else if (userIsRegister) {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -183,11 +200,5 @@ class _ProprioInscriptionState extends State<ProprioInscription> {
         ),
       ),
     );
-  }
-
-  void registeringInProgress() {
-    setState(() {
-      isRegisterUser = !isRegisterUser;
-    });
   }
 }

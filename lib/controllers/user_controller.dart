@@ -16,6 +16,7 @@ class UserDataController extends ChangeNotifier {
   String? _num;
   String? _password;
   String? _userType;
+  String? _ownerEmail;
   AddressModel? _userAddress;
   bool _isLoggedIn = false;
   bool _isRegister = false;
@@ -29,6 +30,7 @@ class UserDataController extends ChangeNotifier {
   String? get num => _num;
   String? get password => _password;
   String? get userType => _userType;
+  String? get ownerEmail => _ownerEmail;
   bool get isLoggedIn => _isLoggedIn;
   bool get isRegister => _isRegister;
 
@@ -43,6 +45,7 @@ class UserDataController extends ChangeNotifier {
     _num = prefs.getString('userNum');
     _password = prefs.getString('userPassword');
     _userType = prefs.getString('userType');
+    _userType = prefs.getString('userType');
     _isRegister = prefs.getBool('isRegister') ?? false;
     _isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
     if (_isRegister) {
@@ -56,7 +59,9 @@ class UserDataController extends ChangeNotifier {
         num: prefs.getString('userN')!,
       );
     }
-    _userExist = await UserAPI.checkUser(_userID);
+    _userExist = _email != null && _ownerEmail != null
+        ? await UserDBServices.checkUser(_email!, _ownerEmail!)
+        : false;
     debugPrint('======================= User $_names succefully loading');
     notifyListeners();
   }
@@ -71,20 +76,21 @@ class UserDataController extends ChangeNotifier {
 
   Future<bool> registerUser(
     UserModel user, {
+    String email = "",
     BuildContext? context,
     bool fromConnection = false,
   }) async {
     final userName = "${user.firstName} ${user.lastName}";
     final prefs = await _prefs;
-    final registered = await UserAPI.registerUser(user);
     if (fromConnection) {
-      prefs.setInt('userID', user.id!);
+      // prefs.setInt('userID', user.id!);
       prefs.setString('userNames', userName);
       prefs.setString('userImgUrl', user.imgUrl!);
       prefs.setString('userEmail', user.email);
       prefs.setString('userNum', user.num);
       prefs.setString('userPassword', user.password);
       prefs.setString('userType', user.userType);
+      prefs.setString('ownerEmail', user.ownerEmail);
       _userID = user.id;
       _names = userName;
       _email = user.email;
@@ -92,38 +98,34 @@ class UserDataController extends ChangeNotifier {
       _imgUrl = user.imgUrl;
       _password = user.password;
       _userType = user.userType;
+      _ownerEmail = user.ownerEmail;
       debugPrint('======================= User $_names succefully register');
       notifyListeners();
       return true;
     } else {
-      if (registered.first == true) {
-        prefs.setInt('userID', registered.last);
+      final userExist = await UserDBServices.checkUser(user.email, email);
+      if (!userExist) {
+        await UserDBServices.registerUser(user, email);
+        // prefs.setInt('userID', user.id!);
         prefs.setString('userNames', userName);
         prefs.setString('userImgUrl', user.imgUrl!);
         prefs.setString('userEmail', user.email);
         prefs.setString('userNum', user.num);
         prefs.setString('userPassword', user.password);
         prefs.setString('userType', user.userType);
-        _userID = registered.last;
+        prefs.setString('ownerEmail', user.ownerEmail);
+        _userID = user.id;
         _names = userName;
         _email = user.email;
         _num = user.num;
         _imgUrl = user.imgUrl;
         _password = user.password;
         _userType = user.userType;
+        _ownerEmail = user.ownerEmail;
         debugPrint('======================= User $_names succefully register');
         notifyListeners();
         return true;
-      } else if (registered.first == null) {
-        myCustomSnackBar(context: context, text: registered.last);
-        notifyListeners();
-        return false;
       } else {
-        myCustomSnackBar(
-          context: context,
-          text: "Erreur lors d'enregistrement",
-        );
-        notifyListeners();
         return false;
       }
     }
@@ -136,7 +138,7 @@ class UserDataController extends ChangeNotifier {
     final prefs = await _prefs;
     final registered = await AddressAPI.registerAddress(address);
     if (fromConnection) {
-      prefs.setInt('userAID', address.id!);
+      // prefs.setInt('userAID', address.id!);
       prefs.setString('userT', address.ville);
       prefs.setString('userC', address.commune);
       prefs.setString('userQ', address.quartier);
@@ -164,7 +166,7 @@ class UserDataController extends ChangeNotifier {
     } else {
       if (registered.first) {
         await UserAPI.userAddressUpdate(_userID!, registered.last);
-        prefs.setInt('userAID', registered.last);
+        // prefs.setInt('userAID', registered.last);
         prefs.setString('userT', address.ville);
         prefs.setString('userC', address.commune);
         prefs.setString('userQ', address.quartier);

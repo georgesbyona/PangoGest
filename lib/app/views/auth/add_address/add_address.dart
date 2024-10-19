@@ -45,7 +45,7 @@ class _AddAdresseState extends State<AddAddress> {
       builder: (context, constraints) {
         return Scaffold(
           backgroundColor: AppColors.blackB,
-          resizeToAvoidBottomInset: true,
+          resizeToAvoidBottomInset: false,
           appBar: AppBar(
             iconTheme: const IconThemeData(color: AppColors.white),
             title: Text(

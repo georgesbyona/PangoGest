@@ -54,6 +54,7 @@ class _ConnexionFormState extends State<ConnexionForm> {
                 child: CustomTextField(
                   controller: widget.passwordController,
                   labelText: "Mot de passe",
+                  maxLines: 1,
                   keyboardType: TextInputType.text,
                   obscureText: !isShowed,
                 ),

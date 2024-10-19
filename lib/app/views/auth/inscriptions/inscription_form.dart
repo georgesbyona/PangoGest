@@ -86,6 +86,7 @@ class _InscriptionFormState extends State<InscriptionForm> {
                               ? TextInputType.phone
                               : TextInputType.text,
                       maxLength: index == 3 ? 13 : null,
+                      maxLines: index == 4 || index == 5 ? 1 : null,
                       obscureText: index == 4 || index == 5 ? !isShowed : false,
                     ),
                   ),
@@ -106,6 +107,7 @@ class _InscriptionFormState extends State<InscriptionForm> {
             ),
           ),
         ),
+        const Gap(200),
       ],
     );
   }

@@ -37,7 +37,7 @@ class _ConnexionPageState extends State<ConnexionPage> {
             : constraints.maxWidth;
         return Scaffold(
           backgroundColor: AppColors.blackB,
-          resizeToAvoidBottomInset: true,
+          resizeToAvoidBottomInset: false,
           body: SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(
