@@ -1,8 +1,10 @@
+import 'package:chatview/chatview.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pangogest/app/views/chat/chat.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:provider/provider.dart';
 
 import '../../../controllers/controllers.dart';
 import '../../../data/data.dart';
@@ -19,7 +21,6 @@ class ChatList extends StatefulWidget {
 }
 
 class _ChatListState extends State<ChatList> {
-  bool isEmpty = true;
   ScrollController scrollController = ScrollController();
   bool _isAtTop = true;
 
@@ -41,11 +42,20 @@ class _ChatListState extends State<ChatList> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserDataController>(context);
     final height = MediaQuery.sizeOf(context).height;
     final theme = Theme.of(context);
     return Scaffold(
-      body: isEmpty
-          ? Column(
+      body: StreamBuilder(
+        stream: ChatDBServices.getTenants(user.email!),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (!snapshot.hasData || snapshot.hasError) {
+            return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -57,14 +67,41 @@ class _ChatListState extends State<ChatList> {
                 ),
                 Gap(height * 0.1),
               ],
-            )
-          : ListView.builder(
+            );
+          } else {
+            List<ChatModel> datas = [];
+            List<Message> userMsgs = [];
+            for (var d in snapshot.data!.docs) {
+              final data = d.data();
+              final chat = ChatModel.fromJson(data);
+              datas.add(chat);
+              for (var msg in chat.messages) {
+                userMsgs.add(msg!);
+              }
+            }
+            if (datas.isEmpty) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const Icon(AppIcons.addMessage),
+                  const Text(
+                    "Pas de discussions",
+                    style: TextStyle(height: 3),
+                    textAlign: TextAlign.center,
+                  ),
+                  Gap(height * 0.1),
+                ],
+              );
+            }
+            return ListView.builder(
               shrinkWrap: true,
               controller: scrollController,
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-              itemCount: chatListData.length,
+              itemCount: datas.length,
               itemBuilder: (context, index) {
-                final firstLetter = chatListData[index].name.substring(0, 1);
+                final firstLetter =
+                    datas[index].names.split(" ")[0].substring(0, 1);
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -74,13 +111,10 @@ class _ChatListState extends State<ChatList> {
                           user: widget.user,
                           controller: widget.controller,
                           otherU: ChatModel(
-                            id: chatListData[index].id,
-                            name: chatListData[index].name,
-                            imgUrl: chatListData[index].imgUrl,
-                            lastMsg: chatListData[index].lastMsg,
-                            lastMsgTime: chatListData[index].lastMsgTime,
-                            lastMsgTotal: chatListData[index].lastMsgTotal,
-                            isRead: chatListData[index].isRead,
+                            email: datas[index].email,
+                            names: datas[index].names,
+                            imgUrl: datas[index].imgUrl,
+                            messages: userMsgs,
                           ),
                         ),
                       ),
@@ -100,7 +134,7 @@ class _ChatListState extends State<ChatList> {
                               CachedNetworkImage(
                                 alignment: Alignment.center,
                                 color: theme.unselectedWidgetColor,
-                                imageUrl: chatListData[index].imgUrl,
+                                imageUrl: datas[index].imgUrl!,
                                 progressIndicatorBuilder:
                                     (context, url, progress) {
                                   return Container(
@@ -163,46 +197,46 @@ class _ChatListState extends State<ChatList> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(chatListData[index].name),
+                                    Text(datas[index].names),
                                     const Gap(3),
-                                    Text(
-                                      chatListData[index].lastMsg,
-                                      style: theme.textTheme.bodySmall,
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 3,
-                                    ),
+                                    // Text(
+                                    //   datas[index].messages[index].id,
+                                    //   style: theme.textTheme.bodySmall,
+                                    //   overflow: TextOverflow.ellipsis,
+                                    //   maxLines: 3,
+                                    // ),
                                   ],
                                 ),
                               ),
                               const Gap(10),
                               Column(
                                 children: [
-                                  Text(
-                                    chatListData[index].lastMsgTime,
-                                    style: TextStyle(
-                                      color: theme.unselectedWidgetColor,
-                                      fontSize: 11,
-                                      height: 2,
-                                    ),
-                                  ),
-                                  chatListData[index].isRead
-                                      ? const Gap(18)
-                                      : Container(
-                                          alignment: Alignment.center,
-                                          width: 18,
-                                          height: 18,
-                                          decoration: BoxDecoration(
-                                            color: theme.primaryColor,
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Text(
-                                            "${chatListData[index].lastMsgTotal}",
-                                            style: const TextStyle(
-                                              color: AppColors.white,
-                                              fontSize: 11,
-                                            ),
-                                          ),
-                                        ),
+                                  // Text(
+                                  //   datas[index].lastMsgTime,
+                                  //   style: TextStyle(
+                                  //     color: theme.unselectedWidgetColor,
+                                  //     fontSize: 11,
+                                  //     height: 2,
+                                  //   ),
+                                  // ),
+                                  // datas[index].isRead
+                                  //     ? const Gap(18)
+                                  //     : Container(
+                                  //         alignment: Alignment.center,
+                                  //         width: 18,
+                                  //         height: 18,
+                                  //         decoration: BoxDecoration(
+                                  //           color: theme.primaryColor,
+                                  //           shape: BoxShape.circle,
+                                  //         ),
+                                  //         child: Text(
+                                  //           "${datas[index].lastMsgTotal}",
+                                  //           style: const TextStyle(
+                                  //             color: AppColors.white,
+                                  //             fontSize: 11,
+                                  //           ),
+                                  //         ),
+                                  //       ),
                                 ],
                               ),
                             ],
@@ -213,21 +247,18 @@ class _ChatListState extends State<ChatList> {
                   ),
                 );
               },
-            ),
-      floatingActionButton: _isAtTop || isEmpty
+            );
+          }
+        },
+      ),
+      floatingActionButton: _isAtTop
           ? CustomFAB(
-              onPressed: () {
-                setState(() {
-                  isEmpty = !isEmpty;
-                });
-              },
+              onPressed: () {},
               icon: AppIcons.addMessage,
             )
           : CustomFABMini(
               onPressed: () {
-                setState(() {
-                  isEmpty = !isEmpty;
-                });
+                setState(() {});
               },
               icon: AppIcons.addMessage,
             ),

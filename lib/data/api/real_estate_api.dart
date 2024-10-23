@@ -8,9 +8,9 @@ import '../data.dart';
 class RealEstateAPI {
   // http://34.45.123.91:8080/
   static String baseUrl = "https://projettutorepangogest.onrender.com/api";
-  static final url = Uri.parse("$baseUrl/bien_imobilier/");
 
   static Future<List> createRealEstate(HouseModel house) async {
+    final url = Uri.parse("$baseUrl/bien_imobilier/");
     var body = jsonEncode(
       {
         "photo_url": house.photo,
@@ -29,7 +29,6 @@ class RealEstateAPI {
         body: body,
       );
       if (response.statusCode == 201) {
-        debugPrint("House successfully created.");
         final myJson = jsonDecode(response.body);
         final data = HouseModel.fromJson(myJson);
         return [true, data];
@@ -44,7 +43,8 @@ class RealEstateAPI {
     }
   }
 
-  static Future<List> readRealEstate() async {
+  static Future readRealEstate() async {
+    final url = Uri.parse("$baseUrl/bien_imobilier/");
     try {
       final response = await http.get(
         url,
@@ -54,26 +54,26 @@ class RealEstateAPI {
         debugPrint("Houses successfully read.");
         final myJson = jsonDecode(response.body);
         // final data = HouseModel.fromJson(myJson);
-        debugPrint("$myJson");
         return myJson;
       } else {
         debugPrint("Body : ${response.body}");
         debugPrint("StatusCode Error : ${response.statusCode}");
-        return [];
+        return;
       }
     } catch (e) {
       debugPrint("Post Error : $e");
-      return [];
+      return;
     }
   }
 
   static Future<bool> deleteRealEstate(int id) async {
+    final url = Uri.parse("$baseUrl/bien_imobilier/$id");
     try {
       final response = await http.delete(
         url,
         headers: {'Content-Type': 'application/json; charset=UTF-8'},
       );
-      if (response.statusCode == 200) {
+      if (response.statusCode == 204) {
         debugPrint("Houses successfully deleted.");
         return true;
       } else {

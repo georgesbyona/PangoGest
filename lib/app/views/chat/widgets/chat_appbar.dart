@@ -4,8 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../controllers/controllers.dart';
 import '../../../shared/shared.dart';
+import '../../views.dart';
 
-ChatViewAppBar chatAppBar({
+ChatViewAppBar chatAppBar(
+  BuildContext context, {
   ThemeData? theme,
   MainController? controller,
   ChatController? chatController,
@@ -13,6 +15,7 @@ ChatViewAppBar chatAppBar({
   final firstLetter = chatController!.otherUsers.first.name.substring(0, 1);
   return ChatViewAppBar(
     elevation: 0,
+    showLeading: false,
     chatTitle: chatController.otherUsers.first.name,
     imageType: ImageType.network,
     profilePicture: chatController.otherUsers.first.profilePhoto,
@@ -71,7 +74,7 @@ ChatViewAppBar chatAppBar({
       letterSpacing: 1,
       fontSize: 15,
     ),
-    userStatus: "en ligne",
+    userStatus: "en ligne il y a 2 min",
     userStatusTextStyle: GoogleFonts.poiretOne(
       fontWeight: FontWeight.bold,
       color: Colors.green,
@@ -79,17 +82,36 @@ ChatViewAppBar chatAppBar({
       fontSize: 12,
     ),
     actions: [
-      GestureDetector(
-        onTap: () {
-          controller!.changeThemeMode();
-        },
-        child: Container(
-          width: 30,
-          height: 30,
-          margin: const EdgeInsets.only(right: 12),
-          child: Image.asset(AppImages.logo),
-        ),
-      ),
+      controller!.index == 2
+          ? GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NotificationPage(),
+                ),
+              ),
+              child: Container(
+                alignment: Alignment.center,
+                color: Colors.transparent,
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                margin: const EdgeInsets.only(right: 10),
+                child: CustomBadge(
+                  content: "3",
+                  icon: AppIcons.notification,
+                ),
+              ),
+            )
+          : GestureDetector(
+              onTap: () {
+                // controller!.changeThemeMode();
+              },
+              child: Container(
+                width: 30,
+                height: 30,
+                margin: const EdgeInsets.only(right: 12),
+                child: Image.asset(AppImages.logo),
+              ),
+            ),
     ],
   );
 }

@@ -83,7 +83,10 @@ Row bottomDialogButtonView(context, {isCenter = false, onTap, confirmText}) {
           ),
           child: Text(
             'Annuler',
-            style: TextStyle(fontSize: sizeWidth * 0.025),
+            style: TextStyle(
+              fontSize: sizeWidth * 0.025,
+              color: theme.colorScheme.inversePrimary,
+            ),
           ),
         ),
       ),
@@ -106,7 +109,10 @@ Row bottomDialogButtonView(context, {isCenter = false, onTap, confirmText}) {
           ),
           child: Text(
             confirmText ?? "Envoyer",
-            style: TextStyle(fontSize: sizeWidth * 0.025),
+            style: TextStyle(
+              fontSize: sizeWidth * 0.025,
+              color: theme.colorScheme.inversePrimary,
+            ),
           ),
         ),
       ),

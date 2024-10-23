@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pangogest/data/data.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../controllers/controllers.dart';
+import '../add_address/add_address.dart';
 import '../widgets/auth_bottom_view.dart';
 import '../../../shared/shared.dart';
 import 'inscription_form.dart';
@@ -23,10 +26,19 @@ class _TenantInscriptionState extends State<TenantInscription> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordCtr = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool isRegisterUser = false;
+
+  void registeringInProgress() {
+    setState(() {
+      isRegisterUser = !isRegisterUser;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     lightCustomSystemChrome();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    final userData = Provider.of<UserDataController>(context);
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
     final size = width > height ? height : width;
@@ -100,19 +112,45 @@ class _TenantInscriptionState extends State<TenantInscription> {
                     ),
                     const Gap(15),
                     CustomMainButton(
-                      onTap: () {
+                      onTap: () async {
                         if (_formKey.currentState!.validate()) {
-                          UserDBServices.registerUser(
-                            UserModel(
-                              firstName: firstNameController.text.trim(),
-                              lastName: lastNameController.text.trim(),
-                              email: mailController.text.trim(),
-                              num: numController.text.trim(),
-                              password: passwordController.text.trim(),
-                              userType: "locataire",
-                            ),
-                            "georgesbyona@gmail.com",
-                          );
+                          if (passwordController.text.length < 8) {
+                            myCustomSnackBar(
+                              context: context,
+                              text: "Le mot de passe doit être >= à 8",
+                            );
+                          } else if (confirmPasswordCtr.text !=
+                              passwordController.text) {
+                            myCustomSnackBar(
+                              context: context,
+                              text: "Vérifie les 2 mots de passe",
+                            );
+                          } else {
+                            registeringInProgress();
+                            bool userIsRegister = await userData.registerUser(
+                              UserModel(
+                                firstName: firstNameController.text.trim(),
+                                lastName: lastNameController.text.trim(),
+                                email: mailController.text.trim(),
+                                num: numController.text.trim(),
+                                password: confirmPasswordCtr.text.trim(),
+                                userType: "locataire",
+                              ),
+                              context: context,
+                            );
+                            if (userIsRegister) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AddAddress(
+                                    email: mailController.text,
+                                    fromConnexion: false,
+                                  ),
+                                ),
+                              );
+                            }
+                            registeringInProgress();
+                          }
                         }
                       },
                       text: "Continuer",

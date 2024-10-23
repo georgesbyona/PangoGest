@@ -104,7 +104,7 @@ class _AddHouseFormState extends State<AddHouseForm> {
                         controller: controllers[index],
                         labelText: labelTexts[index],
                         hintText: hintTexts[index],
-                        keyboardType: index == 0 || index == 8
+                        keyboardType: index == 0
                             ? TextInputType.number
                             : index == 1
                                 ? TextInputType.multiline
@@ -119,6 +119,7 @@ class _AddHouseFormState extends State<AddHouseForm> {
             ),
           ),
         ),
+        const Gap(200),
       ],
     );
   }

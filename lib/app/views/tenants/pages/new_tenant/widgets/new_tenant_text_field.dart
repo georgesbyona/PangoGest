@@ -53,8 +53,9 @@ class NewTenantTextField extends StatelessWidget {
                   height: 2,
                 ),
                 labelText: labelText,
-                labelStyle: GoogleFonts.indieFlower(
+                labelStyle: GoogleFonts.raleway(
                   color: theme.colorScheme.inversePrimary,
+                  fontSize: 13,
                 ),
                 focusedBorder: borderDecoration,
                 enabledBorder: borderDecoration,

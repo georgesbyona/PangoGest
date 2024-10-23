@@ -3,9 +3,9 @@ import 'package:chatview/chatview.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../controllers/controllers.dart';
-import '../../../data/data.dart';
 import 'widgets/chat_widgets.dart';
 import '../../shared/shared.dart';
+import '../../../data/data.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({
@@ -28,77 +28,82 @@ class _ChatPageState extends State<ChatPage> {
   bool cancelReply = false;
   double imageWidth = 200;
 
-  List<Message> messages = [
-    // Message(
-    //   id: '1',
-    //   message: "Hi",
-    //   createdAt: DateTime.now(),
-    //   sentBy: "georgesbyona@gmail.com",
-    // ),
-    // Message(
-    //   id: '2',
-    //   message: "Hello",
-    //   createdAt: DateTime.now(),
-    //   sentBy: "glosingson@gmail.com",
-    // ),
-    // Message(
-    //   id: '3',
-    //   message:
-    //       "J'ai déjà les médicaments que je mettais avant non 😂 donc tout va aller mieux, envoie moi le lien du package",
-    //   createdAt: DateTime.now(),
-    //   sentBy: "glosingson@gmail.com",
-    // ),
-    // Message(
-    //   id: "4",
-    //   message: "T'inquiètes G !",
-    //   createdAt: DateTime.now(),
-    //   sentBy: "glosingson@gmail.com",
-    //   replyMessage: const ReplyMessage(
-    //     messageId: "3",
-    //     message:
-    //         "J'ai déjà les médicaments que je mettais avant non 😂 donc tout va aller mieux, envoie moi le lien du package",
-    //     replyBy: "glosingson@gmail.com",
-    //     replyTo: "glosingson@gmail.com",
-    //   ),
-    // ),
-    // Message(
-    //   id: "5",
-    //   message: "https://pub.dev/packages/chatview",
-    //   createdAt: DateTime.now(),
-    //   sentBy: "georgesbyona@gmail.com",
-    // ),
-    // Message(
-    //   id: "6",
-    //   message: "👆🏾👆🏾👆🏾",
-    //   createdAt: DateTime.now(),
-    //   sentBy: "georgesbyona@gmail.com",
-    //   replyMessage: const ReplyMessage(
-    //     messageId: "3",
-    //     message:
-    //         "J'ai déjà les médicaments que je mettais avant non 😂 donc tout va aller mieux, envoie moi le lien du package",
-    //     replyBy: "georgesbyona@gmail.com",
-    //     replyTo: "glosingson@gmail.com",
-    //   ),
-    // ),
-    // Message(
-    //   id: "7",
-    //   message: "Bien reçu G !",
-    //   createdAt: DateTime.now(),
-    //   sentBy: "glosingson@gmail.com",
-    //   replyMessage: const ReplyMessage(
-    //     messageId: "4",
-    //     message: "https://pub.dev/packages/chatview",
-    //     replyBy: "glosingson@gmail.com",
-    //     replyTo: "georgesbyona@gmail.com",
-    //   ),
-    // ),
-  ];
+  // List<Message> messages = widget.otherU.messages;
+  //  [
+  // Message(
+  //   id: '1',
+  //   message: "Hi",
+  //   createdAt: DateTime.now(),
+  //   sentBy: "georgesbyona@gmail.com",
+  // ),
+  // Message(
+  //   id: '2',
+  //   message: "Hello",
+  //   createdAt: DateTime.now(),
+  //   sentBy: "glosingson@gmail.com",
+  // ),
+  // Message(
+  //   id: '3',
+  //   message:
+  //       "J'ai déjà les médicaments que je mettais avant non 😂 donc tout va aller mieux, envoie moi le lien du package",
+  //   createdAt: DateTime.now(),
+  //   sentBy: "glosingson@gmail.com",
+  // ),
+  // Message(
+  //   id: "4",
+  //   message: "T'inquiètes G !",
+  //   createdAt: DateTime.now(),
+  //   sentBy: "glosingson@gmail.com",
+  //   replyMessage: const ReplyMessage(
+  //     messageId: "3",
+  //     message:
+  //         "J'ai déjà les médicaments que je mettais avant non 😂 donc tout va aller mieux, envoie moi le lien du package",
+  //     replyBy: "glosingson@gmail.com",
+  //     replyTo: "glosingson@gmail.com",
+  //   ),
+  // ),
+  // Message(
+  //   id: "5",
+  //   message: "https://pub.dev/packages/chatview",
+  //   createdAt: DateTime.now(),
+  //   sentBy: "georgesbyona@gmail.com",
+  // ),
+  // Message(
+  //   id: "6",
+  //   message: "👆🏾👆🏾👆🏾",
+  //   createdAt: DateTime.now(),
+  //   sentBy: "georgesbyona@gmail.com",
+  //   replyMessage: const ReplyMessage(
+  //     messageId: "3",
+  //     message:
+  //         "J'ai déjà les médicaments que je mettais avant non 😂 donc tout va aller mieux, envoie moi le lien du package",
+  //     replyBy: "georgesbyona@gmail.com",
+  //     replyTo: "glosingson@gmail.com",
+  //   ),
+  // ),
+  // Message(
+  //   id: "7",
+  //   message: "Bien reçu G !",
+  //   createdAt: DateTime.now(),
+  //   sentBy: "glosingson@gmail.com",
+  //   replyMessage: const ReplyMessage(
+  //     messageId: "4",
+  //     message: "https://pub.dev/packages/chatview",
+  //     replyBy: "glosingson@gmail.com",
+  //     replyTo: "georgesbyona@gmail.com",
+  //   ),
+  // ),
+  // ];
 
   @override
   void initState() {
     final userID = widget.user.email ?? widget.user.num;
+    final List<Message> userChats = [];
+    for (var msg in widget.otherU.messages) {
+      userChats.add(msg!);
+    }
     _chatController = ChatController(
-      initialMessageList: messages,
+      initialMessageList: userChats,
       scrollController: ScrollController(),
       currentUser: ChatUser(
         id: userID!,
@@ -108,8 +113,8 @@ class _ChatPageState extends State<ChatPage> {
       ),
       otherUsers: [
         ChatUser(
-          id: widget.otherU.id,
-          name: widget.otherU.name,
+          id: widget.otherU.email,
+          name: widget.otherU.names,
           imageType: ImageType.network,
           profilePhoto: widget.otherU.imgUrl,
         ),
@@ -151,10 +156,14 @@ class _ChatPageState extends State<ChatPage> {
           flashingCircleBrightColor: theme.primaryColorDark,
           flashingCircleDarkColor: theme.colorScheme.inverseSurface,
         ),
-        appBar: chatAppBar(
-          theme: theme,
-          controller: widget.controller,
-          chatController: _chatController,
+        appBar: Padding(
+          padding: const EdgeInsets.only(left: 15),
+          child: chatAppBar(
+            context,
+            theme: theme,
+            controller: widget.controller,
+            chatController: _chatController,
+          ),
         ),
         chatBackgroundConfig: chatBckConfig(theme),
         sendMessageConfig: SendMessageConfiguration(
@@ -343,7 +352,7 @@ class _ChatPageState extends State<ChatPage> {
     String message,
     ReplyMessage replyMessage,
     MessageType messageType,
-  ) {
+  ) async {
     _chatController!.addMessage(
       Message(
         id: DateTime.now().toString(),
@@ -353,6 +362,11 @@ class _ChatPageState extends State<ChatPage> {
         replyMessage: replyMessage,
         messageType: messageType,
       ),
+    );
+    await ChatDBServices.addMessage(
+      _chatController!.currentUser.id,
+      _chatController!.otherUsers.first.id,
+      _chatController!.initialMessageList,
     );
     Future.delayed(const Duration(milliseconds: 500), () {
       _chatController!.initialMessageList.last.setStatus =

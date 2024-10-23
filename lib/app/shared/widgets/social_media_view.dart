@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
+// import 'package:url_launcher/url_launcher.dart';
 
 Widget socialmediaView(
   ThemeData theme,
   BuildContext context, {
   bool? isWhite = false,
 }) {
-  void launchApp(String url) async {
-    if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url));
-    }
-  }
+  // void launchApp(String url) async {
+  //   if (await canLaunchUrl(Uri.parse(url))) {
+  //     await launchUrl(Uri.parse(url));
+  //   }
+  // }
 
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 10),

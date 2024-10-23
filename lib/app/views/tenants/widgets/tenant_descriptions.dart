@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../pages/details/tenant_details.dart';
+// import '../pages/details/tenant_details.dart';
 import '../../../shared/shared.dart';
 import '../../../../data/data.dart';
 
@@ -82,7 +82,7 @@ class TenantDescriptions extends StatelessWidget {
               children: [
                 const TextSpan(text: 'Maison : '),
                 TextSpan(
-                  text: "N° ${tenants[index].num}",
+                  text: "N° ${tenants[index].addressID}",
                   style: GoogleFonts.indieFlower(),
                 ),
               ],
@@ -95,15 +95,15 @@ class TenantDescriptions extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => TenantDetailsPage(
-                    tenants: tenants,
-                    index: index,
-                  ),
-                ),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => TenantDetailsPage(
+              //       tenants: tenants,
+              //       index: index,
+              //     ),
+              //   ),
+              // );
             },
             child: Container(
               color: Colors.transparent,

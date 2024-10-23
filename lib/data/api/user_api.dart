@@ -78,7 +78,7 @@ class UserAPI {
         return [false, "Utilisateur non existant"];
       }
     } catch (e) {
-      debugPrint("Post error : $e");
+      debugPrint("Connect user error : $e");
       return [false, "Utilisateur non existant"];
     }
   }
@@ -105,7 +105,7 @@ class UserAPI {
         return [false, null];
       }
     } catch (e) {
-      debugPrint("Post error : $e");
+      debugPrint("User adresse update error : $e");
       return [false, null];
     }
   }

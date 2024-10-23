@@ -60,7 +60,10 @@ class CustomDropDownButton extends StatelessWidget {
               .map(
                 (data) => DropdownMenuItem<String>(
                   value: data,
-                  child: Text(data),
+                  child: Text(
+                    data,
+                    style: TextStyle(fontSize: 15),
+                  ),
                 ),
               )
               .toList(),

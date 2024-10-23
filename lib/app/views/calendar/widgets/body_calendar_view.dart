@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../controllers/controllers.dart';
 import '../../../shared/shared.dart';
-import 'event_card.dart';
 
 class BodyCalendarView extends StatelessWidget {
   const BodyCalendarView({
@@ -64,13 +63,14 @@ class BodyCalendarView extends StatelessWidget {
                   controller: scrollController,
                   itemCount: calendar.events.length,
                   itemBuilder: (context, index) {
-                    return EventCard(
-                      title: calendar.events[index].title,
-                      description: calendar.events[index].description,
-                      tenant: calendar.events[index].tenant,
-                      where: calendar.events[index].place,
-                      time: calendar.events[index].time,
-                    );
+                    return Placeholder();
+                    // return EventCard(
+                    //   title: calendar.events[index].title,
+                    //   description: calendar.events[index].description,
+                    //   tenant: calendar.events[index].tenant,
+                    //   where: calendar.events[index].place,
+                    //   time: calendar.events[index].time,
+                    // );
                   },
                 ),
               ),

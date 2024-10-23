@@ -36,8 +36,8 @@ class BottomBoxesView extends StatelessWidget {
             }
           },
           child: SizedBox(
-            width: width * 0.48,
-            height: width * 0.48,
+            width: width * 0.45,
+            height: width * 0.45,
             child: Card(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -46,7 +46,7 @@ class BottomBoxesView extends StatelessWidget {
                   const Gap(15),
                   Text(
                     labels[index],
-                    style: GoogleFonts.indieFlower(),
+                    style: GoogleFonts.raleway(),
                   ),
                   const Icon(Icons.format_list_bulleted_rounded, size: 20),
                 ],

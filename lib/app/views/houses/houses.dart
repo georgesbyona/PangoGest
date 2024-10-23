@@ -44,7 +44,9 @@ class HousesList extends StatelessWidget {
                   return GestureDetector(
                     onTap: () {},
                     child: Card(
-                      margin: const EdgeInsets.only(bottom: 10),
+                      margin: EdgeInsets.only(
+                        bottom: index == controller.houses.length - 1 ? 80 : 10,
+                      ),
                       shape: ContinuousRectangleBorder(
                         borderRadius: BorderRadius.circular(50),
                       ),
@@ -82,6 +84,7 @@ class HousesList extends StatelessWidget {
       ),
       floatingActionButton: CustomFAB(
         onPressed: () {
+          controller.selectedFile = null;
           Navigator.push(
             context,
             MaterialPageRoute(

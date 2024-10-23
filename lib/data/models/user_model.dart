@@ -36,7 +36,7 @@ class UserModel {
       imgUrl: json["photo_url"] as String,
       userType: json['user_type'] as String,
       addressID: json['id_adresse'],
-      ownerEmail: json['ownerEmail'],
+      ownerEmail: json['ownerEmail'] ?? "",
     );
   }
 }

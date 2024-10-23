@@ -22,11 +22,11 @@ class HouseModel {
 
   factory HouseModel.fromJson(json) {
     return HouseModel(
-      id: json["utilisateur"] as int,
-      photo: json["utilisateur"] as String,
-      price: json["utilisateur"] as String,
-      surface: json["utilisateur"] as String,
-      description: json["utilisateur"] as String,
+      id: json["id"] as int,
+      photo: json["photo_url"] as String,
+      price: json["prix"] as String,
+      surface: json["surface"] as String,
+      description: json["description"] as String,
       addressID: json["adresse"] as int,
       userID: json["utilisateur"] as int,
     );

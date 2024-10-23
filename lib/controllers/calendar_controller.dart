@@ -151,17 +151,17 @@ class CalendarController extends ChangeNotifier {
     UserDataController user,
     // UserModel tenant,
   ) {
-    events.add(
-      EventModel(
-        title: title,
-        type: eventType,
-        description: description,
-        tenant: eventTenant!,
-        time: "$endHour:$endMin",
-        ownerID: user.email ?? user.num!,
-        place: eventPlace!,
-      ),
-    );
+    // events.add(
+    // EventModel(
+    //   title: title,
+    //   type: eventType,
+    //   description: description,
+    //   tenant: eventTenant!,
+    //   time: "$endHour:$endMin",
+    //   ownerID: user.email ?? user.num!,
+    //   place: eventPlace!,
+    // ),
+    // );
     notifyListeners();
   }
 }

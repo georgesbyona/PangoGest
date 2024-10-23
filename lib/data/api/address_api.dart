@@ -45,7 +45,7 @@ class AddressAPI {
     }
   }
 
-  static Future<List> checkAddress(int addressID) async {
+  static Future checkAddress(int addressID) async {
     final url = Uri.parse("$baseUrl/adresse/$addressID/");
     try {
       final response = await http.get(
@@ -55,15 +55,15 @@ class AddressAPI {
       if (response.statusCode == 200) {
         final myJson = jsonDecode(response.body);
         final data = AddressModel.fromJson(myJson);
-        return [true, data];
+        return data;
       } else {
         debugPrint("Body : ${response.body}");
         debugPrint("StatusCode Error : ${response.statusCode}");
-        return [true, null];
+        return null;
       }
     } catch (e) {
       debugPrint("Erreur lors de get : $e");
-      return [false, null];
+      return null;
     }
   }
 }

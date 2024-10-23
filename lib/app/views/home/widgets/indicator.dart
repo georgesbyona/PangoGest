@@ -31,7 +31,7 @@ class Indicator extends StatelessWidget {
         const Gap(5),
         Text(
           text,
-          style: GoogleFonts.indieFlower(
+          style: GoogleFonts.raleway(
             fontSize: 13,
             color: textColor,
           ),

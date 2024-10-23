@@ -95,8 +95,7 @@ class UserDBServices {
     await users.doc(email).set({"addressID": houseID});
   }
 
-  Future getUsers() async {
-    debugPrint('Taper');
+  void getUsers() {
     try {
       debugPrint('Stream');
       users.snapshots().map(
@@ -109,6 +108,32 @@ class UserDBServices {
       e.toString();
     }
   }
+
+  // Future<bool> checkUser(String email, String ownerEmail) async {
+  //   bool userExist = false;
+  //   try {
+  //     if (ownerEmail.isEmpty) {
+  //       users.doc(email).snapshots().map(
+  //         (e) {
+  //           userExist = e.exists;
+  //         },
+  //       );
+  //       debugPrint('User exist ? $userExist');
+  //       return userExist;
+  //     } else {
+  //       users.doc(ownerEmail).collection("tenants").doc(email).snapshots().map(
+  //         (e) {
+  //           userExist = e.exists;
+  //         },
+  //       );
+  //     }
+  //     debugPrint('User exist ? $userExist');
+  //     return userExist;
+  //   } catch (e) {
+  //     e.toString();
+  //     return false;
+  //   }
+  // }
 
   // Future<UserModel?> getUser(String email, String password) async {
   //   if (ownerEmail.isEmpty) {

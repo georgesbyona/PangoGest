@@ -145,11 +145,6 @@ class _ProprioInscriptionState extends State<ProprioInscription> {
                                   );
                                 } else {
                                   registeringInProgress();
-                                  final userExist =
-                                      await UserDBServices.checkUser(
-                                    mailController.text.trim(),
-                                    "",
-                                  );
                                   bool userIsRegister =
                                       await userData.registerUser(
                                     UserModel(
@@ -163,13 +158,7 @@ class _ProprioInscriptionState extends State<ProprioInscription> {
                                     ),
                                     context: context,
                                   );
-                                  if (userExist) {
-                                    myCustomSnackBar(
-                                      context: context,
-                                      text:
-                                          "Utilisateur existant, veuillez vous connecter",
-                                    );
-                                  } else if (userIsRegister) {
+                                  if (userIsRegister) {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(

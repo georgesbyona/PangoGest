@@ -38,7 +38,7 @@ Container dialogBody(
           text: "Propriétaire",
           icon: AppIcons.owner,
           onTap: () {
-            if (userData.isRegister || userData.userExist) {
+            if (userData.isRegister) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -61,18 +61,27 @@ Container dialogBody(
           text: "Locataire",
           icon: AppIcons.tenant,
           onTap: () {
-            const bckgroundColor = AppColors.blackOver;
-            showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (context) {
-                return Dialog(
-                  alignment: Alignment.center,
-                  backgroundColor: bckgroundColor,
-                  child: tenantDialogBody(context, width),
-                );
-              },
-            );
+            if (userData.isRegister) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ConnexionPage(),
+                ),
+              );
+            } else {
+              const bckgroundColor = AppColors.blackOver;
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) {
+                  return Dialog(
+                    alignment: Alignment.center,
+                    backgroundColor: bckgroundColor,
+                    child: tenantDialogBody(context, width),
+                  );
+                },
+              );
+            }
           },
         ),
       ],

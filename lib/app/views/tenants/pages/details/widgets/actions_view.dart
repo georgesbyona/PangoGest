@@ -1,12 +1,9 @@
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
-import '../../../../../../controllers/controllers.dart';
-import '../../../../../../data/data.dart';
 import '../../../../../shared/shared.dart';
-import '../../../../views.dart';
+import '../../../../../../data/data.dart';
 
 class ActionsView extends StatelessWidget {
   const ActionsView({
@@ -23,8 +20,8 @@ class ActionsView extends StatelessWidget {
     final theme = Theme.of(context);
     final width = MediaQuery.sizeOf(context).width;
     final height = MediaQuery.sizeOf(context).height;
-    final user = Provider.of<UserDataController>(context);
-    final controller = Provider.of<MainController>(context);
+    // final user = Provider.of<UserDataController>(context);
+    // final controller = Provider.of<MainController>(context);
     final size = width > height ? height : width;
     final List<String> titles = ["Rappel", "Chat", "Supprimer"];
     final List<IconData> icons = [
@@ -42,23 +39,23 @@ class ActionsView extends StatelessWidget {
             return GestureDetector(
               onTap: () {
                 if (i == 1) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ChatPage(
-                        user: user,
-                        controller: controller,
-                        otherU: ChatModel(
-                          id: tenants[index].email,
-                          name: tenants[index].firstName,
-                          imgUrl: tenants[index].imgUrl!,
-                          lastMsgTime: "",
-                          lastMsg: "",
-                          isRead: true,
-                        ),
-                      ),
-                    ),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  // MaterialPageRoute(
+                  //   builder: (context) => ChatPage(
+                  //     user: user,
+                  //     controller: controller,
+                  //     otherU: ChatModel(
+                  //       email: tenants[index].email,
+                  //       name: tenants[index].firstName,
+                  //       imgUrl: tenants[index].imgUrl!,
+                  //       lastMsgTime: "",
+                  //       lastMsg: "",
+                  //       isRead: true,
+                  //     ),
+                  //   ),
+                  // ),
+                  // );
                 }
               },
               child: Card(

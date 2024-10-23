@@ -52,7 +52,9 @@ class PangoGest extends StatelessWidget {
                         ? ThemeMode.dark
                         : ThemeMode.light,
                     home: user.isRegister && user.isLoggedIn
-                        ? Wrapper(controller: mainController, user: user)
+                        ? user.userType == "locataire"
+                            ? Wrapper2(controller: mainController, user: user)
+                            : Wrapper(controller: mainController, user: user)
                         : Welcome(controller: mainController, user: user),
                   );
                 },

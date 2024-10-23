@@ -20,7 +20,6 @@ class UserDataController extends ChangeNotifier {
   AddressModel? _userAddress;
   bool _isLoggedIn = false;
   bool _isRegister = false;
-  bool _userExist = false;
 
   int? get userID => _userID;
   String? get names => _names;
@@ -34,8 +33,6 @@ class UserDataController extends ChangeNotifier {
   bool get isLoggedIn => _isLoggedIn;
   bool get isRegister => _isRegister;
 
-  bool get userExist => _userExist;
-
   Future<void> loadUserData() async {
     final prefs = await _prefs;
     _userID = prefs.getInt('userID');
@@ -45,23 +42,24 @@ class UserDataController extends ChangeNotifier {
     _num = prefs.getString('userNum');
     _password = prefs.getString('userPassword');
     _userType = prefs.getString('userType');
-    _userType = prefs.getString('userType');
     _isRegister = prefs.getBool('isRegister') ?? false;
     _isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
-    if (_isRegister) {
-      _userAddress = AddressModel(
-        id: prefs.getInt('userAID'),
-        ville: prefs.getString('userT')!,
-        commune: prefs.getString('userC')!,
-        quartier: prefs.getString('userQ')!,
-        cellule: prefs.getString('userCell'),
-        avenue: prefs.getString('userA')!,
-        num: prefs.getString('userN')!,
-      );
+    // if (_isRegister) {
+    //   final address = await AddressAPI.checkAddress(_userAddress!.id!);
+    //   _userAddress = AddressModel(
+    //     id: prefs.getInt('userAID'),
+    //     ville: prefs.getString('userT')!,
+    //     commune: prefs.getString('userC')!,
+    //     quartier: prefs.getString('userQ')!,
+    //     cellule: prefs.getString('userCell'),
+    //     avenue: prefs.getString('userA')!,
+    //     num: prefs.getString('userN')!,
+    //   );
+    // }
+
+    if (_userID != null) {
+      await loadUsers();
     }
-    _userExist = _email != null && _ownerEmail != null
-        ? await UserDBServices.checkUser(_email!, _ownerEmail!)
-        : false;
     debugPrint('======================= User $_names succefully loading');
     notifyListeners();
   }
@@ -83,7 +81,7 @@ class UserDataController extends ChangeNotifier {
     final userName = "${user.firstName} ${user.lastName}";
     final prefs = await _prefs;
     if (fromConnection) {
-      // prefs.setInt('userID', user.id!);
+      prefs.setInt('userID', user.id!);
       prefs.setString('userNames', userName);
       prefs.setString('userImgUrl', user.imgUrl!);
       prefs.setString('userEmail', user.email);
@@ -103,10 +101,11 @@ class UserDataController extends ChangeNotifier {
       notifyListeners();
       return true;
     } else {
-      final userExist = await UserDBServices.checkUser(user.email, email);
-      if (!userExist) {
-        await UserDBServices.registerUser(user, email);
-        // prefs.setInt('userID', user.id!);
+      // final userExist = await UserAPI.checkUser(user.id);
+
+      final register = await UserAPI.registerUser(user);
+      if (register.first == true) {
+        prefs.setInt('userID', register.last);
         prefs.setString('userNames', userName);
         prefs.setString('userImgUrl', user.imgUrl!);
         prefs.setString('userEmail', user.email);
@@ -125,6 +124,10 @@ class UserDataController extends ChangeNotifier {
         debugPrint('======================= User $_names succefully register');
         notifyListeners();
         return true;
+      } else if (register.first == null) {
+        myCustomSnackBar(context: context, text: register.last);
+        notifyListeners();
+        return false;
       } else {
         return false;
       }
@@ -138,7 +141,7 @@ class UserDataController extends ChangeNotifier {
     final prefs = await _prefs;
     final registered = await AddressAPI.registerAddress(address);
     if (fromConnection) {
-      // prefs.setInt('userAID', address.id!);
+      prefs.setInt('userAID', address.id!);
       prefs.setString('userT', address.ville);
       prefs.setString('userC', address.commune);
       prefs.setString('userQ', address.quartier);
@@ -166,7 +169,7 @@ class UserDataController extends ChangeNotifier {
     } else {
       if (registered.first) {
         await UserAPI.userAddressUpdate(_userID!, registered.last);
-        // prefs.setInt('userAID', registered.last);
+        prefs.setInt('userAID', registered.last);
         prefs.setString('userT', address.ville);
         prefs.setString('userC', address.commune);
         prefs.setString('userQ', address.quartier);
@@ -253,5 +256,30 @@ class UserDataController extends ChangeNotifier {
       );
     }
     notifyListeners();
+  }
+
+  List<UserModel> usersList = [];
+  Future<void> loadUsers() async {
+    final users = await ContractAPI.getOwner(
+      UserModel(
+        id: _userID,
+        firstName: _names!.split(" ")[0],
+        lastName: _names!.split(" ")[1],
+        email: _email!,
+        num: _num!,
+        password: _password!,
+        userType: _userType!,
+        // addressID: _userAddress!.id,
+        imgUrl: _imgUrl,
+        ownerEmail: _ownerEmail ?? "",
+      ),
+    );
+    if (users.last != null) {
+      for (var u in users.last) {
+        usersList.add(u);
+      }
+      debugPrint("Users successfully loaded");
+      notifyListeners();
+    }
   }
 }
