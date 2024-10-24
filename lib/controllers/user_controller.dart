@@ -303,7 +303,7 @@ class UserDataController extends ChangeNotifier {
         ),
       );
     }
-    debugPrint("Users ${owner!.email} successfully loaded");
+    // debugPrint("Users ${owner!.email} successfully loaded");
     notifyListeners();
   }
 }
