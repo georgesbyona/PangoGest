@@ -86,4 +86,31 @@ class RealEstateAPI {
       return false;
     }
   }
+
+  static Future<HouseModel?> getTenantHouse(int id) async {
+    final url = Uri.parse("$baseUrl/contrat_location/maison_par_locataire/");
+    var body = jsonEncode({"locataire_id": id});
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json; charset=UTF-8'},
+        body: body,
+      );
+      if (response.statusCode == 200) {
+        final myJson = jsonDecode(response.body);
+        final data = HouseModel.fromJson(myJson.first);
+
+        debugPrint("Maison : ${response.body}");
+        return data;
+      } else {
+        debugPrint("Body : ${response.body}");
+        debugPrint("StatusCode Error : ${response.statusCode}");
+        return null;
+      }
+    } catch (e) {
+      debugPrint("Post Error : $e");
+      return null;
+    }
+  }
 }

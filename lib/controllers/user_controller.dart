@@ -33,6 +33,8 @@ class UserDataController extends ChangeNotifier {
   bool get isLoggedIn => _isLoggedIn;
   bool get isRegister => _isRegister;
 
+  HouseModel? tenantHouse;
+
   Future<void> loadUserData() async {
     final prefs = await _prefs;
     _userID = prefs.getInt('userID');
@@ -59,6 +61,10 @@ class UserDataController extends ChangeNotifier {
 
     if (_userID != null) {
       await loadUsers();
+      if (_userType == "locataire") {
+        tenantHouse = await RealEstateAPI.getTenantHouse(_userID!);
+        _userAddress = await AddressAPI.checkAddress(tenantHouse!.addressID);
+      }
     }
     debugPrint('======================= User $_names succefully loading');
     notifyListeners();
@@ -211,9 +217,9 @@ class UserDataController extends ChangeNotifier {
     final prefs = await _prefs;
     final connected = await UserAPI.connectUser(userKey, userPassword);
     if (connected.first == true) {
-      final address = await AddressAPI.checkAddress(connected.last.addressID);
+      // final address = await AddressAPI.checkAddress(connected.last.addressID);
       await registerUser(connected.last, fromConnection: true);
-      await registerAddress(address.last, fromConnection: true);
+      // await registerAddress(address.last, fromConnection: true);
       prefs.setBool('isRegister', true);
       prefs.setBool('isLoggedIn', true);
       _isRegister = true;
@@ -259,8 +265,10 @@ class UserDataController extends ChangeNotifier {
   }
 
   List<UserModel> usersList = [];
+  UserModel? owner;
+
   Future<void> loadUsers() async {
-    final users = await ContractAPI.getOwner(
+    final users = await ContractAPI.getTenants(
       UserModel(
         id: _userID,
         firstName: _names!.split(" ")[0],
@@ -274,12 +282,28 @@ class UserDataController extends ChangeNotifier {
         ownerEmail: _ownerEmail ?? "",
       ),
     );
-    if (users.last != null) {
+    if (users.first == true && users.last != null) {
       for (var u in users.last) {
         usersList.add(u);
       }
-      debugPrint("Users successfully loaded");
-      notifyListeners();
     }
+    if (users.first == true && users.last == null) {
+      owner = await ContractAPI.getOwner(
+        UserModel(
+          id: _userID,
+          firstName: _names!.split(" ")[0],
+          lastName: _names!.split(" ")[1],
+          email: _email!,
+          num: _num!,
+          password: _password!,
+          userType: _userType!,
+          // addressID: _userAddress!.id,
+          imgUrl: _imgUrl,
+          ownerEmail: _ownerEmail ?? "",
+        ),
+      );
+    }
+    debugPrint("Users ${owner!.email} successfully loaded");
+    notifyListeners();
   }
 }

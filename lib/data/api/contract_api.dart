@@ -78,7 +78,7 @@ class ContractAPI {
     }
   }
 
-  static Future<List> getOwner(UserModel user) async {
+  static Future<List> getTenants(UserModel user) async {
     final url = user.userType == "locataire"
         ? Uri.parse("$baseUrl/contrat_location/bailleur_par_locataire/")
         : Uri.parse("$baseUrl/contrat_location/locataires_par_bailleur/");
@@ -154,7 +154,7 @@ class ContractAPI {
               data.email,
             );
           }
-          return [true, data];
+          return [true, null];
         }
       } else {
         debugPrint("Body : ${response.body}");
@@ -164,6 +164,48 @@ class ContractAPI {
     } catch (e) {
       debugPrint("Post Error : $e");
       return [false, null];
+    }
+  }
+
+  static Future getOwner(UserModel user) async {
+    final url = Uri.parse("$baseUrl/contrat_location/bailleur_par_locataire/");
+    var body = jsonEncode({"locataire_id": user.id});
+    try {
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json; charset=UTF-8'},
+        body: body,
+      );
+      if (response.statusCode == 200) {
+        final myJson = jsonDecode(response.body);
+
+        final data = UserModel.fromJson(myJson.first);
+        final userExist =
+            await UserDBServices.checkUser(user.email, data.email);
+        final isExist = await ChatDBServices.checkUser(user.email, data.email);
+        if (!userExist) {
+          await UserDBServices.registerUser(user, data.email);
+        }
+        if (!isExist) {
+          await ChatDBServices.registerUChat(
+            ChatModel(
+              email: user.email,
+              names: "${user.firstName} ${user.lastName}",
+              imgUrl: user.imgUrl,
+              messages: [],
+            ),
+            data.email,
+          );
+        }
+        return data;
+      } else {
+        debugPrint("Body : ${response.body}");
+        debugPrint("StatusCode Error : ${response.statusCode}");
+        return;
+      }
+    } catch (e) {
+      debugPrint("Post Error : $e");
+      return;
     }
   }
 }

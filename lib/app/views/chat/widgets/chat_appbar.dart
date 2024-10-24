@@ -74,10 +74,10 @@ ChatViewAppBar chatAppBar(
       letterSpacing: 1,
       fontSize: 15,
     ),
-    userStatus: "en ligne il y a 2 min",
+    userStatus: chatController.otherUsers.first.id,
     userStatusTextStyle: GoogleFonts.poiretOne(
       fontWeight: FontWeight.bold,
-      color: Colors.green,
+      color: AppColors.primary,
       letterSpacing: 1,
       fontSize: 12,
     ),
@@ -96,7 +96,7 @@ ChatViewAppBar chatAppBar(
                 padding: const EdgeInsets.only(left: 15, right: 15),
                 margin: const EdgeInsets.only(right: 10),
                 child: CustomBadge(
-                  content: "3",
+                  content: "",
                   icon: AppIcons.notification,
                 ),
               ),

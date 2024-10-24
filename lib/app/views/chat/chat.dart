@@ -13,11 +13,13 @@ class ChatPage extends StatefulWidget {
     required this.user,
     required this.controller,
     required this.otherU,
+    this.fromTenant = false,
   });
 
   final UserDataController user;
   final MainController controller;
   final ChatModel otherU;
+  final bool fromTenant;
 
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -27,60 +29,10 @@ class _ChatPageState extends State<ChatPage> {
   ChatController? _chatController;
   bool cancelReply = false;
   double imageWidth = 200;
+  final List<Message> userChats = [];
 
   // List<Message> messages = widget.otherU.messages;
   //  [
-  // Message(
-  //   id: '1',
-  //   message: "Hi",
-  //   createdAt: DateTime.now(),
-  //   sentBy: "georgesbyona@gmail.com",
-  // ),
-  // Message(
-  //   id: '2',
-  //   message: "Hello",
-  //   createdAt: DateTime.now(),
-  //   sentBy: "glosingson@gmail.com",
-  // ),
-  // Message(
-  //   id: '3',
-  //   message:
-  //       "J'ai déjà les médicaments que je mettais avant non 😂 donc tout va aller mieux, envoie moi le lien du package",
-  //   createdAt: DateTime.now(),
-  //   sentBy: "glosingson@gmail.com",
-  // ),
-  // Message(
-  //   id: "4",
-  //   message: "T'inquiètes G !",
-  //   createdAt: DateTime.now(),
-  //   sentBy: "glosingson@gmail.com",
-  //   replyMessage: const ReplyMessage(
-  //     messageId: "3",
-  //     message:
-  //         "J'ai déjà les médicaments que je mettais avant non 😂 donc tout va aller mieux, envoie moi le lien du package",
-  //     replyBy: "glosingson@gmail.com",
-  //     replyTo: "glosingson@gmail.com",
-  //   ),
-  // ),
-  // Message(
-  //   id: "5",
-  //   message: "https://pub.dev/packages/chatview",
-  //   createdAt: DateTime.now(),
-  //   sentBy: "georgesbyona@gmail.com",
-  // ),
-  // Message(
-  //   id: "6",
-  //   message: "👆🏾👆🏾👆🏾",
-  //   createdAt: DateTime.now(),
-  //   sentBy: "georgesbyona@gmail.com",
-  //   replyMessage: const ReplyMessage(
-  //     messageId: "3",
-  //     message:
-  //         "J'ai déjà les médicaments que je mettais avant non 😂 donc tout va aller mieux, envoie moi le lien du package",
-  //     replyBy: "georgesbyona@gmail.com",
-  //     replyTo: "glosingson@gmail.com",
-  //   ),
-  // ),
   // Message(
   //   id: "7",
   //   message: "Bien reçu G !",
@@ -98,9 +50,8 @@ class _ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     final userID = widget.user.email ?? widget.user.num;
-    final List<Message> userChats = [];
     for (var msg in widget.otherU.messages) {
-      userChats.add(msg!);
+      userChats.add(msg);
     }
     _chatController = ChatController(
       initialMessageList: userChats,
@@ -237,6 +188,7 @@ class _ChatPageState extends State<ChatPage> {
                 );
         },
         loadingWidget: const LinearProgressIndicator(minHeight: 2),
+
         messageConfig: MessageConfiguration(
           customMessageBuilder: (message) {
             return Container();
@@ -363,11 +315,33 @@ class _ChatPageState extends State<ChatPage> {
         messageType: messageType,
       ),
     );
-    await ChatDBServices.addMessage(
-      _chatController!.currentUser.id,
-      _chatController!.otherUsers.first.id,
-      _chatController!.initialMessageList,
-    );
+    if (widget.fromTenant) {
+      await ChatDBServices.addMessage(
+        _chatController!.otherUsers.first.id,
+        _chatController!.currentUser.id,
+        [
+          {
+            "id": DateTime.now().toString(),
+            "message": message,
+            "sentBy": _chatController!.currentUser.id,
+            "sentTo": _chatController!.otherUsers.first.id,
+          },
+        ],
+      );
+    } else {
+      await ChatDBServices.addMessage(
+        _chatController!.currentUser.id,
+        _chatController!.otherUsers.first.id,
+        [
+          {
+            "id": DateTime.now().toString(),
+            "message": message,
+            "sentBy": _chatController!.currentUser.id,
+            "sentTo": _chatController!.otherUsers.first.id,
+          },
+        ],
+      );
+    }
     Future.delayed(const Duration(milliseconds: 500), () {
       _chatController!.initialMessageList.last.setStatus =
           MessageStatus.undelivered;

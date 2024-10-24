@@ -19,21 +19,26 @@ class ChatModel {
       );
 }
 
-// class MiMessageModel {
-//   String id;
-//   DateTime createdAt;
-//   String message;
-//   String sentBy;
-//   String sentTo;
+class MiMessageModel {
+  String id;
+  String message;
+  String sentBy;
+  String sentTo;
 
-//   MiMessageModel({
-//     required this.id,
-//     required this.createdAt,
-//     required this.message,
-//     required this.sentBy,
-//     required this.sentTo,
-//   });
-// }
+  MiMessageModel({
+    required this.id,
+    required this.message,
+    required this.sentBy,
+    required this.sentTo,
+  });
+
+  factory MiMessageModel.fromJson(json) => MiMessageModel(
+        id: json['id'],
+        message: json['message'],
+        sentBy: json['sentBy'],
+        sentTo: json['sentTo'],
+      );
+}
 
 // List<ChatModel> chatListData = [
 //   ChatModel(

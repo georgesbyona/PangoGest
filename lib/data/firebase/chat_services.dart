@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:chatview/chatview.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../data.dart';
@@ -76,17 +75,34 @@ class ChatDBServices {
   static Future<void> addMessage(
     String ownerEmail,
     String email,
-    List<Message> messages,
+    List<Map<String, dynamic>> messages,
   ) async {
     try {
-      await chats.doc(ownerEmail).update({"messages": messages});
+      await chats
+          .doc(ownerEmail)
+          .update({"messages": FieldValue.arrayUnion(messages)});
       await chats
           .doc(ownerEmail)
           .collection("tenants")
           .doc(email)
-          .update({"messages": messages});
+          .update({"messages": FieldValue.arrayUnion(messages)});
     } catch (e) {
       debugPrint("Adding message error : ${e.toString()}");
     }
   }
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getOwner(String email) {
+    return chats.snapshots();
+  }
+  // static Future<ChatModel?> getOwner(String email) async {
+  //   ChatModel? owner;
+  //   try {
+  //     final doc = await chats.doc(email).get();
+  //     owner = ChatModel.fromJson(doc.data());
+  //     return owner;
+  //   } catch (e) {
+  //     debugPrint(e.toString());
+  //     return owner;
+  //   }
+  // }
 }

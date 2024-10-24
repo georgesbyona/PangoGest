@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../controllers/controllers.dart';
 import 'widgets/bottom_appbar_view.dart';
 import '../../shared/shared.dart';
-import '../../../data/data.dart';
 import 'drawer/mi_drawer.dart';
 import '../views.dart';
 
@@ -32,7 +31,7 @@ class Wrapper extends StatelessWidget {
     ];
     final List<String> labels = ["Home", "Calendrier", "Chat"];
     final List<int> indexes = [0, 1, 2];
-    final List<String> badgeContents = ["2", "10", "7"];
+    final List<String> badgeContents = ["", "", ""];
     final List<double> bottomHeight = [95, 50, 50];
     final List<Widget> screens = [
       const HomePage(),
@@ -110,7 +109,7 @@ class Wrapper extends StatelessWidget {
               icon: index == 2
                   ? CustomBadge(
                       icon: unselectedIcons[index],
-                      content: '10',
+                      content: '',
                     )
                   : Icon(unselectedIcons[index]),
               selectedIcon: Icon(
@@ -151,22 +150,14 @@ class Wrapper2 extends StatelessWidget {
     ];
     final List<String> labels = ["Home", "Calendrier", "Chat"];
     final List<int> indexes = [0, 1, 2];
-    final List<String> badgeContents = ["2", "10", "7"];
+    final List<String> badgeContents = ["", "", ""];
     final List<double> bottomHeight = [95, 50, 50];
     final List<Widget> screens = [
       const HomePage(),
       CalendarPage(user: user),
-      ChatPage(
-        user: user,
-        controller: controller,
-        otherU: ChatModel(
-          email: "georgesbyona@gmail.com",
-          names: "Georges Byona",
-          messages: [],
-        ),
-      ),
+      ChatView(user: user, controller: controller),
     ];
-    int chatNotifLength = 0;
+    // int chatNotifLength = 0;
     // for (var chatData in chatListData.where((chatData) => !chatData.isRead)) {
     //   chatNotifLength += chatData.lastMsgTotal!;
     // }
@@ -177,7 +168,7 @@ class Wrapper2 extends StatelessWidget {
 
     return Scaffold(
       extendBody: true,
-      appBar: controller.index == 2
+      appBar: controller.index == 2 && user.owner != null
           ? null
           : AppBar(
               backgroundColor: bckGroundColor,
@@ -240,7 +231,7 @@ class Wrapper2 extends StatelessWidget {
               icon: index == 2
                   ? CustomBadge(
                       icon: unselectedIcons[index],
-                      content: '$chatNotifLength',
+                      content: '',
                     )
                   : Icon(unselectedIcons[index]),
               selectedIcon: Icon(
